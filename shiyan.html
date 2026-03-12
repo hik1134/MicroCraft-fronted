@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>共生·纹理重构实验室</title>
+  <link rel="stylesheet" href="shiyan.css">
+  <!-- 引入字体，优先使用等线，如果没有则回退到微软雅黑 -->
+  <style>
+    body {
+      font-family: 'DengXian', 'Microsoft YaHei', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 背景图片容器 -->
+
+
+  <div class="app-container">
+
+    <!-- 头部模块 -->
+    <header class="header-module">
+      <h1 class="main-title">共生·纹理重构实验室</h1>
+      <p class="sub-title">Symbiosis Texture Refactoring Laboratory</p>
+      <p class="tagline">"让过去的纹理，成为未来的皮肤"</p>
+
+      <!-- 流程图 -->
+      <div class="process-flow">
+        <div class="flow-step" id="step-1">
+          <span class="step-num">01</span> <span class="step-text">选择载体</span>
+        </div>
+        <div class="flow-line">
+          <img src="./实验室的拆分/实验室素材/单箭头,长箭头,右.png" alt="">
+        </div>
+        <div class="flow-step" id="step-2">
+          <span class="step-num">02</span> <span class="step-text">提取纹理</span>
+        </div>
+        <div class="flow-line">
+          <img src="./实验室的拆分/实验室素材/单箭头,长箭头,右.png" alt="">
+        </div>
+        <div class="flow-step" id="step-3">
+          <span class="step-num">03</span> <span class="step-text">实时重构</span>
+        </div>
+        <div class="flow-line">
+          <img src="./实验室的拆分/实验室素材/单箭头,长箭头,右.png" alt="">
+        </div>
+        <div class="flow-step" id="step-4">
+          <span class="step-num">04</span> <span class="step-text">铭刻印记</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主工作区 -->
+    <main class="workspace">
+
+      <!-- 模块 01：选择载体 -->
+      <section class="panel panel-carrier">
+        <div class="panel-header">
+          <div class="ph-left">
+            <span class="ph-num">01</span>
+            <span class="ph-title">选择载体</span>
+          </div>
+          <span class="ph-eng">CARRIER</span>
+        </div>
+
+        <div class="scroll-content carrier-list">
+          <!-- 载体 1 -->
+          <div class="card carrier-card" data-id="keyboard" onclick="selectCarrier(this)">
+            <div class="card-icon"><img src="./实验室的拆分/实验室素材/键盘图标.png" alt="icon"></div>
+            <!-- 替换你的图标 -->
+            <div class="card-info">
+              <div class="ci-top">
+                <span class="ci-name">机械键盘</span>
+                <span class="ci-code">HM-001</span>
+              </div>
+              <div class="ci-sub">人体工学设计</div>
+            </div>
+          </div>
+          <!-- 载体 2 -->
+          <div class="card carrier-card" data-id="sneaker" onclick="selectCarrier(this)">
+            <div class="card-icon"><img src="./实验室的拆分/实验室素材/球鞋图标.png" alt="icon"></div>
+            <!-- 替换你的图标 -->
+            <div class="card-info">
+              <div class="ci-top">
+                <span class="ci-name">限量球鞋</span>
+                <span class="ci-code">FS-002</span>
+              </div>
+              <div class="ci-sub">街头文化符号</div>
+            </div>
+          </div>
+          <!-- 载体 3 -->
+          <div class="card carrier-card" data-id="speaker" onclick="selectCarrier(this)">
+            <div class="card-icon"><img src="./实验室的拆分/实验室素材/音响图标.png" alt="icon"></div>
+            <!-- 替换你的图标 -->
+            <div class="card-info">
+              <div class="ci-top">
+                <span class="ci-name">智能音箱</span>
+                <span class="ci-code">HM-003</span>
+              </div>
+              <div class="ci-sub">极简美学</div>
+            </div>
+          </div>
+          <!-- 载体 4 -->
+          <div class="card carrier-card" data-id="car" onclick="selectCarrier(this)">
+            <div class="card-icon"><img src="./实验室的拆分/实验室素材/汽车图标.png" alt="icon"></div>
+            <!-- 替换你的图标 -->
+            <div class="card-info">
+              <div class="ci-top">
+                <span class="ci-name">概念跑车</span>
+                <span class="ci-code">AU-004</span>
+              </div>
+              <div class="ci-sub">流线型车身</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-footer">
+          <span>可用载体</span>
+          <span class="highlight-num">4</span>
+        </div>
+      </section>
+
+      <!-- 模块 02：纹理基因库 -->
+      <section class="panel panel-texture">
+        <!-- 头部：金色主题 -->
+        <div class="panel-header">
+          <div class="ph-left">
+            <span class="ph-num">02</span>
+            <span class="ph-title">纹理基因库</span>
+          </div>
+          <span class="ph-eng">TEXTURE</span>
+        </div>
+
+        <!-- 筛选栏：方块按钮 -->
+        <div class="filter-bar">
+          <!-- 默认选中 ALL -->
+          <button class="filter-btn active" onclick="filterTextures('all')">ALL</button>
+          <button class="filter-btn" onclick="filterTextures('ice')">ICE-<br>001</button>
+          <button class="filter-btn" onclick="filterTextures('gold')">BRC-<br>002</button>
+          <button class="filter-btn" onclick="filterTextures('rust')">CEL-<br>003</button>
+          <button class="filter-btn" onclick="filterTextures('ink')">INK-<br>004</button>
+        </div>
+
+        <!-- 列表内容 -->
+        <div class="scroll-content texture-list">
+
+          <!-- 卡片 1 (ice) -->
+          <div class="card texture-card" data-category="ice" onclick="selectTexture(this, 'ice')">
+            <div class="tex-img-box">
+              <!-- 记得替换图片 -->
+              <img src="./实验室的拆分/实验室素材/冰裂的标.png" alt="冰裂纹">
+            </div>
+            <div class="tex-info">
+              <div class="ti-title">宋代冰裂纹·深蓝</div>
+              <div class="ti-desc">源自宋代官窑开片工艺...</div>
+              <div class="ti-tags">
+                <!-- 标签样式：左边色块，右边英文 -->
+                <div class="tag-box cyan">
+                  <span>冰裂</span><span>纹</span>
+                </div>
+                <div class="tag-text">
+                  <span>Voronoi</span>
+                  <span>Fracture</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片 2 (gold) -->
+          <div class="card texture-card" data-category="gold" onclick="selectTexture(this, 'gold')">
+            <div class="tex-img-box">
+              <img src="./实验室的拆分/实验室素材/锦绣前面的标.png" alt="织锦">
+            </div>
+            <div class="tex-info">
+              <div class="ti-title">汉代织锦·流金</div>
+              <div class="ti-desc">汉代蜀锦纹样，云气与...</div>
+              <div class="ti-tags">
+                <div class="tag-box gold">
+                  <span>织锦</span><span>纹</span>
+                </div>
+                <div class="tag-text">
+                  <span>Pattern</span>
+                  <span>Synthesis</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片 3 (rust) -->
+          <div class="card texture-card" data-category="rust" onclick="selectTexture(this, 'rust')">
+            <div class="tex-img-box">
+              <img src="./实验室的拆分/实验室素材/锈迹前面的标.png" alt="铜锈">
+            </div>
+            <div class="tex-info">
+              <div class="ti-title">西周铜锈·墨绿</div>
+              <div class="ti-desc">西周青铜器造纹样,如...</div>
+              <div class="ti-tags">
+                <div class="tag-box green">
+                  <span>铜锈</span><span>纹</span>
+                </div>
+                <div class="tag-text">
+                  <span>Rusty</span>
+                  <span>Simulation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片 4 (ink) -->
+          <div class="card texture-card" data-category="ink" onclick="selectTexture(this, 'ink')">
+            <div class="tex-img-box">
+              <img src="./实验室的拆分/实验室素材/书画前面的标.png" alt="水墨">
+            </div>
+            <div class="tex-info">
+              <div class="ti-title">水墨飞白·烟雨</div>
+              <div class="ti-desc">山水画的留白意境，虚...</div>
+              <div class="ti-tags">
+                <div class="tag-box ink">
+                  <span>水墨</span><span>韵</span>
+                </div>
+                <div class="tag-text">
+                  <span>Fluid</span>
+                  <span>Dynamics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 中间模块：3D 视图 -->
+      <!-- 3D视口主容器 -->
+      <div class="viewport-area">
+        <!-- 空状态界面（默认显示） -->
+        <div class="viewport-empty-state" id="vp-placeholder">
+          <div class="viewport-label">3D VIEWPORT</div>
+          <div class="empty-center">
+            <div class="empty-icon-box">
+              <img src="./实验室的拆分/实验室素材/实验中间.png" alt="3D图标" class="empty-icon">
+            </div>
+            <div class="empty-text-cn">请选择一个现代载体</div>
+            <div class="empty-text-en">SELECT CARRIER TO BEGIN</div>
+          </div>
+          <div class="empty-bottom-tip">请选择载体和纹理开始重构</div>
+        </div>
+
+        <!-- Three.js 渲染容器（默认隐藏） -->
+        <div id="vp-model-display" class="hidden" style="width: 100%; height: 100%; position: relative;"></div>
+      </div>
+
+
+      <!-- 右侧组合模块 -->
+      <div class="right-column">
+
+        <!-- 模块 03：材质融合 -->
+        <section class="panel panel-material">
+          <div class="panel-header">
+            <div class="ph-left" style="color: #a18cd1;"> <!-- 紫色 -->
+              <span class="ph-num">03</span>
+              <span class="ph-title">材质融合</span>
+            </div>
+            <span class="ph-eng">MATERIAL</span>
+          </div>
+
+          <!-- 未激活状态 -->
+          <div class="material-locked" id="mat-locked">
+            <img src="./实验室的拆分/实验室素材/第三板块框内.png" alt="锁图标" class="lock-icon">
+            <div>请先选择并应用纹理</div>
+          </div>
+
+          <!-- 激活状态 (内容) -->
+          <div class="material-content hidden" id="mat-content">
+            <div class="section-label">PRESETS</div>
+            <div class="presets-row">
+              <button class="btn-preset active">古典</button>
+              <button class="btn-preset">赛博</button>
+              <button class="btn-preset">未来</button>
+              <button class="btn-preset">自然</button>
+            </div>
+
+            <div class="section-label" style="margin-top: 15px;">PARAMETERS</div>
+
+            <!-- 滑块组 -->
+            <div class="slider-group">
+              <div class="sg-label">
+                <span>融合度</span> <span class="sg-val" id="val-fusion">50%</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" oninput="updateSlider('fusion', this.value)">
+            </div>
+            <div class="slider-group">
+              <div class="sg-label">
+                <span>金属度</span> <span class="sg-val" id="val-metal">30%</span>
+              </div>
+              <input type="range" min="0" max="100" value="30" oninput="updateSlider('metal', this.value)">
+            </div>
+            <div class="slider-group">
+              <div class="sg-label">
+                <span>粗糙度</span> <span class="sg-val" id="val-rough">50%</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" oninput="updateSlider('rough', this.value)">
+            </div>
+            <div class="slider-group">
+              <div class="sg-label">
+                <span>赛博发光</span> <span class="sg-val" id="val-emit">0%</span>
+              </div>
+              <input type="range" min="0" max="100" value="0" oninput="updateSlider('emit', this.value)">
+            </div>
+
+            <!-- 底部数据概览 -->
+            <div class="mat-stats">
+              <div class="stat-box">
+                <div class="sb-label">FUSION</div>
+                <div class="sb-val" id="stat-fusion">50%</div>
+              </div>
+              <div class="stat-box">
+                <div class="sb-label">METAL</div>
+                <div class="sb-val" id="stat-metal">30%</div>
+              </div>
+              <div class="stat-box">
+                <div class="sb-label">EMIT</div>
+                <div class="sb-val" id="stat-emit">0%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 模块 04：铭刻印记 -->
+        <section class="panel panel-export">
+          <div class="panel-header"
+            style="    background: linear-gradient(90deg, rgba(20, 60, 43, 0.6) 0%, rgba(10, 11, 16, 0) 80%);">
+            <div class="ph-left" style="color: #4facfe;"> <!-- 绿色/青色 -->
+              <span class="ph-num" style="color:#6ad09d ;">04</span>
+              <span class="ph-title">铭刻印记</span>
+            </div>
+            <span class="ph-eng">EXPORT</span>
+          </div>
+
+          <div class="export-content">
+            <div class="section-label">DESIGNER NAME</div>
+            <input type="text" class="input-name" placeholder="输入你的名字">
+
+            <div class="section-label" style="margin-top: 10px;">SEAL TEXT</div>
+            <div class="seal-options">
+              <button class="btn-seal active" onclick="setSeal('匠心')">匠心</button>
+              <button class="btn-seal" onclick="setSeal('传承')">传承</button>
+              <button class="btn-seal" onclick="setSeal('创新')">创新</button>
+              <button class="btn-seal" onclick="setSeal('融合')">融合</button>
+            </div>
+
+            <div class="seal-preview">
+              <div class="seal-stamp" id="seal-stamp">匠心</div>
+            </div>
+
+            <button class="btn-export" onclick="exportPoster()">生成作品海报</button>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+  </div>
+  <!-- Three.js 核心库 -->
+  <script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+  <script type="module" src="./shiyan.js"></script>
+</body>
+
+</html>

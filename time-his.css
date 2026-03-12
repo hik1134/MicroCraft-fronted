@@ -1,0 +1,417 @@
+/* --- 全局重置与变量 (保持一致性) --- */
+:root {
+  --bg-color: #0f1012;
+  --card-bg: #151618;
+  /* 比背景稍亮一点 */
+  --text-main: #ffffff;
+  --text-grey: #8c8c8c;
+  --accent-orange: #d99c68;
+  --border-color: #333;
+  --font-serif: "SimSun", "Songti SC", serif;
+  --font-sans: "DengXian", "Microsoft YaHei", sans-serif;
+  --font-mono: "Consolas", "Monaco", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* 防止全屏滚动 */
+}
+
+/* --- 顶部导航 --- */
+header {
+  height: 60px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header-left .back-btn:hover {
+  color: #ffffff;
+}
+
+.logo-area {
+  text-align: center;
+}
+
+.logo-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-left: 320px;
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--text-grey);
+  letter-spacing: 3px;
+  margin-left: 320px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  color: var(--text-grey);
+  transition: all 0.3s;
+}
+
+
+.nav-item.active {
+  background-color: var(--accent-orange);
+  color: #1e1f21;
+  font-weight: bold;
+}
+
+.nav-item:hover:not(.active) {
+  color: var(--text-main);
+}
+
+/* --- 页面主体布局 (左右分栏) --- */
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 60px);
+  position: relative;
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 60px 40px 60px;
+}
+
+/* 顶部标题区 */
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* 左侧内容区 */
+.content-side {
+  flex: 1;
+  /* 占据剩余空间，约 50%-60% */
+  padding: 40px 60px 40px 100px;
+  /* 左边距大一点，视觉平衡 */
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* 如果内容太长，允许滚动 */
+  z-index: 5;
+  /* 隐藏滚动条但保留功能 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content-side::-webkit-scrollbar {
+  display: none;
+}
+
+/* 标题 */
+
+
+.page-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--accent-orange);
+  margin-bottom: 10px;
+}
+
+.page-desc {
+  font-size: 14px;
+  color: var(--text-grey);
+}
+
+/* --- 时间轴样式 --- */
+.timeline-container {
+  position: relative;
+  padding-left: 20px;
+  /* 给圆点留出位置 */
+  padding-bottom: 40px;
+}
+
+
+.timeline-line {
+  position: absolute;
+  top: 5px;
+  bottom: 50px;
+  left: 24px;
+  width: 3px;
+  background-color: var(--accent-orange);
+  opacity: 0.5;
+}
+
+.t-item {
+  position: relative;
+  margin-bottom: 45px;
+  padding-left: 30px;
+  /* 文字距离线的距离 */
+  opacity: 0;
+  /* 初始隐藏，用于JS动画 */
+  transform: translateY(20px);
+}
+
+/* 时间轴圆点 */
+.t-dot {
+  position: absolute;
+  left: -4px;
+  /* 线是 left:4px, 宽度1px。圆点16px，中心对齐需计算 */
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--accent-orange);
+  border-radius: 50%;
+  border: 3px solid var(--bg-color);
+  /* 形成空心感或间隔感 */
+  box-shadow: 0 0 10px rgba(217, 156, 104, 0.3);
+  z-index: 2;
+}
+
+.t-title {
+  font-size: 14px;
+  font-weight: bold;
+  /* 字重中等偏粗 */
+  color: var(--accent-orange);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.t-desc {
+  font-size: 13px;
+  color: var(--text-grey);
+  line-height: 1.6;
+  max-width: 550px;
+  /* 控制文字宽度，防止太长 */
+}
+
+/* --- 全局重置与变量 (保持一致性) --- */
+:root {
+  --bg-color: #0f1012;
+  --card-bg: #151618;
+  /* 比背景稍亮一点 */
+  --text-main: #ffffff;
+  --text-grey: #8c8c8c;
+  --accent-orange: #d99c68;
+  --border-color: #333;
+  --font-serif: "SimSun", "Songti SC", serif;
+  --font-sans: "DengXian", "Microsoft YaHei", sans-serif;
+  --font-mono: "Consolas", "Monaco", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* 防止全屏滚动 */
+}
+
+/* --- 顶部导航 --- */
+header {
+  height: 60px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.back-btn {
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+  opacity: 0.8;
+  display: flex;
+  gap: 8px;
+}
+
+.back-btn:hover {
+  opacity: 1;
+}
+
+.logo-area {
+  text-align: center;
+}
+
+.logo-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.logo-sub {
+  font-size: 10px;
+  color: var(--text-grey);
+  letter-spacing: 3px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  color: var(--text-grey);
+  transition: all 0.3s;
+}
+
+.nav-item.active {
+  background-color: var(--accent-orange);
+  color: #1e1f21;
+  font-weight: bold;
+}
+
+.nav-item:hover:not(.active) {
+  color: var(--text-main);
+}
+
+
+
+/* =========================================
+   新增：与其他页面统一的背景装饰层
+   ========================================= */
+.bg-layer {
+  position: fixed;
+  top: 55%;
+  right: 0;
+  transform: translateY(-50%);
+  /* 垂直居中 */
+
+  width: 50vw;
+  height: 80vh;
+
+  /* 青铜器素材图片 */
+  background-image: url('./素材补充/未标题-2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center right;
+
+  pointer-events: none;
+  /* 鼠标穿透 */
+  z-index: 0;
+  opacity: 0.9;
+
+  /* 边缘黑影渐变融入 */
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+
+  /* 呼吸动感动画 */
+  animation: pulseGlow 10s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* =========================================
+   修正主容器与左侧时间轴的布局
+   ========================================= */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  /* 确保文字在背景上层 */
+}
+
+.content-side {
+  flex: 1;
+  overflow-y: auto;
+  /* 限制宽度，防止文字铺满屏幕遮挡右侧的背景图 */
+  max-width: 800px;
+  margin-left: -100px;
+  /* 整体居左留白 */
+  padding-right: 20px;
+
+  /* 隐藏滚动条但保留功能 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content-side::-webkit-scrollbar {
+  display: none;
+}
+
+/* 响应式适配：手机端隐藏大背景图 */
+@media (max-width: 900px) {
+  .bg-layer {
+    display: none;
+  }
+
+  .content-side {
+    max-width: 100%;
+    margin-left: 20px;
+  }
+}

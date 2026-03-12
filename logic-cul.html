@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字织锦 - 文化内涵</title>
+  <link rel="stylesheet" href="logic-cul.css">
+</head>
+
+<body>
+
+  <!-- 顶部导航栏 -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"><button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="header-center">
+      <div class="logo-title">逻辑·织绣</div>
+      <div class="logo-subtitle">DIGITAL BROCADE</div>
+    </div>
+
+    <div class="header-right">
+      <nav>
+        <ul>
+          <li><a href="logic.html" class="nav-item">交互体验</a></li>
+          <li><a href="logic-sci.html" class="nav-item">科学原理</a></li>
+          <li><a href="logic-his.html" class="nav-item">历史演变</a></li>
+          <li><a href="logic-cul.html" class="nav-item active">文化内涵</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="culture-main">
+
+    <!-- 第一部分：中国四大名锦 -->
+    <section class="section-block">
+      <h1 class="main-title text-center">中国四大名锦</h1>
+      <div class="brocade-cards">
+        <!-- 卡片 1 -->
+        <div class="b-card">
+          <div class="big-char">云</div>
+          <div class="b-name">南京云锦</div>
+          <div class="b-desc">妆花技艺，金碧辉煌</div>
+        </div>
+        <!-- 卡片 2 -->
+        <div class="b-card">
+          <div class="big-char">宋</div>
+          <div class="b-name">苏州宋锦</div>
+          <div class="b-desc">图案典雅，色彩和谐</div>
+        </div>
+        <!-- 卡片 3 -->
+        <div class="b-card">
+          <div class="big-char">蜀</div>
+          <div class="b-name">四川蜀锦</div>
+          <div class="b-desc">历史悠久，工艺精湛</div>
+        </div>
+        <!-- 卡片 4 -->
+        <div class="b-card">
+          <div class="big-char">壮</div>
+          <div class="b-name">广西壮锦</div>
+          <div class="b-desc">民族特色，图案粗犷</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第二部分：左右分栏（图案象征 & 女性文化） -->
+    <section class="section-block split-culture">
+      <!-- 左侧：图案的象征意义 -->
+      <div class="culture-box">
+        <h2 class="sub-title">图案的象征意义</h2>
+        <div class="text-content" style="color: rgb(208 208 208);">
+          <p>中国传统织绣图案往往具有特定的象征意义。龙凤代表皇权，牡丹象征富贵，莲花寓意清廉。蝙蝠谐音"福"，石榴象征多子。</p>
+          <p>这些图案不仅是装饰，更是一种视觉语言，传递着人们对美好生活的向往和祝福。</p>
+        </div>
+
+        <!-- 简单的表格 -->
+        <table class="symbol-table">
+          <thead>
+            <tr>
+              <th>图案</th>
+              <th>象征意义</th>
+              <th>常见用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>龙</td>
+              <td>皇权、尊贵</td>
+              <td>龙袍、官服</td>
+            </tr>
+            <tr>
+              <td>凤</td>
+              <td>吉祥、高贵</td>
+              <td>嫁衣、礼服</td>
+            </tr>
+            <tr>
+              <td>牡丹</td>
+              <td>富贵、繁荣</td>
+              <td>家居装饰</td>
+            </tr>
+            <tr>
+              <td>莲花</td>
+              <td>清廉、高洁</td>
+              <td>文人服饰</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 右侧：织绣与女性文化 -->
+      <div class="culture-box">
+        <h2 class="sub-title">织绣与女性文化</h2>
+        <div class="text-content" style="color: rgb(135, 136, 137);">
+          <div style="margin-bottom: 20px;color: rgb(208 208 208);">
+            <p>在传统社会中，"女红"是女性必备的技能。"十三能织素，十四学裁衣"，织绣不仅是谋生手段，更是女性修养的体现。</p>
+          </div>
+          <p style="color: rgb(208 208 208);">许多古代女性通过织绣表达情感。苏绣中的"双面绣"，正面是花鸟，背面是诗句，寄托着绣女的才情与心事。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三部分：工艺流程 -->
+    <section class="section-block process-section">
+      <h2 class="main-title text-center" style="font-size: 28px; margin-bottom: 40px;">传统织绣工艺流程</h2>
+      <div class="process-steps">
+        <!-- 步骤 1 -->
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-name">养蚕</div>
+          <div class="step-desc">精心饲养蚕宝宝</div>
+        </div>
+        <!-- 步骤 2 -->
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-name">缫丝</div>
+          <div class="step-desc">从蚕茧中提取丝线</div>
+        </div>
+        <!-- 步骤 3 -->
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-name">染色</div>
+          <div class="step-desc">使用植物染料染色</div>
+        </div>
+        <!-- 步骤 4 -->
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-name">整经</div>
+          <div class="step-desc">将经线整理排列</div>
+        </div>
+        <!-- 步骤 5 -->
+        <div class="step-card">
+          <div class="step-num">5</div>
+          <div class="step-name">织造</div>
+          <div class="step-desc">经纬交织成布</div>
+        </div>
+        <!-- 步骤 6 -->
+        <div class="step-card">
+          <div class="step-num">6</div>
+          <div class="step-name">整理</div>
+          <div class="step-desc">后处理与质检</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第四部分：底部引言与文字 -->
+    <section class="section-block quote-section">
+      <div class="quote-text-col">
+        <p>丝绸不仅是一种纺织品，更是中华文明的重要象征。"丝"字在汉字中与"系"、"绪"、"维"等字同源，暗示了丝绸与文明起源的深层联系。</p>
+        <p>在古代，丝绸是身份和地位的象征。皇帝穿龙袍，官员按品级穿不同颜色的官服，平民只能穿布衣。这种"衣以载道"的传统，体现了儒家礼制思想。</p>
+      </div>
+      <div class="quote-display-col">
+        <div class="quote-item">
+          <div class="q-content">"蚕丛及鱼凫，开国何茫然。"</div>
+          <div class="q-source">—— 唐·李白《蜀道难》</div>
+        </div>
+        <div class="quote-item">
+          <div class="q-content">"锦城虽云乐，不如早还家。"</div>
+          <div class="q-source">—— 唐·李白《蜀道难》</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="logic-cul.js"></script>
+</body>
+
+</html>

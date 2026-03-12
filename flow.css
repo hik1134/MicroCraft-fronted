@@ -1,0 +1,385 @@
+/* 全局设置 */
+:root {
+  --bg-dark: #0f1012;
+  /* 深色背景 */
+  --panel-bg: #1A1A1A;
+  /* 控制面板背景 */
+  --coral: #E37B58;
+  /* 珊瑚色/橙红色高亮 */
+  --text-gray: #888888;
+  --paper-color: #F3F2EA;
+  /* 米白色宣纸背景 */
+
+  /* 字体定义 */
+  --font-serif: "Songti SC", "SimSun", "Times New Roman", serif;
+  /* 宋体/衬线 */
+  --font-sans: "DengXian", "Microsoft YaHei", sans-serif;
+  /* 等线/无衬线 */
+  --font-mono: "Consolas", "Courier New", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: var(--font-sans);
+  height: 100vh;
+  overflow: hidden;
+  /* 防止页面滚动 */
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  /* 自定义固定颜色，替换成你想要的颜色即可 */
+}
+
+/* --- 顶部导航 --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.header-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header-left .back-btn:hover {
+  color: #ffffff;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-left: 230px;
+}
+
+.logo-en {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--text-gray);
+  margin-top: 2px;
+  margin-left: 230px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  color: #949292;
+}
+
+.nav-item.active {
+  background-color: rgba(227, 123, 88, 0.2);
+  color: var(--coral);
+  background-color: #e9825f;
+  color: #000000;
+  font-weight: bold;
+}
+
+.nav-item:hover:not(.active) {
+  color: #fff;
+}
+
+/* --- 主体内容 --- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px 40px 40px;
+}
+
+.hero-text {
+  text-align: center;
+  margin: 20px 0 30px 0;
+}
+
+.main-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* 珊瑚色渐变文字效果 */
+  background: linear-gradient(to right, #E37B58, #F5A985);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sub-title {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+/* --- 工作区布局 --- */
+.workspace {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  height: 0;
+  /* 配合 flex:1 实现高度自适应 */
+}
+
+/* 左侧画板 */
+.canvas-container {
+  flex: 1;
+  background-color: var(--paper-color);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  /* 纸张纹理模拟（可选） */
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjRjNGMkVBIi8+CjxwYXRoIGQ9Ik0wIDBoNHYxSDB6bTAgMmg0djFIMHoiIGZpbGw9IiNFRUVFZTQiIGZpbGwtb3BhY2l0eT0iMC41Ii8+Cjwvc3ZnPg==');
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  display: block;
+}
+
+.canvas-footer-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  font-family: "KaiTi", "楷体", var(--font-serif);
+  font-size: 12px;
+  color: #555;
+  background: rgba(243, 242, 234, 0.8);
+  padding: 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  /* 让鼠标穿透文字，不影响绘图 */
+}
+
+/* 右侧控制面板 */
+.control-panel {
+  width: 320px;
+  background-color: var(--panel-bg);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #333;
+}
+
+.panel-header {
+  font-size: 12px;
+  color: #fff;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-note {
+  color: var(--text-gray);
+  font-size: 11px;
+}
+
+/* 滑动条样式 */
+.control-group {
+  margin-bottom: 30px;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-gray);
+  margin-bottom: 10px;
+}
+
+.label-row span:nth-child(2) {
+  font-family: var(--font-mono);
+  color: var(--coral);
+  font-size: 12px;
+}
+
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--coral);
+  cursor: pointer;
+  margin-top: -6px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  background: #444;
+}
+
+/* 按钮组 */
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: opacity 0.2s;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #444;
+  color: #fff;
+}
+
+.btn-solid {
+  background: var(--coral);
+  color: white;
+}
+
+/* 统计面板 */
+.stats-panel {
+  background: #151515;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: auto;
+  /* 推到底部 */
+}
+
+.stats-header {
+  font-size: 11px;
+  color: var(--text-gray);
+  margin-bottom: 10px;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.stat-num {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  color: var(--coral);
+}
+
+
+/* --- 修改部分：标题区背景 --- */
+.hero-text {
+  text-align: center;
+  margin: 20px 0 30px 0;
+
+  /* 新增背景设置 */
+  position: relative;
+  /* 请把 'your-image.jpg' 替换为你实际的图片路径，或者在线图片URL */
+  background-image: url('./气韵书画页面素材/第一页/第一页装饰暗纹.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* 增加内边距，让背景显示更多 */
+  padding: 40px 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  /* 防止遮罩溢出 */
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); */
+}
+
+/* 增加一层黑色半透明遮罩，确保文字清晰 */
+.hero-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: rgba(0, 0, 0, 0.6); */
+  /* 0.6 是遮罩浓度，可调 */
+  z-index: 0;
+  /* 放在文字下面 */
+}
+
+/* 确保文字在遮罩上面 */
+.hero-text h1,
+.hero-text p {
+  position: relative;
+  z-index: 1;
+}
+
+.main-title {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  /* 稍微加大一点 */
+  font-weight: bold;
+  margin-bottom: 12px;
+  background: linear-gradient(to right, #E37B58, #F5A985);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
+  /* 增加一点阴影 */
+}

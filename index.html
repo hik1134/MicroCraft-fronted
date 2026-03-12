@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解码文明指纹 | Decoding the Texture of Civilization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Noto+Serif+SC:wght@200;400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- 第一模块：WebGL 画布 + UI -->
+  <section class="section-one">
+    <div id="canvas-container"></div>
+    <div id="ui-layer">
+      <nav class="top-nav">
+        <!-- 1. 未登录状态的按钮 -->
+        <a href="./login-denglu.html" class="login-btn" id="nav-login-btn">
+          <img src="./页面一素材/未登录 (1).png" class="login-icon" alt="登录图标">
+          <span class="text">登录</span>
+        </a>
+
+        <!-- 2. 已登录状态的用户区域（默认隐藏） -->
+        <div class="user-profile" id="nav-user-profile" style="display: none;">
+          <div class="user-info" id="user-info-toggle">
+            <img src="./页面一素材/未登录 (1).png" class="login-icon" alt="用户图标">
+            <!-- 这里会通过 JS 填入后端的 nickname -->
+            <span class="text" id="user-nickname">Explorer</span>
+          </div>
+          <!-- 下拉的退出按钮 -->
+          <div class="logout-dropdown" id="logout-dropdown">
+            <button id="logout-btn">退出登录</button>
+          </div>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <h1 class="main-title">解码文明指纹</h1>
+        <p class="sub-title">Decoding the Texture of Civilization</p>
+      </div>
+      <div class="bottom-bar">
+        <div class="art-fingerprint-wrapper">
+          <div class="art-glow-bg"></div>
+          <div class="art-ring-orbit">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="art-ring-flow"></div>
+          <svg class="art-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" opacity="0.8" />
+            <path d="M12 8.5a3.5 3.5 0 1 1 0 7" opacity="0.6" />
+            <path d="M12 5.5a6.5 6.5 0 0 1 6.5 6.5" opacity="0.8" />
+            <path d="M8.5 17.5a6.5 6.5 0 0 1 -3 -5.5" opacity="0.8" />
+            <path d="M12 2.5a9.5 9.5 0 0 1 5 17.5" opacity="0.5" />
+            <path d="M4 12a8 8 0 0 1 2 -5" opacity="0.4" />
+          </svg>
+        </div>
+        <div class="arrow-down-art"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第二模块：四大解码器 -->
+  <section class="section-two" id="decoder-module">
+    <nav class="module-nav">
+      <div class="nav-container">
+        <div class="nav-logo">文明指纹</div>
+        <div class="nav-links">
+          <a href="order.html">秩序</a>
+          <a href="logic.html">逻辑</a>
+          <a href="time.html">岁月</a>
+          <a href="flow.html">气韵</a>
+          <span class="nav-divider">|</span>
+          <a href="social.html">代码库</a>
+          <a href="shiyan.html">实验室</a>
+        </div>
+      </div>
+    </nav>
+    <div class="decoder-container">
+      <div class="center-header">
+        <h2 class="decoder-title">四大解码器</h2>
+        <p class="decoder-subtitle">THE DECODERS</p>
+      </div>
+      <div class="cards-wrapper">
+        <div class="decoder-card card-order" onclick="window.location.href='order.html'">
+          <div class="card-icon"><img src="./登录以及首页素材/登录以及首页素材/第二页/未标题-1.png" alt="秩序"></div>
+          <h3 class="card-zh">秩序</h3>
+          <p class="card-en one">ORDER</p>
+        </div>
+        <div class="decoder-card card-logic" onclick="window.location.href='logic.html'">
+          <div class="card-icon"><img src="./素材补充/秩序图标补档.png" alt="逻辑"></div>
+          <h3 class="card-zh">逻辑</h3>
+          <p class="card-en two">LOGIC</p>
+        </div>
+        <div class="decoder-card card-time" onclick="window.location.href='time.html'">
+          <div class="card-icon"><img src="./登录以及首页素材/登录以及首页素材/第二页/2.png" alt="岁月"></div>
+          <h3 class="card-zh">岁月</h3>
+          <p class="card-en three">TIME</p>
+        </div>
+        <div class="decoder-card card-flow" onclick="window.location.href='flow.html'">
+          <div class="card-icon"><img src="./登录以及首页素材/登录以及首页素材/第二页/3.png" alt="气韵"></div>
+          <h3 class="card-zh">气韵</h3>
+          <p class="card-en four">FLOW</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第三个模块：纹理数字化解构 -->
+  <section class="philosophy-section">
+    <div class="philosophy-container">
+      <div class="philosophy-left">
+        <p class="philosophy-subtitle">PHLOSOPHY</p>
+        <h2 class="philosophy-title">纹理数字化<br>解构</h2>
+        <p class="philosophy-desc">
+          我们致力于将古代的纹路和痕迹与现代的计算机技术结合，使纹理可以以一种数字化的形式被创造和储存，这是一种新的文化传承方式，在实现文明数据可视化的同时，实现古代纹理的现代化应用。
+        </p>
+      </div>
+      <div class="philosophy-right">
+        <div class="philosophy-item">
+          <span class="philosophy-number">01</span>
+          <div class="philosophy-text">
+            <h3>重塑审美</h3>
+            <p>在快节奏时代，引导人们静心观察，于细微处发现美，培养深度审美习惯。</p>
+          </div>
+        </div>
+        <div class="philosophy-item">
+          <span class="philosophy-number">02</span>
+          <div class="philosophy-text">
+            <h3>建立连接</h3>
+            <p>通过数字化技术重现和创造纹理，通过个性化的纹理创造方式建立古代与现代的情感连接。</p>
+          </div>
+        </div>
+        <div class="philosophy-item">
+          <span class="philosophy-number">03</span>
+          <div class="philosophy-text">
+            <h3>现代诠释</h3>
+            <p>运用计算机技术实现古代纹理的现代化应用，实现创造性转化与创新型发展。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 第四个模块：文明代码库 -->
+  <section class="full-page-module">
+    <img src="./登录以及首页素材/登录以及首页素材/第四页/未标题-2.png" class="beijing" alt="">
+    <div class="header-content">
+      <!-- 添加 custom-songti 类，用于指定宋体 -->
+      <h1 class="custom-songti">文明代码库</h1>
+      <p class="subtitle">THE ARCHIVE</p>
+    </div>
+    <div class="search-section">
+      <div class="search-bar-wrapper">
+        <!-- 替换默认搜索图标为自定义素材 -->
+        <img src="./登录以及首页素材/登录以及首页素材/第四页/搜索.png" class="custom-search-icon" alt="搜索">
+        <input type="text" placeholder="搜索作品或创作者..." class="search-input">
+      </div>
+      <div class="filter-group">
+        <span class="filter-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+        </span>
+        <!-- 修复了类名 click-glow，并增加了 data-sort -->
+        <button class="tag-btn click-glow" data-sort="秩序">秩序</button>
+        <button class="tag-btn click-glow" data-sort="逻辑">逻辑</button>
+        <button class="tag-btn click-glow" data-sort="岁月">岁月</button>
+        <button class="tag-btn click-glow" data-sort="气韵">气韵</button>
+      </div>
+    </div>
+    <div class="card-grid" id="cardContainer"></div>
+    <div class="module-footer">
+      <a href="social.html" class="enter-btn">
+        <span>进入社区</span>
+        <img src="./登录以及首页素材/登录以及首页素材/第四页/下箭头.png" class="arrow-down-img" alt="进入社区">
+      </a>
+    </div>
+  </section>
+
+  <!-- 实验室部分 -->
+  <!-- 模块容器 -->
+  <div class="sci-fi-module" id="sciFiModule">
+
+    <!-- 1. 左侧图片 (z-index: 1) -->
+    <div class="side-img left"><img src="./登录以及首页素材/登录以及首页素材/第五页/两边拉开的左门.png" alt=""></div>
+
+    <!-- 2. 右侧图片 (z-index: 1) -->
+    <div class="side-img right"><img src="./登录以及首页素材/登录以及首页素材/第五页/门做成向两边拉开的设计（右门）.png" alt=""></div>
+
+    <!-- 3. 中间背景面板 (z-index: 2) -->
+    <div class="center-bg"><img src="./素材补充/里面的内容.png" alt=""></div>
+
+    <!-- 4. 中间顶层内容 (z-index: 3) -->
+    <div class="center-content">
+      <!-- 头部标题 -->
+      <div class="header-title">
+        <div class="arrows">◀◀◀</div>
+        <div class="title-text">
+          <h1>实验室</h1>
+          <p>LABORATORY</p>
+        </div>
+        <div class="arrows">▶▶▶</div>
+      </div>
+
+      <!-- 垂直文字 -->
+      <div class="vertical-text-box">
+        <div class="vertical-text">立即体验</div>
+        <!-- <div class="down-arrows">▼▼▼</div> -->
+      </div>
+
+      <!-- 指纹素材 -->
+      <div class="fingerprint-area">
+        <!-- <div class="circle-ring"></div> -->
+        <!-- <div class="circle-ring-inner"></div> -->
+        <!-- 指纹图片占位，如果是img标签写在这里 -->
+        <div class="fingerprint-img">
+          <!-- 为了预览效果，这里放一个SVG指纹图标占位。实际请用你的图片替换 -->
+          <a href="shiyan.html"><img src="./素材补充/辛苦了.png" alt=""></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- 最后一个部分 -->
+  <footer class="footerr-module">
+    <img src="./登录以及首页素材/登录以及首页素材/末尾/末尾的花.png" class="flowerr" alt="">
+    <!-- 内容容器 -->
+    <div class="content-wrapper">
+
+      <!-- 标题区域 -->
+      <div class="title-group">
+        <h2 class="main-title">解码文明指纹</h2>
+        <p class="sub-title">Decoding the Texture of civilization</p>
+      </div>
+
+      <!-- 导航链接 -->
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="order.html">秩序</a>
+        <a href="logic.html">逻辑</a>
+        <a href="time.html">岁月</a>
+        <a href="flow.html">气韵</a>
+        <a href="social.html">社区</a>
+        <a href="shiyan.html">实验室</a>
+      </nav>
+
+      <!-- 指纹图标 -->
+      <div class="fingerprint-box">
+        <!-- 这里放你的指纹图片素材 -->
+        <img src="./登录以及首页素材/登录以及首页素材/末尾/末尾的指纹.png" alt="指纹">
+      </div>
+
+    </div>
+
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

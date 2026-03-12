@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文明代码库 - 纹理社区</title>
+  <!-- 引入样式文件 -->
+  <link rel="stylesheet" href="social.css">
+</head>
+
+<body>
+  <div class="header-unified-bg">
+    <!-- 1. 导航栏 -->
+    <nav class="navbar">
+      <div class="nav-back text-14">
+        <img src="./社区板及素材块/第一部分/左箭头.png" alt="<" class="icon-sm">
+        <a href="index.html"><span>返回</span></a>
+      </div>
+      <div class="nav-center-title">
+        <div class="title-cn font-serif">文明代码库</div>
+        <div class="title-en">THE ARCHIVE</div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- 2. Hero 区域 -->
+      <section class="hero-section">
+        <h1 class="text-28 bold text-white">纹理社区</h1>
+        <p class="text-14 hero-subtitle">分享你的纹理创作，发现更多灵感</p>
+      </section>
+
+      <!-- 功能卡片区 -->
+      <section class="func-cards">
+        <div class="func-card theme-yellow">
+          <div class="card-upper">
+            <div class="icon-box">
+              <img src="./社区板及素材块/第一部分/第一个的上传.png" alt="icon">
+            </div>
+            <div class="card-title text-16 font-serif">我的纹理</div>
+            <div class="card-desc text-12">上传并管理你的作品</div>
+          </div>
+          <button class="btn-custom btn-yellow" onclick="handleUploadClick('uploadTextureModal')">
+            <img src="./社区板及素材块/第一部分/第一个的上传.png" class="icon-xs"> 点击上传
+          </button>
+        </div>
+
+        <div class="func-card theme-green">
+          <div class="card-upper">
+            <div class="icon-box">
+              <img src="./社区板及素材块/第一部分/第二个小框内容.png" alt="icon">
+            </div>
+            <div class="card-title text-16 font-serif">纹理展览</div>
+            <div class="card-desc text-12">探索社区精选作品</div>
+          </div>
+          <a href="#exhibition" class="link-text text-blue">浏览展览 &gt;</a>
+        </div>
+
+        <div class="func-card theme-red">
+          <div class="card-upper">
+            <div class="icon-box">
+              <img src="./社区板及素材块/第一部分/第三个小框的标.png" class="xiangji" alt="icon">
+            </div>
+            <div class="card-title text-16 font-serif">拍照上传</div>
+            <div class="card-desc text-12">捕捉生活中的纹理</div>
+          </div>
+          <button class="btn-custom btn-red" onclick="handleUploadClick('photoUploadModal')">
+            <img src="./社区板及素材块/第一部分/第三个小框的标.png" class="icon-xs"> 打开相机
+          </button>
+        </div>
+
+        <div class="func-card theme-orange">
+          <div class="card-upper">
+            <div class="icon-box">
+              <img src="./社区板及素材块/第一部分/第四个小框的标.png" alt="icon">
+            </div>
+            <div class="card-title text-16 font-serif">生活中的纹理</div>
+            <div class="card-desc text-12">分享日常纹理发现</div>
+          </div>
+          <a href="#code-library" class="link-text text-orange">探索生活 &gt;</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 3. 我的纹理作品 -->
+  <section id="my-works-section" class="section-block">
+    <div class="section-header">
+      <h2 class="text-18 font-serif">我的纹理作品</h2>
+    </div>
+    <div class="works-grid" id="myWorksGrid"></div>
+  </section>
+
+  <!-- 4. 纹理展览 -->
+  <section id="exhibition" class="section-block">
+    <div class="section-header">
+      <h2 class="text-18 font-serif">纹理展览</h2>
+    </div>
+
+    <!-- 筛选栏 -->
+    <div class="filter-bar">
+      <div class="search-box">
+        <img src="./社区板及素材块/搜索.png" alt="搜索" class="search-icon-img">
+        <!-- 增加 id="exhibitionSearch" -->
+        <input type="text" id="exhibitionSearch" placeholder="搜索作品或创作者..." class="text-14">
+      </div>
+      <div class="filter-tags text-12" id="exhibitionFilters">
+        <span class="filter-tag active" data-type="all">全部</span>
+        <span class="filter-tag" data-type="texture">肌理</span>
+        <span class="filter-tag" data-type="logic">逻辑</span>
+        <span class="filter-tag" data-type="time">岁月</span>
+        <span class="filter-tag" data-type="charm">气韵</span>
+      </div>
+    </div>
+
+    <div class="works-grid" id="exhibitionGrid"></div>
+    <div class="pagination" id="exhibitionPagination"></div>
+  </section>
+
+  <!-- 5. 拍照上传大模块 -->
+  <section class="upload-section-bg">
+    <div class="upload-content">
+      <div class="camera-deco">
+        <img src="./社区板及素材块/第四部分/拍照图标内容.png" alt="Cam" class="camera-icon-lg">
+      </div>
+      <h2 class="text-18 font-serif" style="margin-bottom:10px;margin-left: -5px;">拍照上传</h2>
+      <p class="text-14 text-gray-light">使用手机或电脑摄像头捕捉生活中的纹理瞬间，上传到社区与大家分享</p>
+      <div class="upload-btns">
+        <button class="btn-custom btn-upload-lg" onclick="handleUploadClick('photoUploadModal')">
+          <img src="./社区板及素材块/第四部分/相机.png" class="icon-xs"> 拍照上传
+        </button>
+        <button class="btn-custom btn-upload-lg btn-upload-outline" onclick="handleUploadClick('photoAlbumModal')">
+          <img src="./社区板及素材块/第一部分/第一个的上传.png" class="icon-xs"> 从相册选择
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 代码库 (暂时复用作品接口展示前3个) -->
+  <section id="code-library" class="section-block">
+    <div class="section-header">
+      <h2 class="text-18 font-serif">代码库</h2>
+    </div>
+    <div class="works-grid" id="libraryGrid"></div>
+  </section>
+
+
+  <!-- 7. Footer -->
+  <footer class="footer-section">
+    <div class="text-12 footer-sub">PHILOSOPHY</div>
+    <h2 class="footer-slogan text-28 font-serif">鼓励线下观察，线上分享，形成情感共鸣的社区氛围</h2>
+    <div class="footer-stats">
+      <div class="f-stat-item">
+        <!-- 加上了 id="stat-works" -->
+        <div class="f-num font-serif" id="stat-works">0</div>
+        <div class="f-label">分享作品</div>
+      </div>
+      <div class="f-stat-item">
+        <!-- 加上了 id="stat-likes" -->
+        <div class="f-num font-serif" id="stat-likes">0</div>
+        <div class="f-label">获赞总数</div>
+      </div>
+      <div class="f-stat-item">
+        <!-- 加上了 id="stat-users" -->
+        <div class="f-num font-serif" id="stat-users">0</div>
+        <div class="f-label">活跃用户</div>
+      </div>
+      <div class="f-stat-item">
+        <!-- 加上了 id="stat-tags" -->
+        <div class="f-num font-serif" id="stat-tags">4</div>
+        <div class="f-label">温度标签</div>
+      </div>
+    </div>
+  </footer>
+  <!-- ================= 隐藏输入框与弹窗区 ================= -->
+  <!-- 本地文件上传隐藏输入框 -->
+  <input type="file" id="localUploadInput" accept="image/*" style="display: none;" onchange="handleLocalUpload(this)">
+  <input type="file" id="photoAlbumInput" accept="image/*" style="display: none;" onchange="handlePhotoAlbumUpload(this)">
+
+  <!-- 弹窗1：上传纹理 (本地) -->
+  <div id="uploadTextureModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal theme-gold-modal">
+      <div class="modal-header">
+        <span>上传纹理</span>
+        <span class="close-btn" onclick="closeCustomModal('uploadTextureModal')">×</span>
+      </div>
+      <!-- 点击此处只选择文件，不直接上传 -->
+      <div class="modal-body upload-dashed-area" onclick="document.getElementById('localUploadInput').click()">
+        <img src="./社区板及素材块/第一部分/第一个的上传.png" alt="上传" class="modal-icon">
+        <p class="upload-main-text" id="localFileNameDisplay">点击选择本地图片</p>
+        <p class="upload-sub-text">支持 JPG, PNG, WEBP 格式</p>
+      </div>
+
+      <!-- 新增：四个分类按钮 -->
+      <div class="category-selection">
+        <span class="category-btn active" data-val="order" onclick="selectCategory(this, 'local')">秩序</span>
+        <span class="category-btn" data-val="logic" onclick="selectCategory(this, 'local')">逻辑</span>
+        <span class="category-btn" data-val="time" onclick="selectCategory(this, 'local')">岁月</span>
+        <span class="category-btn" data-val="flow" onclick="selectCategory(this, 'local')">气韵</span>
+      </div>
+
+      <!-- 命名与确定按钮 (如截图所示) -->
+      <div class="modal-naming-area">
+        <input type="text" id="localArtworkName" placeholder="为即将上传的作品命名...">
+        <button class="confirm-name-btn" id="confirmLocalBtn" onclick="confirmLocalUpload()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 弹窗2：拍照上传 (去掉命名，保留标签) -->
+  <div id="photoUploadModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal theme-red-modal">
+      <div class="modal-header">
+        <span>准备拍照</span>
+        <span class="close-btn" onclick="closeCustomModal('photoUploadModal')">×</span>
+      </div>
+      <!-- 点击此处直接打开相机 -->
+      <div class="modal-body upload-dashed-area" onclick="triggerRealCamera()">
+        <img src="./社区板及素材块/第一部分/第三个小框的标.png" alt="相机" class="modal-icon">
+        <p class="upload-main-text">点击打开相机</p>
+      </div>
+
+      <!-- 新增：四个分类按钮 (无命名框) -->
+      <div class="category-selection" style="margin-top: 20px;">
+        <span class="category-btn active" data-val="order" onclick="selectCategory(this, 'photo')">秩序</span>
+        <span class="category-btn" data-val="logic" onclick="selectCategory(this, 'photo')">逻辑</span>
+        <span class="category-btn" data-val="time" onclick="selectCategory(this, 'photo')">岁月</span>
+        <span class="category-btn" data-val="flow" onclick="selectCategory(this, 'photo')">气韵</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 弹窗3：拍照上传 - 从相册选择 -->
+  <div id="photoAlbumModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal theme-red-modal">
+      <div class="modal-header">
+        <span>从相册选择</span>
+        <span class="close-btn" onclick="closeCustomModal('photoAlbumModal')">×</span>
+      </div>
+
+      <!-- 点击此处只选择图片，不直接上传 -->
+      <div class="modal-body upload-dashed-area" onclick="document.getElementById('photoAlbumInput').click()">
+        <img src="./社区板及素材块/第一部分/第一个的上传.png" alt="上传" class="modal-icon">
+        <p class="upload-main-text" id="photoAlbumFileNameDisplay">点击选择相册图片</p>
+        <p class="upload-sub-text">支持 JPG, PNG, WEBP 格式</p>
+      </div>
+
+      <!-- 四个分类按钮 -->
+      <div class="category-selection">
+        <span class="category-btn active" data-val="order" onclick="selectCategory(this, 'photo')">秩序</span>
+        <span class="category-btn" data-val="logic" onclick="selectCategory(this, 'photo')">逻辑</span>
+        <span class="category-btn" data-val="time" onclick="selectCategory(this, 'photo')">岁月</span>
+        <span class="category-btn" data-val="flow" onclick="selectCategory(this, 'photo')">气韵</span>
+      </div>
+
+      <!-- 命名与确定按钮 -->
+      <div class="modal-naming-area">
+        <input type="text" id="photoAlbumArtworkName" placeholder="为即将上传的作品命名...">
+        <button class="confirm-name-btn" id="confirmPhotoAlbumBtn" onclick="confirmPhotoAlbumUpload()">确定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 隐藏的画布，用于截取视频帧 -->
+  <canvas id="cameraCanvas" style="display: none;"></canvas>
+  <!-- 弹窗3：真实的相机拍摄界面 (必须加上这段才能显示摄像头) -->
+  <div id="cameraModal" class="custom-modal-overlay" style="display: none; z-index: 99999;">
+    <div class="custom-modal theme-red-modal" style="width: 600px; text-align: center;">
+      <div class="modal-header">
+        <span id="cameraTitle">相机拍照</span>
+        <span class="close-btn" onclick="closeCamera()">×</span>
+      </div>
+
+      <!-- 画面显示区 -->
+      <div style="background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 20px; position: relative;">
+        <!-- 实时摄像头视频流 -->
+        <video id="cameraVideo" autoplay playsinline style="width: 100%; max-height: 400px; object-fit: cover;"></video>
+        <!-- 拍下后的照片预览 -->
+        <img id="photoPreview" style="width: 100%; max-height: 400px; object-fit: cover; display: none;">
+      </div>
+
+      <!-- 控制按钮区 -->
+      <div id="cameraControls" style="display: flex; justify-content: center; gap: 20px;">
+        <button class="confirm-name-btn" style="background: #e74c3c; color: white;" onclick="takePhotoPreview()">📸
+          咔嚓！拍照</button>
+      </div>
+
+      <!-- 预览确认区 (拍完照后显示) -->
+      <div id="previewControls" style="display: none; justify-content: center; gap: 20px;">
+        <button class="category-btn" style="width: 120px;" onclick="resetCameraUI()">🔄 重拍</button>
+        <button id="confirmUploadBtn" class="confirm-name-btn" style="width: 120px; background: #2ecc71; color: white;"
+          onclick="uploadCapturedPhoto()">✅ 确认上传</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="request.js"></script>
+  <script src="social.js"></script>
+</body>
+
+</html>

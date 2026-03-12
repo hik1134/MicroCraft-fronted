@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>气韵·书画 - 文化内涵</title>
+  <link rel="stylesheet" href="flow-cul.css">
+  <!-- 引入 Remix Icon 图标库 -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 顶部导航 -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="nav-center">
+      <div class="logo-text">气韵·书画</div>
+      <div class="logo-en">RHYTHM OF LIFE</div>
+    </div>
+
+    <div class="nav-right">
+      <a href="flow.html">
+        <div class="nav-item" data-tab="interactive">交互体验</div>
+        <a href="flow-sci.html">
+          <div class="nav-item " data-tab="science">科学原理</div>
+        </a>
+        <a href="flow-his.html">
+          <div class="nav-item" data-tab="history">历史演变</div>
+        </a>
+        <a href="flow-cul.html">
+          <div class="nav-item active" data-tab="culture">文化内涵</div>
+        </a>
+    </div>
+  </header>
+
+  <!-- 页面主体容器 (允许滚动) -->
+  <main class="scroll-container">
+
+
+    <section class="section-types fade-in">
+      <h2 class="section-title">书法五体详解</h2>
+      <div class="types-grid">
+        <!-- 卡片 1 -->
+        <div class="type-card">
+          <h3 class="type-name">篆</h3>
+          <p style="padding-bottom: 10px;"> 篆书</p>
+          <p class="type-desc">古朴典雅</p>
+        </div>
+        <!-- 卡片 2 -->
+        <div class="type-card">
+          <h3 class="type-name">隶</h3>
+          <p style="padding-bottom: 10px;">隶书</p>
+          <p class="type-desc">蚕头燕尾</p>
+        </div>
+        <!-- 卡片 3 -->
+        <div class="type-card">
+          <h3 class="type-name">楷</h3>
+          <p style="padding-bottom: 10px;">楷书</p>
+          <p class="type-desc">端庄规整</p>
+        </div>
+        <!-- 卡片 4 -->
+        <div class="type-card">
+          <h3 class="type-name">行</h3>
+          <p style="padding-bottom: 10px;">行书</p>
+          <p class="type-desc">流畅自然</p>
+        </div>
+        <!-- 卡片 5 -->
+        <div class="type-card">
+          <h3 class="type-name">草</h3>
+          <p style="padding-bottom: 10px;">草书</p>
+          <p class="type-desc">奔放洒脱</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第二部分：铸造工艺与合金配比 (左右分栏) -->
+    <section class="section-tech-alloy fade-in">
+
+      <!-- 左侧：铸造工艺介绍 -->
+      <div class="tech-box">
+        <h3 class="box-title">书体演变规律</h3>
+        <p class="text-content">
+          中国书法的演变遵循着"由繁到简"的规律。从甲骨文到楷书，文字的笔画逐渐减少，结构逐渐简化，书写效率不断提高。
+        </p>
+        <p class="text-content">
+          但这种简化并非随意为之，而是在保持文字可识别性的前提下进行的。每一种书体的形成，都是实用性和艺术性平衡的结果。
+        </p>
+        <div class="quote-block">
+          <p class="quote-text">"晋人尚韵，唐人尚法，宋人尚意，元明尚态。"</p>
+          <span class="quote-source">——清·梁巘《评书帖》</span>
+        </div>
+      </div>
+
+      <!-- 右侧：合金配比表格 -->
+      <div class="alloy-box">
+        <h3 class="box-title">历代书法名家</h3>
+        <!-- <p class="text-content">
+          古代工匠已经掌握了不同用途青铜器的最佳合金配比。《考工记》中记载了"六齐"，即六种不同用途的铜锡配比。
+        </p> -->
+
+        <div class="alloy-table">
+          <div class="table-header">
+            <span>时代</span>
+            <span>书家</span>
+            <span>代表作</span>
+          </div>
+          <div class="table-row">
+            <span>东晋</span>
+            <span class="mono-font">王羲之</span>
+            <span>《兰亭序》</span>
+          </div>
+          <div class="table-row">
+            <span>唐</span>
+            <span class="mono-font">张旭</span>
+            <span>《古诗四帖》</span>
+          </div>
+          <div class="table-row">
+            <span>宋</span>
+            <span class="mono-font">苏轼</span>
+            <span>《寒食帖》</span>
+          </div>
+          <div class="table-row">
+            <span>元</span>
+            <span class="mono-font">赵孟頫</span>
+            <span>《洛神赋》</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三部分：工艺流程 -->
+    <section class="section-process fade-in">
+      <h2 class="section-title">文房四宝的制作工艺</h2>
+      <div class="process-steps">
+        <!-- 步骤 1 -->
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h4 class="step-title">选料</h4>
+          <p class="step-desc">精选优质原材料</p>
+        </div>
+        <!-- 步骤 2 -->
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h4 class="step-title">加工</h4>
+          <p class="step-desc">传统手工制作</p>
+        </div>
+        <!-- 步骤 3 -->
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h4 class="step-title">雕琢</h4>
+          <p class="step-desc">精雕细刻打磨</p>
+        </div>
+        <!-- 步骤 4 -->
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h4 class="step-title">养护</h4>
+          <p class="step-desc">长期使用养护</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 第四部分：底部哲学引言 -->
+    <section class="section-philosophy fade-in">
+      <div class="philo-content">
+        <p class="text-content">
+          中国书法不仅是一门艺术，更是一种修身养性的方式。"书为心画"，书法是书写者内心世界的直接反映。
+        </p>
+        </p>
+        <p class="text-content">
+          书法讲究"意在笔先"，强调内心的准备和专注。这与儒家的"正心诚意"、道家的"静心无为"、佛家的"禅定"都有相通之处。
+        </p>
+      </div>
+      <div class="philo-quote">
+        <p class="big-quote">"书者，散也。欲书先散怀抱，任情恣性，然后书之。"</p>
+        <span class="quote-source align-right">——东汉·蔡邕《笔论》</span>
+      </div>
+    </section>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <script src="flow-cul.js"></script>
+</body>
+
+</html>

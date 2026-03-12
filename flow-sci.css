@@ -1,0 +1,282 @@
+/* --- 全局变量与重置 (保持与第一页一致) --- */
+:root {
+  --bg-dark: #0f1012;
+  --panel-bg: #1A1A1A;
+  /* 卡片背景色 */
+  --coral: #E37B58;
+  /* 珊瑚色 */
+  --text-gray: #888888;
+  --border-color: #333;
+
+  --font-serif: "Songti SC", "SimSun", "Times New Roman", serif;
+  --font-sans: "DengXian", "Microsoft YaHei", sans-serif;
+  --font-mono: "Consolas", "Courier New", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: var(--font-sans);
+  height: 100vh;
+  overflow: hidden;
+  /* 防止页面滚动 */
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  /* 自定义固定颜色，替换成你想要的颜色即可 */
+}
+
+/* --- 顶部导航 --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.header-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header-left .back-btn:hover {
+  color: #ffffff;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-left: 230px;
+}
+
+.logo-en {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--text-gray);
+  margin-top: 2px;
+  margin-left: 230px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #949292;
+
+}
+
+.nav-item.active {
+  background-color: rgba(227, 123, 88, 0.2);
+  color: var(--coral);
+  background-color: #e9825f;
+  color: #000000;
+  font-weight: bold;
+}
+
+.nav-item:hover:not(.active) {
+  color: #fff;
+}
+
+/* --- 页面主体 --- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+/* 标题区 */
+.hero-section {
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--coral);
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-gray);
+  letter-spacing: 1px;
+}
+
+/* 内容大卡片 */
+.content-card {
+  background-color: var(--panel-bg);
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 16px;
+  padding: 50px 60px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid #252525;
+}
+
+.section-header {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #eee;
+}
+
+/* 网格布局 */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  /* 左侧稍宽 */
+  gap: 80px;
+}
+
+/* --- 左侧样式 --- */
+.text-block {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* 公式盒子 */
+.formula-box {
+  margin-top: 40px;
+  background: #251b18;
+  border: 1px solid #bc7e69;
+  /* 珊瑚色边框 */
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+
+.formula-label {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.formula-math {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  /* 稍微大一点更清晰 */
+  color: var(--coral);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.formula-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 10px;
+  color: var(--text-gray);
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+/* --- 右侧样式 --- */
+.list-title {
+  font-size: 14px;
+  color: var(--coral);
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+
+.factors-table {
+  width: 100%;
+}
+
+.table-header,
+.table-row {
+  display: flex;
+  padding: 15px 0;
+  border-bottom: 1px solid #333;
+}
+
+.table-header {
+  font-size: 12px;
+  color: var(--text-gray);
+  border-bottom: 1px solid #444;
+}
+
+.table-header span:first-child,
+.table-row .factor-name {
+  width: 35%;
+  /* 第一列宽度 */
+}
+
+.table-header span:last-child,
+.table-row .factor-desc {
+  flex: 1;
+}
+
+.table-row {
+  font-size: 13px;
+  color: #ddd;
+  align-items: center;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.factor-name {
+  color: #ccc;
+}
+
+.factor-desc {
+  color: #999;
+}
+
+/* 响应式微调 */
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .content-card {
+    padding: 30px;
+  }
+}

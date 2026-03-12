@@ -1,0 +1,1266 @@
+/* --- 全局重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050508;
+  color: #e0e0e0;
+  font-family: 'DengXian', 'SimHei', sans-serif;
+  /* 移除 height: 100vh; 取消强制全屏高度 */
+  /* 移除 overflow: hidden; 允许页面整体滚动 */
+  min-height: 100vh;
+  /* 保留最小高度，确保铺满视口 */
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1400px;
+  /* 可选：限制最大宽度，适配大屏 */
+  margin: 0 auto;
+  /* 居中显示 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0 10px;
+  /* 加左右内边距，适配小屏 */
+}
+
+
+.flow-step .app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+
+
+/* --- 头部模块 --- */
+.header-module {
+  /* 1. 设置背景图片 (请替换你的图片路径) */
+  background-image: url('./实验室的拆分/实验室素材/左右上方的纹.png');
+  background-size: cover;
+  background-position: center;
+
+
+  text-align: center;
+  /* 增加上下内边距，给背景图展示空间 */
+  padding: 40px 20px 30px 20px;
+
+  /* 弹性布局设置，防止内容被压缩 */
+  flex-shrink: 0;
+
+  /* 底部加一点边距，或者直接用背景过渡 */
+  margin-bottom: 20px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.main-title {
+  font-size: 32px;
+  font-weight: bold;
+  /* 必须加粗，效果才明显 */
+  font-family: 'DengXian', 'Microsoft YaHei', sans-serif;
+  /* 确保使用粗线条字体 */
+
+  /* 关键点 1：精确的颜色渐变 (从左边的蓝色 #5CA0F2 到右边的紫色 #A38DF5) */
+  background: linear-gradient(90deg, #5CA0F2 0%, #A38DF5 100%);
+
+  /* 关键点 2：把背景裁剪到文字上 */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* 关键点 3：让文字本身变透明，这样背景色才能透出来 */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  /* 其他排版设置 */
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  display: inline-block;
+  /* 防止某些浏览器渲染宽度问题 */
+}
+
+
+.sub-title {
+  font-size: 14px;
+  color: #888;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.tagline {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+  margin-top: 21px;
+}
+
+/* 流程图 */
+.process-flow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 29px;
+  margin-bottom: -16px;
+}
+
+/* --- 流程图节点样式 (替换原有代码) --- */
+
+
+/* 1. 节点的基础样式 (对应图中的灰色未激活状态) */
+.flow-step {
+  /* 尺寸与形状 */
+  min-width: 120px;
+  /* 给一个最小宽度，让它呈长方形 */
+  padding: 10px 20px;
+  border-radius: 8px;
+  /* 圆角改小一点，像图里那样的圆滑矩形 */
+
+  /* 布局 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  /* 数字和文字之间的距离 */
+
+  /* 颜色 (未激活) */
+  background: rgba(255, 255, 255, 0.05);
+  /* 极淡的白色透明，形成磨砂黑效果 */
+  border: 1px solid #333;
+  /* 暗灰色的边框 */
+  color: #666;
+  /* 灰色的文字 */
+
+  /* 字体与过渡 */
+  font-size: 14px;
+  transition: all 0.4s ease;
+  /* 让变化有呼吸感 */
+  position: relative;
+  /* 为可能的特效做准备 */
+}
+
+/* 2. 节点内的数字 (01, 02...) */
+.step-num {
+  font-family: 'Courier New', monospace;
+  /* 科技感等宽字体 */
+  font-size: 14px;
+  font-weight: normal;
+  color: #555;
+}
+
+/* 3. 节点内的文字 (选择载体...) */
+.step-text {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* --- 激活/完成状态 (对应图中的亮色状态) --- */
+/* 当 JS 给它加上 active 或 completed 类时 */
+.flow-step.active,
+.flow-step.completed {
+  /* 背景：从深蓝到深紫的渐变，模拟图中的微光 */
+  background: linear-gradient(135deg, rgba(17, 68, 75, 0.9) 0%, rgba(40, 30, 70, 0.9) 100%);
+
+  /* 边框：高亮青蓝色 */
+  border-color: #2f5e74;
+
+  /* 文字颜色：白色 */
+  color: #fff;
+
+  /* 外部发光：淡淡的蓝色光晕 */
+  box-shadow: 0 0 15px rgba(35, 128, 142, 0.2);
+}
+
+/* 激活状态下的数字颜色 (高亮青色) */
+.flow-step.active .step-num,
+.flow-step.completed .step-num {
+  color: #65d0ea;
+  /* 对应图里的 "01" 颜色 */
+  font-weight: bold;
+}
+
+/* --- 在 style.css 中找到并替换 flow-line 相关样式 --- */
+
+/* 连接线容器 */
+.flow-line {
+  /* 设置箭头显示的宽度，根据你的图片长短调整这个数值 */
+  width: 30px;
+  height: auto;
+
+  /* 清除之前的背景线样式 */
+  background: none;
+
+  /* 居中对齐 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 默认状态：稍微透明一点，表示未激活 */
+  opacity: 0.3;
+  transition: all 0.5s ease;
+}
+
+/* 箭头图片样式 */
+.flow-line img {
+  width: 80%;
+  height: auto;
+  display: block;
+  /* 如果你的素材不是白/灰色的，可以用 filter: grayscale(100%) 先把它变灰 */
+}
+
+/* 激活状态：当 JavaScript 给它加上 active 类时 */
+.flow-line.active {
+  opacity: 1;
+  /* 变得完全不透明 */
+
+  /* 科技感发光特效！会让你的箭头变成亮蓝色 */
+  filter: drop-shadow(0 0 5px #4facfe) brightness(1.2);
+}
+
+
+/* --- 主工作区 Grid 布局 --- */
+.workspace {
+  flex: 1;
+  display: grid;
+  /* 替换固定列宽为 自适应 + 最小宽度，适配小屏 */
+  /* grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); */
+  grid-template-columns: 240px 240px 1fr 280px;
+  gap: 15px;
+  padding: 0 20px 20px 20px;
+  /* 新增：允许 workspace 垂直滚动（如果内容溢出） */
+  overflow-y: auto;
+  margin-bottom: 20px;
+  /* 底部留白 */
+}
+
+/* 面板通用样式 */
+.panel {
+  background: rgba(20, 22, 26, 0.85);
+  border: 1px solid #333;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #2a2a2a;
+  background: linear-gradient(90deg, rgba(51, 20, 60, 0.6) 0%, rgba(10, 11, 16, 0) 80%);
+}
+
+.ph-left {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.ph-num {
+  font-weight: bold;
+  font-size: 16px;
+  color: #ad7fe8;
+  /* 默认亮绿 */
+}
+
+.ph-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+}
+
+.panel-carrier .ph-num {
+  color: #00ff9d;
+}
+
+/* 01 亮绿 */
+/* 02 金色, 03 紫色, 04 绿色 在 html 内联样式或下面单独定义 */
+
+.ph-eng {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* 滚动条样式 */
+.scroll-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-content::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
+
+/* 卡片通用 */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.card.selected {
+  border-color: #4facfe;
+  background: rgba(79, 172, 254, 0.1);
+  box-shadow: 0 0 15px rgba(79, 172, 254, 0.1) inset;
+}
+
+/* 模块 01 载体列表 */
+.carrier-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  background: #000;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-icon img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.ci-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.ci-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.ci-code {
+  font-size: 10px;
+  color: #555;
+  font-family: monospace;
+}
+
+.ci-sub {
+  font-size: 12px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+}
+
+.highlight-num {
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 模块 02 纹理库 */
+.filter-bar {
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.filter-tag {
+  font-size: 10px;
+  padding: 3px 8px;
+  background: #222;
+  border-radius: 10px;
+  color: #888;
+  cursor: pointer;
+}
+
+.filter-tag.code {
+  font-family: monospace;
+}
+
+.filter-tag.active {
+  background: #444;
+  color: #fff;
+}
+
+.texture-card {
+  display: flex;
+  gap: 10px;
+  height: 100px;
+}
+
+.tex-img-box {
+  width: 60px;
+  height: 60px;
+  background: #000;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tex-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tex-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ti-title {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.ti-desc {
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ti-tags {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  color: #111;
+}
+
+.tag.cyan {
+  background: #213442;
+}
+
+.tag.gold {
+  background: #38312c;
+}
+
+.tag.green {
+  background: #223336;
+}
+
+.tag.ink {
+  background: #242936;
+}
+
+.eng-tag {
+  font-size: 10px;
+  color: #555;
+  transform: scale(0.9);
+  transform-origin: left;
+}
+
+
+/* 3D视口大盒子 - 用素材图片作为背景 */
+.viewport-area {
+  position: relative;
+  border: none;
+  /* 去掉原有边框，避免和素材图片冲突 */
+  border-radius: 8px;
+  /* 可选：和素材图片圆角保持一致 */
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+  /* 素材图片的高度，可根据你的图片调整 */
+  width: 90%;
+  overflow: hidden;
+  /* 防止图片溢出 */
+  /* 核心：设置素材图片为背景 */
+  background: url("./实验室的拆分/实验室素材/中间实验部分.png") no-repeat center center;
+  /* 让图片适配容器（关键） */
+  background-size: cover;
+  /* 覆盖整个容器，保持比例 */
+  /* 可选：如果素材有透明区域，加一层底色 */
+  /* background-color: #050812; */
+  /* 可选：禁止背景图片滚动 */
+  background-attachment: local;
+}
+
+
+/* 保留原有空状态内容的样式，仅调整文字颜色适配素材 */
+.viewport-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #4a86b8;
+  /* 可根据素材底色调整文字色 */
+  font-size: 12px;
+  /* font-family: 'Roboto Mono', monospace; */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+  /* 确保文字在素材图片上方 */
+}
+
+.viewport-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #458b9f;
+}
+
+.empty-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 20px;
+  padding: 40px;
+  z-index: 10;
+  /* 确保中间内容在素材图片上方 */
+}
+
+.empty-icon-box {
+  width: 80px;
+  height: 80px;
+  /* background: rgba(255, 255, 255, 0.08); */
+  /* 原有磨砂背景 */
+  border-radius: 12px;
+  /* 圆角 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  /* 磨砂模糊 */
+  position: relative;
+
+  /* 清新绿，可替换成你想要的绿色值 */
+  /* 可选：边框稍微内缩，避免和背景融合 */
+  box-sizing: border-box;
+  margin-top: 150px;
+}
+
+
+
+/* 图标样式 */
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  opacity: 0.7;
+  /* 图标半透明，贴近截图 */
+}
+
+/* 中文提示文字 */
+.empty-text-cn {
+  color: #b0b8c4;
+  /* 浅灰色文字 */
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.empty-text-en {
+  color: #707884;
+  /* 更深的灰色 */
+  font-size: 12px;
+  letter-spacing: 1px;
+  /* 字母间距，贴近截图 */
+  text-transform: uppercase;
+  /* 大写字母 */
+}
+
+.empty-bottom-tip {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #9098a4;
+  font-size: 12px;
+  padding: 6px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  /* 确保底部提示在素材图片上方 */
+
+}
+
+/* 3D模型渲染容器（选择载体后显示） */
+.model-simulation {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+
+.model-simulation {
+  width: 60%;
+  height: 60%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* 默认没有纹理时的 3D 模型轮廓  */
+  ground-color: rgba(255, 255, 255, 0.05);
+  border: 1px dashed #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 模块 03 材质融合 */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.panel-material {
+  flex: 2;
+  max-height: 380px;
+  /* padding: 15px 20px; */
+}
+
+
+
+*/ .panel-export {
+  flex: 1;
+  min-height: 250px;
+}
+
+.material-locked {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #8a8a8a;
+  font-size: 14px;
+}
+
+.lock-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+  width: 80px;
+
+}
+
+.material-content,
+.export-content {
+  padding: 15px;
+  overflow-y: auto;
+  overflow: hidden;
+}
+
+.section-label {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.presets-row {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-preset {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #444;
+  color: #888;
+  padding: 5px 0;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-preset.active {
+  border-color: #a18cd1;
+  color: #a18cd1;
+  background: rgba(161, 140, 209, 0.1);
+}
+
+/* 滑块样式 */
+.slider-group {
+  margin-bottom: 12px;
+}
+
+.sg-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.sg-val {
+  font-family: monospace;
+  color: #fff;
+}
+
+input[type=range] {
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  appearance: none;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #a18cd1;
+  cursor: pointer;
+  box-shadow: 0 0 5px #a18cd1;
+}
+
+.mat-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  border-top: 1px solid #222;
+  padding-top: 10px;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.sb-label {
+  font-size: 10px;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.sb-val {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 模块 04 铭刻 */
+.input-name {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  padding: 8px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.seal-options {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.btn-seal {
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid #444;
+  color: #888;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-seal.active {
+  border-color: #d63031;
+  color: #d63031;
+}
+
+.seal-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  height: 60px;
+}
+
+.seal-stamp {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #d63031;
+  color: #d63031;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-family: 'SimSun', serif;
+  /* 宋体风格 */
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(214, 48, 49, 0.4);
+}
+
+.btn-export {
+  width: 100%;
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-export:hover {
+  background: #4facfe;
+  border-color: #4facfe;
+}
+
+
+
+
+/* =========================================
+   模块 01：选择载体 (深度定制样式)
+   ========================================= */
+
+/* 1. 面板整体容器 */
+.panel-carrier {
+  /* 整个面板的边框变成暗蓝色 */
+  border: 1px solid #1c2a3a;
+  /* 背景变成极深的蓝黑色，不再是磨砂透明 */
+  background-color: #0b0d10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. 面板头部 (Header) */
+.panel-carrier .panel-header {
+  /* 关键：复刻图中的左侧蓝光渐变效果 */
+  background: linear-gradient(90deg, rgba(30, 60, 90, 0.6) 0%, rgba(10, 11, 16, 0) 80%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+}
+
+/* 头部的 "01" */
+.panel-carrier .ph-num {
+  color: #65d0ea;
+  /* 亮青色 */
+  font-family: 'Courier New', monospace;
+  margin-right: 10px;
+}
+
+/* 头部的 "选择载体" */
+.panel-carrier .ph-title {
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* 头部的 "CARRIER" (右侧灰色小字) */
+.panel-carrier .ph-eng {
+  font-size: 10px;
+  color: #4a5568;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 3. 卡片列表区域 */
+.panel-carrier .scroll-content {
+  padding: 15px;
+  /* 给卡片留出呼吸空间 */
+}
+
+/* 4. 单个卡片样式 (复刻图中的深灰色块) */
+.carrier-card {
+  /* 卡片背景：深灰偏蓝 */
+  background-color: #131519;
+  border: 1px solid #2a2d33;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+
+  /* 布局调整 */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  /* 过渡效果 */
+  transition: all 0.3s ease;
+}
+
+/* 卡片悬停/选中效果 */
+.carrier-card:hover,
+.carrier-card.selected {
+  background-color: #1a1e24;
+  /*稍微亮一点*/
+  border-color: #2f5e74;
+  /* 选中变亮蓝边框 */
+  box-shadow: 0 0 10px rgba(79, 172, 254, 0.1);
+}
+
+/* 修改这里：去掉背景色和边框 */
+.carrier-card .card-icon {
+  width: 44px;
+  height: 44px;
+
+  /* 关键修改：把背景颜色去掉，改成 none 或 transparent */
+  background: none;
+  border-radius: 0;
+  /* 不需要圆角了 */
+
+  /* 保持居中对齐 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* 修改这里：既然去掉了框，图片可以稍微放大一点，并不再需要透明度 */
+.carrier-card .card-icon img {
+  width: 44px;
+  /* 从原来的 24px 改大一点，或者设为 100% */
+  height: auto;
+  opacity: 1;
+  /* 去掉透明度，让图标更亮 */
+  object-fit: contain;
+}
+
+/* 6. 卡片内的文字信息 */
+.carrier-card .card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.carrier-card .ci-top {
+  display: flex;
+  justify-content: space-between;
+  /* 名字在左，编号在右 */
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.carrier-card .ci-name {
+  font-size: 15px;
+  color: #e0e0e0;
+  font-weight: normal;
+  /* 不用太粗 */
+}
+
+.carrier-card .ci-code {
+  font-size: 10px;
+  color: #555;
+  /* 很暗的灰色 */
+  font-family: monospace;
+}
+
+.carrier-card .ci-sub {
+  font-size: 12px;
+  color: #777;
+}
+
+/* 7. 底部 Footer */
+.panel-carrier .panel-footer {
+  background-color: #0f1115;
+  /* 比列表区稍微深一点，区分层次 */
+  border-top: 1px solid #1c2a3a;
+  padding: 12px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #555;
+}
+
+/* 底部的数字 "4" */
+.panel-carrier .highlight-num {
+  color: #65d0ea;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+
+
+
+.tag-box.cyan
+/* =========================================
+   模块 02：纹理基因库 (深度定制样式)
+   ========================================= */
+
+/* 1. 面板容器 */
+.panel-texture {
+  border: 1px solid #2a2510;
+  /* 暗金色边框 */
+  background-color: #0b0d10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. 面板头部 (金色渐变) */
+.panel-texture .panel-header {
+  /* 关键：复刻图中的左侧金色光效 */
+  background: linear-gradient(90deg, rgba(60, 50, 20, 0.6) 0%, rgba(10, 11, 16, 0) 80%);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  /* 极淡的金线 */
+  padding: 15px 20px;
+}
+
+.panel-texture .ph-num {
+  color: #ffd700;
+  /* 金色数字 */
+  font-family: 'Courier New', monospace;
+  margin-right: 10px;
+}
+
+.panel-texture .ph-title {
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.panel-texture .ph-eng {
+  font-size: 10px;
+  color: #555;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 3. 筛选栏 (Filter Bar) */
+.filter-bar {
+  padding: 15px;
+  display: flex;
+  gap: 8px;
+  background: transparent;
+  border-bottom: 1px solid #1c1c1c;
+  /* 筛选栏下方的分割线 */
+}
+
+/* 筛选按钮样式 */
+.filter-btn {
+  flex: 1;
+  /* 平均分布 */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333;
+  color: #888;
+  border-radius: 4px;
+  padding: 8px 5px;
+  font-size: 10px;
+  font-family: monospace;
+  /* 代码风格字体 */
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.2;
+  transition: all 0.3s;
+}
+
+/* 按钮悬停 */
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+}
+
+/* 按钮激活状态 (选中) */
+.filter-btn.active {
+  background: #444;
+  /* 稍微亮一点的灰 */
+  color: #fff;
+  border-color: #666;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+/* 4. 纹理卡片样式 (复刻布局) */
+.panel-texture .scroll-content {
+  padding: 15px;
+}
+
+.texture-card {
+  background-color: #131519;
+  border: 1px solid #2a2d33;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  /* 顶部对齐 */
+  transition: all 0.3s;
+}
+
+.texture-card:hover,
+.texture-card.selected {
+  background-color: #1a1e24;
+  border-color: #ffd700;
+  border-color: #8d8243;
+  /* 选中变金色边框 */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+}
+
+/* 卡片左侧图片框 */
+.texture-card .tex-img-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.texture-card .tex-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 卡片右侧信息 */
+.texture-card .tex-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.texture-card .ti-title {
+  font-size: 15px;
+  color: #e0e0e0;
+  font-weight: normal;
+}
+
+.texture-card .ti-desc {
+  font-size: 11px;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+/* 5. 标签区域样式 (重点) */
+.texture-card .ti-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0f1113;
+  /* 标签栏的深色背景 */
+  padding: 5px;
+  border-radius: 4px;
+  width: fit-content;
+  /* 宽度自适应内容 */
+}
+
+/* 彩色方块标签 */
+.tag-box {
+  display: flex;
+  flex-direction: column;
+  /* 文字竖排或两行 */
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: bold;
+  color: #000;
+  /* 文字黑色 */
+}
+
+/* 各种颜色 */
+.tag-box.cyan {
+  background-color: #213442;
+  color: #56b0c8;
+}
+
+.tag-box.gold {
+  background-color: #38312c;
+  color: #c6a144;
+}
+
+.tag-box.green {
+  background-color: #223336;
+  color: #327c60;
+}
+
+.tag-box.ink {
+  background-color: #242936;
+  color: #798386;
+}
+
+/* 英文标签 */
+.tag-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  color: #666;
+  font-family: monospace;
+  line-height: 1.2;
+}
+
+
+
+
+/* 隐藏滚动条，同时保留滚动功能 */
+.parent-container {
+
+  /* 针对 WebKit 浏览器（Chrome、Safari） */
+  -webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  /* 针对 Firefox */
+  scrollbar-width: none;
+  /* 针对 IE 和 Edge */
+  -ms-overflow-style: none;
+}

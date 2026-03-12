@@ -1,0 +1,354 @@
+/* --- 全局变量与基础设置 --- */
+:root {
+  --bg-dark: #0f1012;
+  --coral: #E37B58;
+  --coral-dim: #9c553e;
+  --text-gray: #888888;
+  --gold: #D4AF37;
+  /* 金色辅助色 */
+
+  --font-serif: "Songti SC", "SimSun", "Times New Roman", serif;
+  --font-sans: "DengXian", "Microsoft YaHei", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  /* 自定义固定颜色，替换成你想要的颜色即可 */
+}
+
+/* --- 顶部导航 --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.header-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header-left .back-btn:hover {
+  color: #ffffff;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.logo-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-left: 240px;
+}
+
+.logo-en {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--text-gray);
+  margin-top: 2px;
+  margin-left: 240px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 20px;
+}
+
+
+.nav-item {
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #949292;
+
+}
+
+.nav-item.active {
+  background-color: rgba(227, 123, 88, 0.2);
+  color: var(--coral);
+  background-color: #e9825f;
+  color: #000000;
+  font-weight: bold;
+}
+
+.nav-item:hover:not(.active) {
+  color: #fff;
+}
+
+/* --- 页面主体 --- */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 60px;
+}
+
+/* 标题区 */
+.hero-section {
+  text-align: center;
+  margin-bottom: 60px;
+  margin-top: 80px;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--coral);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-gray);
+  letter-spacing: 1px;
+}
+
+/* --- 内容容器布局 --- */
+.content-container {
+  display: flex;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 左侧时间轴区域 */
+.timeline-wrapper {
+  flex: 0 0 55%;
+  /* 占据左侧 55% */
+  position: relative;
+  padding-left: 20px;
+}
+
+/* 贯穿线 */
+.timeline-line {
+  position: absolute;
+  left: 43px;
+  /* 对齐圆点中心 */
+  top: 10px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--coral) 0%, var(--coral) 80%, transparent 100%);
+  opacity: 0.6;
+}
+
+/* 时间轴单项 */
+.timeline-item {
+  position: relative;
+  padding-left: 50px;
+  /* 给圆点留出空间 */
+  margin-bottom: 40px;
+  opacity: 0;
+  /* 初始隐藏，用于JS动画 */
+  transform: translateY(20px);
+}
+
+/* 时间节点圆点 */
+.timeline-dot {
+  position: absolute;
+  left: 20px;
+  /* 调整位置使其中心对齐线条 */
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--coral);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(227, 123, 88, 0.4);
+  z-index: 2;
+}
+
+.timeline-content {
+  /* 内容区域 */
+}
+
+.dynasty-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--coral);
+  margin-bottom: 6px;
+}
+
+.dynasty-desc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-gray);
+  line-height: 1.6;
+  max-width: 500px;
+  /* 限制阅读宽度 */
+}
+
+/* --- 右侧视觉艺术区域 --- */
+.visual-art {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* 防止图片溢出 */
+}
+
+/* 
+   视觉层：如果你有素材图片，请修改这里的 background-image。
+   目前使用 radial-gradient 模拟右下角的金色光晕。
+*/
+.art-layer {
+  position: fixed;
+  /* 固定在右侧，不随滚动条走太远，或者根据需求改成 absolute */
+  right: -10%;
+  bottom: -10%;
+  width: 80vh;
+  height: 80vh;
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+
+  /* 
+    TODO: 替换为你的素材图片 
+    background-image: url('assets/golden-brush-stroke.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    */
+
+  /* 简单的旋转动画增加动感 */
+  animation: pulseGlow 10s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .timeline-wrapper {
+    flex: 1;
+    padding-right: 0;
+  }
+
+  .visual-art {
+    display: none;
+    /* 移动端隐藏大图，或者放到最底部 */
+  }
+
+  main {
+    padding: 20px;
+  }
+}
+
+
+
+
+
+
+
+/* ... 前面的代码保持不变 ... */
+
+/* --- 右侧视觉艺术区域 --- */
+.visual-art {
+  /* 这一层作为占位符，确保 flex 布局给右侧留出空间 */
+  flex: 1;
+  min-height: 100vh;
+  pointer-events: none;
+  /* 让鼠标穿透，不影响操作 */
+}
+
+/* --- 核心修改部分：背景图层 --- */
+.art-layer {
+  /* 使用 fixed 定位，让金色笔触固定在屏幕右侧，不随文字滚动 */
+  position: fixed;
+  top: 20%;
+  right: 0;
+  transform: translateY(-50%);
+  /* 垂直居中 */
+
+  /* 控制图片大小区域，根据你的素材比例调整 */
+  width: 50vw;
+  /* 占据屏幕宽度的一半 */
+  height: 80vh;
+  /* 占据屏幕高度的 90% */
+
+  /* --- 这里填入你的图片路径 --- */
+  /* 假设你的图片在同级目录下叫 bg.png，如果在 images 文件夹里就写 images/bg.png */
+  background-image: url('./素材补充/未标题-3.png');
+
+  /* 关键属性：保证图片完整显示且不重复 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center right;
+  /* 图片靠右对齐 */
+
+  z-index: -1;
+  /* 放在最底层，防止挡住文字（虽然布局上分开了，以防万一） */
+  opacity: 0.9;
+  /* 如果图片太亮，可以稍微调低透明度 */
+}
+
+/* 手机端适配：隐藏背景图或改为底部背景 */
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .timeline-wrapper {
+    flex: 1;
+    padding-right: 0;
+  }
+
+  /* 手机端把大图隐藏，或者你可以改成 opacity: 0.2 做背景纹理 */
+  .art-layer {
+    display: none;
+  }
+
+  main {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字织锦 - 科学原理</title>
+  <link rel="stylesheet" href="logic-sci.css">
+</head>
+
+<body>
+
+  <!-- 顶部导航栏 -->
+  <header>
+    <div class="header-left">
+      <!-- 返回按钮：点击跳转回首页 -->
+      <a href="index.html"><button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="header-center">
+      <div class="logo-title">逻辑·织绣</div>
+      <div class="logo-subtitle">DIGITAL BROCADE</div>
+    </div>
+
+    <div class="header-right">
+      <nav>
+        <ul>
+          <li><a href="logic.html" class="nav-item">交互体验</a></li>
+          <!-- 当前页面高亮 -->
+          <li><a href="logic-sci.html" class="nav-item active">科学原理</a></li>
+          <li><a href="logic-his.html" class="nav-item">历史演变</a></li>
+          <li><a href="logic-cul.html" class="nav-item">文化内涵</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main>
+    <!-- Hero 区域：带双重背景 -->
+    <section class="hero-section">
+      <h1 class="main-title">二进制编码的科学原理</h1>
+      <p class="description">从布尔代数到信息论，探索织锦图案背后的数学逻辑。</p>
+    </section>
+
+    <!-- 内容区域：左右分栏 -->
+    <div class="content-container">
+      <h2 class="section-title">布尔代数与织锦逻辑</h2>
+
+      <div class="split-layout">
+        <!-- 左侧：文字描述与逻辑表 -->
+        <div class="left-panel">
+          <div class="text-content">
+            <p>布尔代数是计算机科学的基础，但它与织锦的关系却鲜为人知。在织锦中，经线和纬线的交织本质上就是一种布尔运算。</p>
+            <p>当经线上提时，我们记为"1"；当经线下压时，我们记为"0"。图案的形成就是一系列"与"、"或"、"非"运算的结果。</p>
+          </div>
+
+          <table class="logic-table">
+            <thead>
+              <tr>
+                <th style="width: 30%">布尔运算</th>
+                <th style="width: 40%">织锦对应</th>
+                <th style="width: 30%">结果</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-mono">1 AND 1</td>
+                <td>经上 + 纬上</td>
+                <td>显经色</td>
+              </tr>
+              <tr>
+                <td class="font-mono">1 OR 0</td>
+                <td>经上 + 纬下</td>
+                <td>显经色</td>
+              </tr>
+              <tr>
+                <td class="font-mono">0 AND 0</td>
+                <td>经下 + 纬下</td>
+                <td>显纬色</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 右侧：真值表可视化 -->
+        <div class="right-panel">
+          <h3 class="panel-header">真值表</h3>
+
+          <div class="truth-grid">
+            <!-- 表头 -->
+            <div class="grid-header">A</div>
+            <div class="grid-header">B</div>
+            <div class="grid-header">A∧B</div>
+            <div class="grid-header">A∨B</div>
+
+            <!-- 第一行: 0, 0 -->
+            <div class="grid-cell bg-gold">0</div> <!-- A -->
+            <div class="grid-cell bg-gold">0</div> <!-- B -->
+            <div class="grid-cell bg-dark">0</div> <!-- AND -->
+            <div class="grid-cell bg-dark">0</div> <!-- OR -->
+
+            <!-- 第二行: 0, 1 -->
+            <div class="grid-cell bg-gold">0</div>
+            <div class="grid-cell bg-gold">1</div>
+            <div class="grid-cell bg-dark">0</div>
+            <div class="grid-cell bg-gold">1</div>
+
+            <!-- 第三行: 1, 0 -->
+            <div class="grid-cell bg-gold">1</div>
+            <div class="grid-cell bg-gold">0</div>
+            <div class="grid-cell bg-dark">0</div>
+            <div class="grid-cell bg-gold">1</div>
+
+            <!-- 第四行: 1, 1 -->
+            <div class="grid-cell bg-gold">1</div>
+            <div class="grid-cell bg-gold">1</div>
+            <div class="grid-cell bg-gold">1</div>
+            <div class="grid-cell bg-gold">1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="logic-sci.js"></script>
+</body>
+
+</html>

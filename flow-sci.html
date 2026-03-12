@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>气韵·书画 - 科学原理</title>
+  <link rel="stylesheet" href="flow-sci.css">
+  <!-- 引入 Remix Icon 图标库 -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 顶部导航 (复用结构，激活状态在“科学原理”) -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="nav-center">
+      <div class="logo-text">气韵·书画</div>
+      <div class="logo-en">RHYTHM OF LIFE</div>
+    </div>
+
+    <div class="nav-right">
+      <a href="flow.html">
+        <div class="nav-item" data-tab="interactive">交互体验</div>
+        <a href="flow-sci.html">
+          <div class="nav-item active" data-tab="science">科学原理</div>
+        </a>
+        <a href="flow-his.html">
+          <div class="nav-item" data-tab="history">历史演变</div>
+        </a>
+        <a href="flow-cul.html">
+          <div class="nav-item" data-tab="culture">文化内涵</div>
+        </a>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main>
+    <!-- 头部标题区 -->
+    <div class="hero-section">
+      <h1 class="page-title">笔墨纸砚的科学原理</h1>
+      <p class="page-subtitle">从流体力学到材料科学，探索中国传统书画背后的科学奥秘。</p>
+    </div>
+
+    <!-- 内容卡片 -->
+    <div class="content-card">
+      <h2 class="section-header">墨水在纸上的流动</h2>
+
+      <div class="content-grid">
+        <!-- 左侧：理论与公式 -->
+        <div class="col-left">
+          <p class="text-block">
+            墨水的流动遵循流体力学的基本定律。当毛笔接触纸面时，墨水在毛细作用下向纸张纤维渗透。渗透速度取决于墨水的粘度、纸张的吸水性以及施加的压力。
+          </p>
+          <p class="text-block">
+            飞白的产生是因为运笔速度超过了墨水的供给速度。当笔尖的墨水来不及补充时，就会形成断续的线条，露出纸面的白色。
+          </p>
+
+          <!-- 公式卡片 -->
+          <div class="formula-box">
+            <div class="formula-label">毛细作用公式 (WASHBURN方程)</div>
+            <div class="formula-math">
+              L<sup>2</sup> = (&gamma;Dt cos&theta;) / (4&eta;)
+            </div>
+            <div class="formula-legend">
+              <span>L: 渗透深度</span>
+              <span>&gamma;: 表面张力</span>
+              <span>D: 孔径</span>
+              <span>&theta;: 接触角</span>
+              <span>&eta;: 粘度</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧：影响因素列表 -->
+        <div class="col-right">
+          <h3 class="list-title">影响飞白的因素</h3>
+
+          <div class="factors-table">
+            <div class="table-header">
+              <span>因素</span>
+              <span>影响</span>
+            </div>
+
+            <div class="table-row">
+              <span class="factor-name">运笔速度</span>
+              <span class="factor-desc">速度越快，飞白越明显</span>
+            </div>
+
+            <div class="table-row">
+              <span class="factor-name">墨水浓度</span>
+              <span class="factor-desc">浓度越高，飞白越难产生</span>
+            </div>
+
+            <div class="table-row">
+              <span class="factor-name">纸张吸水性</span>
+              <span class="factor-desc">吸水性越强，晕染越明显</span>
+            </div>
+
+            <div class="table-row">
+              <span class="factor-name">笔毫硬度</span>
+              <span class="factor-desc">硬毫易出飞白，软毫易晕染</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="flow-sci.js"></script>
+</body>
+
+</html>

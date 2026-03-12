@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>秩序·陶瓷 - 交互体验</title>
+  <link rel="stylesheet" href="order.css">
+</head>
+
+<body>
+  <!-- 导航栏 -->
+  <div class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="back-btn"><img src="./秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/左箭头.png" alt="返回" class="back-arrow">
+        返回</a>
+    </div>
+    <div class="nav-center">
+      <div class="brand-title">秩序·陶瓷</div>
+      <div class="brand-subtitle">VIRTUAL KILN</div>
+    </div>
+    <div class="nav-right">
+      <!-- 修改：添加了具体的文件跳转链接 -->
+      <a href="order.html" class="nav-link active">交互体验</a>
+      <a href="science.html" class="nav-link">科学原理</a>
+      <a href="history.html" class="nav-link">历史演变</a>
+      <a href="culture.html" class="nav-link">文化内涵</a>
+    </div>
+  </div>
+
+  <!-- 主内容区 -->
+  <div class="main-container">
+    <!-- 标题区 -->
+    <div class="page-header">
+      <h1 class="main-title">虚拟窑炉·冰裂纹生成器</h1>
+      <p class="subtitle">通过调节窑温和冷却速度，体验宋代匠人创造冰裂纹的奥秘。每一次烧制都是人与天工的完美合作。</p>
+    </div>
+
+    <!-- 内容区：左图右控 -->
+    <div class="content-wrapper">
+      <!-- 左侧视觉区 -->
+      <div class="visual-section">
+        <div class="kiln-container">
+          <!-- 窑炉背景保留，作为3D模型的背景 -->
+          <img src="./秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/中间把挡住的窑.png" alt="窑炉背景" class="kiln-bg">
+
+          <!-- 【修改这里】替换原来的图片和裂纹div，改为3D容器 -->
+          <div class="porcelain" id="canvas-container">
+            <!-- 3D Canvas 会被 JavaScript 动态注入到这里 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧控制面板 -->
+      <div class="control-section">
+
+        <!-- 卡片1：烈火温度 -->
+        <div class="slider-card">
+          <div class="slider-header">
+            <div class="header-left">
+              <img src="./秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/火焰图标.png" alt="烈火" class="slider-icon-img">
+              <span class="slider-title">烈火 (Passion)</span>
+            </div>
+            <span class="slider-tip">控制裂纹密度与张力</span>
+          </div>
+
+          <div class="slider-body">
+            <input type="range" min="900" max="1300" value="980" class="slider" id="temp-slider">
+            <!-- 修改：数值显示行 -->
+            <div class="value-row">
+              <span class="range-min">900°C</span>
+              <!-- 中间显示的动态数值 -->
+              <span class="current-value text-fire" id="temp-display-middle">980° C</span>
+              <span class="range-max">1300°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片2：冷却速度 -->
+        <div class="slider-card">
+          <div class="slider-header">
+            <div class="header-left">
+              <img src="./秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/冷却图标.png" alt="冷却" class="slider-icon-img">
+              <span class="slider-title">冷却 (Patience)</span>
+            </div>
+            <span class="slider-tip">控制裂纹深浅与釉面厚度</span>
+          </div>
+
+          <div class="slider-body">
+            <input type="range" min="50" max="200" value="118" class="slider" id="cool-slider">
+            <!-- 修改：数值显示行 -->
+            <div class="value-row">
+              <span class="range-min">50°C/h</span>
+              <!-- 中间显示的动态数值 -->
+              <span class="current-value text-cool" id="cool-display-middle">118° C/h</span>
+              <span class="range-max">200°C/h</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片3：数据监控 (底部) -->
+        <div class="monitor-card">
+          <div class="monitor-title">DATA MONITOR</div>
+          <div class="monitor-row">
+            <div class="monitor-item">
+              <span class="monitor-label">窑温</span>
+              <span class="monitor-value text-fire" id="kiln-temp">980° C</span>
+            </div>
+            <div class="monitor-item">
+              <span class="monitor-label">冷却速率</span>
+              <span class="monitor-value text-cool" id="cool-rate">118° C/h</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 按钮区域 -->
+        <div class="action-buttons">
+          <button class="btn generate-btn" id="generate-btn">重新生成</button>
+          <button class="btn download-btn" id="download-btn" title="保存陶瓷图片">
+            <!-- 请确认下面 src 的文件名和你的素材名一致 -->
+            <img src="./秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/xiazai.png" alt="下载" class="download-icon-img">
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- Three.js 核心库 -->
+  <script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+  <script type="module" src="./order.js"></script>
+</body>
+
+</html>

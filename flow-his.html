@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>气韵·书画 - 历史演变</title>
+  <link rel="stylesheet" href="flow-his.css">
+  <!-- 引入 Remix Icon 图标库 -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 顶部导航 -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="nav-center">
+      <div class="logo-text">气韵·书画</div>
+      <div class="logo-en">RHYTHM OF LIFE</div>
+    </div>
+
+    <div class="nav-right">
+      <a href="flow.html">
+        <div class="nav-item" data-tab="interactive">交互体验</div>
+        <a href="flow-sci.html">
+          <div class="nav-item " data-tab="science">科学原理</div>
+        </a>
+        <a href="flow-his.html">
+          <div class="nav-item active" data-tab="history">历史演变</div>
+        </a>
+        <a href="flow-cul.html">
+          <div class="nav-item" data-tab="culture">文化内涵</div>
+        </a>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main>
+    <!-- 标题区 -->
+    <div class="hero-section">
+      <h1 class="page-title">中国书法发展简史</h1>
+      <p class="page-subtitle">从甲骨文到狂草，探索中国书法艺术的千年演变历程。</p>
+    </div>
+
+    <!-- 布局容器：左侧时间轴，右侧视觉图 -->
+    <div class="content-container">
+
+      <!-- 左侧：时间轴 -->
+      <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+
+        <!-- 商代 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">商代 (公元前1600-1046年)</h3>
+            <p class="dynasty-desc">甲骨文和金文的出现标志着中国文字的成熟。这些文字主要用于占卜和祭祀，线条质朴，结构古朴。</p>
+          </div>
+        </div>
+
+        <!-- 周代 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">周代 (公元前1046-256年)</h3>
+            <p class="dynasty-desc">大篆（籀文）成为官方文字。石鼓文是这一时期的代表作品，字体趋于规整，为后来的小篆奠定了基础。</p>
+          </div>
+        </div>
+
+        <!-- 秦代 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">秦代 (公元前221-207年)</h3>
+            <p class="dynasty-desc">秦始皇统一文字，李斯创制小篆。同时，隶书开始萌芽，为文字简化开辟了道路。</p>
+          </div>
+        </div>
+
+        <!-- 汉代 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">汉代 (公元前206-公元220年)</h3>
+            <p class="dynasty-desc">隶书成熟并取代篆书成为主要书体。草书也开始发展，出现了章草。书法艺术开始受到重视。</p>
+          </div>
+        </div>
+
+        <!-- 魏晋南北朝 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">魏晋南北朝 (公元220-589年)</h3>
+            <p class="dynasty-desc">书法艺术的黄金时代。王羲之被誉为"书圣"，其《兰亭序》被称为"天下第一行书"。楷书、行书、草书在这一时期基本定型。</p>
+          </div>
+        </div>
+
+        <!-- 唐代 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">唐代 (公元618-907年)</h3>
+            <p class="dynasty-desc">楷书达到巅峰，出现了欧阳询、颜真卿、柳公权等楷书大家。张旭、怀素的狂草更是将草书推向极致。</p>
+          </div>
+        </div>
+
+        <!-- 宋元明清 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="dynasty-title">宋元明清 (公元960-1912年)</h3>
+            <p class="dynasty-desc">宋代尚意，苏轼、黄庭坚、米芾追求个性表达。元代赵孟頫提倡复古，明清时期帖学和碑学交替发展。</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右侧：视觉艺术区 -->
+      <div class="visual-art">
+        <!-- 这里的div用于放置背景图 -->
+        <div class="art-layer"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="flow-his.js"></script>
+</body>
+
+</html>

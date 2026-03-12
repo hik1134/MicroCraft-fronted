@@ -1,0 +1,298 @@
+/* 全局设置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  /* 默认使用等线风格字体 */
+  font-family: "Microsoft YaHei", "PingFang SC", "Heiti SC", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  /* 防止背景图撑开横向滚动条 */
+}
+
+/* 导航栏 (保持一致) */
+.navbar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: #0a0a0a;
+  position: relative;
+  border-bottom: 1px solid #1a1a1a;
+  z-index: 100;
+}
+
+.nav-left,
+.nav-right {
+  width: auto;
+}
+
+.back-btn {
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.back-arrow {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-family: "SimSun", serif;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  font-size: 12px;
+  color: #999;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #00b386;
+  color: #fff;
+}
+
+/* --- 背景装饰层 --- */
+.bg-layer {
+  /* 固定在屏幕右侧，不随文字滚动 */
+  position: fixed;
+  top: 55%;
+  right: 0;
+  transform: translateY(-50%);
+  /* 垂直居中对齐 */
+
+  /* 控制图片大小区域，占比与 flow-his 相同 */
+  width: 50vw;
+  height: 80vh;
+
+  /* 背景图设置：请根据实际路径替换 */
+  background-image: url('./素材补充/图案.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center right;
+  /* 图片靠右对齐 */
+
+  pointer-events: none;
+  /* 让鼠标穿透，不影响操作 */
+  z-index: 0;
+  opacity: 0.9;
+
+  /* 渐变黑影遮罩（保留了原来好看的边缘融入感） */
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2));
+
+  /* 增加与 flow-his 完全一致的动感呼吸动画 */
+  animation: pulseGlow 10s infinite alternate;
+}
+
+
+
+/* 呼吸浮动动画 */
+@keyframes pulseGlow {
+  0% {
+    /* 注意: 需要带上 translateY 避免发生位置跳变 */
+    transform: translateY(-50%) scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+/* 手机端适配：隐藏背景图 */
+@media (max-width: 768px) {
+  .bg-layer {
+    display: none;
+  }
+
+  .timeline-container {
+    margin-left: 20px;
+  }
+}
+
+/* --- 主内容区 --- */
+.main-container {
+  position: relative;
+  z-index: 1;
+  /* 确保文字在背景之上 */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部 */
+.history-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.page-title {
+  font-family: "SimSun", "Songti SC", serif;
+  /* 宋体 */
+  font-size: 34px;
+  font-weight: bold;
+  /* 字重粗 */
+  /* 绿色到黄色渐变 */
+
+  background: linear-gradient(90deg, #6ab9a5 30%, #f9d500 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  margin-bottom: 12px;
+}
+
+.page-subtitle {
+  /* 等线、灰色、14px */
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  color: #999;
+}
+
+/* --- 时间轴容器 --- */
+.timeline-container {
+  position: relative;
+  max-width: 700px;
+  /* 限制宽度，不让文字跑得太远遮住背景圆盘 */
+  margin-left: 100px;
+  /* 整体居左，留出左边距 */
+  padding-left: 30px;
+  /* 给竖线留位置 */
+}
+
+/* 竖着的绿色渐变线图片 */
+.timeline-axis-img {
+  position: absolute;
+  left: -70px;
+  top: -62px;
+  width: 153px;
+  height: 70%;
+  object-fit: fill;
+}
+
+/* 单个时间节点 */
+.timeline-item {
+  position: relative;
+  margin-bottom: 48px;
+  /* 间距 */
+  opacity: 0;
+  /* 初始隐藏，给JS做动画 */
+  transform: translateY(20px);
+}
+
+/* 绿色小圆球 */
+.timeline-dot {
+  position: absolute;
+  left: -32px;
+  /* (padding-left 30) + (自身宽度一半) 调整对齐线 */
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #00b386;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 179, 134, 0.8);
+  z-index: 2;
+}
+
+.content-box {
+  /* 文字内容容器 */
+}
+
+/* 标题样式 */
+.period-title {
+  font-family: "Microsoft YaHei", sans-serif;
+  /* 等线 */
+  font-size: 18px;
+  font-weight: 500;
+  /* 字重中等 */
+  margin-bottom: 6px;
+}
+
+/* 青色标题 */
+.cyan-text {
+  color: #e3c478;
+  /* 青色/天蓝色 */
+  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+  font-family: "SimSun", "宋体", "Songti SC", "Noto Serif SC", serif;
+}
+
+/* 黄色标题 */
+.yellow-text {
+  color: #e3c478;
+  /* 黄色 */
+  text-shadow: 0 0 5px rgba(249, 213, 0, 0.3);
+  font-family: "SimSun", "宋体", "Songti SC", "Noto Serif SC", serif;
+}
+
+/* 正文描述 */
+.period-desc {
+  font-family: "Microsoft YaHei", sans-serif;
+  /* 等线 */
+  font-size: 13px;
+  color: #999;
+  /* 灰色 */
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .bg-plate {
+    right: -20%;
+    opacity: 0.3;
+    /* 手机端淡化背景 */
+  }
+
+  .timeline-container {
+    margin-left: 20px;
+  }
+}

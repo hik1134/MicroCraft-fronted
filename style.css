@@ -1,0 +1,1605 @@
+/* --- 1. 全局重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #050505;
+  color: white;
+  font-family: 'Noto Serif SC', serif;
+  overflow-x: hidden;
+  /* 防止横向滚动 */
+}
+
+/* --- 2. 通用模块样式 --- */
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 10;
+  /* 确保模块层级隔离 */
+}
+
+/* --- 3. 第一模块：首屏 + WebGL --- */
+.section-one {
+  height: 100vh;
+  background-image:
+    url('./页面一素材/bg-corners.png'),
+    url('./页面一素材/bg-wave.png');
+  background-position: center center, center bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, 100% auto;
+  background-attachment: fixed;
+}
+
+#canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  opacity: 0.95;
+  pointer-events: none;
+  background: transparent;
+}
+
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* 允许交互的元素 */
+.top-nav,
+.bottom-bar {
+  pointer-events: auto;
+}
+
+/* --- 3. 登录按钮 --- */
+.top-nav {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+}
+
+.login-btn {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
+}
+
+.login-btn:hover {
+  border-color: #ffffff;
+  transform: scale(1.05);
+}
+
+.login-btn .text {
+  color: #ffffff;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+
+.login-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover .login-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* --- 4. 核心标题 --- */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  z-index: 20;
+}
+
+.main-title {
+  font-size: 5rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  margin-bottom: 24px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards 0.5s;
+}
+
+.sub-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  color: rgba(174, 238, 255, 0.7);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards 1s;
+}
+
+/* --- 5. 底部指纹 --- */
+.bottom-bar {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.art-fingerprint-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.art-fingerprint-wrapper:hover {
+  transform: scale(1.1);
+}
+
+.art-glow-bg {
+  position: absolute;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  animation: art-breathe 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.art-ring-orbit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  animation: art-spin 20s linear infinite;
+  will-change: transform;
+}
+
+.orbit-dot {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: #00f2fe;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00f2fe;
+}
+
+.art-ring-flow {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: rgba(0, 242, 254, 0.6);
+  border-right-color: rgba(0, 242, 254, 0.2);
+  animation: art-spin-reverse 8s linear infinite;
+  will-change: transform;
+}
+
+.art-icon {
+  width: 45%;
+  height: 45%;
+  color: #d1f7ff;
+  z-index: 2;
+  animation: art-fade 3s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 2px rgba(0, 242, 254, 0.5));
+}
+
+.arrow-down-art {
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  transform: rotate(45deg);
+  animation: art-float 2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* --- 第二模块：四大解码器 --- */
+.section-two {
+  height: 100vh;
+  background: #05070a;
+  background-image: url('./登录以及首页素材/登录以及首页素材/第二页/背景.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+/* 导航栏样式 */
+.module-nav {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: transparent;
+}
+
+.nav-container {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  padding: 8px 30px;
+  height: 60px;
+}
+
+.nav-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-left: 25px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.nav-divider {
+  margin-left: 25px;
+  opacity: 0.3;
+}
+
+/* 中心标题 */
+.decoder-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.center-header {
+  text-align: center;
+  z-index: 5;
+}
+
+.decoder-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 15px;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.decoder-subtitle {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 5px;
+  opacity: 0.5;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* 卡片布局 */
+.cards-wrapper {
+  position: absolute;
+  width: 95%;
+  height: 70%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 200px;
+  row-gap: 100px;
+  transform: translateY(-90px);
+  margin: 0 auto;
+}
+
+/* 单个卡片样式 */
+.decoder-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+  backdrop-filter: blur(5px);
+  padding: 40px;
+  width: 280px;
+  height: 280px;
+}
+
+/* 卡片位置调整 */
+.card-order {
+  justify-self: end;
+  align-self: end;
+  margin-right: 130px;
+}
+
+.card-logic {
+  justify-self: start;
+  align-self: end;
+  margin-left: 130px;
+}
+
+.card-time {
+  justify-self: end;
+  align-self: start;
+  margin-right: 130px;
+}
+
+.card-flow {
+  justify-self: start;
+  align-self: start;
+  margin-left: 130px;
+}
+
+.card-icon img {
+  width: 90px;
+  height: auto;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.card-zh {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 2rem;
+  margin: 10px 0 8px 0;
+  font-weight: 400;
+  color: #969595;
+}
+
+.card-en {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  opacity: 0.6;
+  letter-spacing: 2px;
+}
+
+.one {
+  color: #e09c39;
+}
+
+.two {
+  color: #6da37a;
+}
+
+.three {
+  color: #4993a8;
+}
+
+.four {
+  color: #d55d97;
+}
+
+/* 卡片悬停效果 */
+.decoder-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-10px) scale(1.05);
+}
+
+.card-order:hover {
+  border-color: #f7b500;
+  box-shadow: 0 0 30px rgba(247, 181, 0, 0.2);
+}
+
+.card-logic:hover {
+  border-color: #6dd400;
+  box-shadow: 0 0 30px rgba(109, 212, 0, 0.2);
+}
+
+.card-time:hover {
+  border-color: #0091ff;
+  box-shadow: 0 0 30px rgba(0, 145, 255, 0.2);
+}
+
+.card-flow:hover {
+  border-color: #b620e0;
+  box-shadow: 0 0 30px rgba(182, 32, 224, 0.2);
+}
+
+
+/* --- 第三模块：纹理数字化解构 --- */
+.philosophy-section {
+  width: 100%;
+  /* 使用 min-height 确保在内容多时也能铺满，height: 100vh 确保首屏铺满 */
+  min-height: 80vh;
+  position: relative;
+
+  /* 背景设置 */
+  background-color: #121212;
+  background-image:
+    url('./登录以及首页素材/登录以及首页素材/第三页/暗纹.png'),
+    url('./登录以及首页素材/登录以及首页素材/第三页/未标题-2.png');
+
+  /* 关键修改：background-size: cover 确保图片铺满整个容器 */
+  background-size: cover, cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* 关键修改：改为 scroll，这样背景就会跟随文字一起上下滚动 */
+  background-attachment: scroll;
+
+  display: flex;
+  align-items: center;
+  /* 垂直居中内容 */
+  justify-content: center;
+  /* 水平居中内容 */
+  padding: 80px 0;
+  /* 增加上下内边距，防止内容贴边 */
+  z-index: 20;
+  overflow: hidden;
+}
+
+/* 内容容器：保持原有的左右布局 */
+.philosophy-container {
+  max-width: 1400px;
+  /* 稍微缩小最大宽度，让视觉更集中，类似参考图 */
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+  /* 左右两栏的间距 */
+}
+
+/* 左侧文字区域 */
+.philosophy-left {
+  flex: 0 0 40%;
+}
+
+.philosophy-subtitle {
+  font-size: 12px;
+  letter-spacing: 8px;
+  color: #666;
+  margin-bottom: 20px;
+  font-family: "Fira Code", monospace;
+}
+
+.philosophy-title {
+  font-size: 60px;
+  /* 根据参考图微调字号 */
+  line-height: 1.2;
+  color: #d4b572;
+  /* 这种金色很关键 */
+  font-weight: 300;
+  margin-bottom: 40px;
+  letter-spacing: 5px;
+  font-family: "SimSun", "宋体", serif;
+}
+
+.philosophy-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #999;
+  max-width: 480px;
+}
+
+/* 右侧列表区域 */
+.philosophy-right {
+  flex: 0 0 50%;
+}
+
+.philosophy-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.philosophy-number {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #446899;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #88a4cc;
+  font-family: "Fira Code", monospace;
+  margin-right: 25px;
+  flex-shrink: 0;
+  /* 防止数字框被压缩 */
+}
+
+.philosophy-text h3 {
+  font-size: 22px;
+  color: #e0e0e0;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.philosophy-text p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #777;
+}
+
+/* 取消数字框hover效果，保持静态质感 */
+/* .philosophy-number:hover { 
+  border-color: #446899;
+  color: #88a4cc;
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: none;
+}*/
+
+/* --- 第四个模块：文明代码库 --- */
+.full-page-module {
+  width: 100%;
+  /* 1. 确保最小高度是 100vh，但允许根据内容无限向下延伸 */
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-position: center top;
+  /* 图像从顶部对齐 */
+  background-size: cover;
+  /* 关键：强制覆盖整个模块区域 */
+  background-attachment: scroll;
+  /* 关键：随内容滚动 */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: white;
+  position: relative;
+
+}
+
+/* 标题区域：调整位置+半透明背景，不遮挡背景图 */
+.header-content {
+  text-align: center;
+  /* 标题向下偏移，留出背景图上半部分显示空间 */
+  margin-top: 50px;
+  margin-bottom: 20px;
+  /* 半透明背景，既保证文字可读性，又不遮挡背景图 */
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 30px;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.header-content h1.custom-songti {
+  font-size: 2.5rem;
+  letter-spacing: 8px;
+  margin-bottom: 10px;
+  font-family: "SimSun", "宋体", serif !important;
+  /* 轻微文字阴影，提升可读性，不遮挡背景 */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.header-content .subtitle {
+  font-family: "Fira Code", monospace;
+  letter-spacing: 5px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 搜索区域：半透明背景，不遮挡背景图 */
+.search-section {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  /* 搜索框向下偏移，不挤占背景图空间 */
+  margin-top: -16px;
+  gap: 15px;
+  /* 半透明背景，避免完全遮挡 */
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  border-radius: 12px;
+  z-index: 2;
+}
+
+/* 搜索框样式（保留原有，仅调整背景透明度） */
+.search-bar-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* 降低背景透明度，露出下方背景图 */
+  background: rgba(15, 15, 15, 0.6);
+  padding: 12px 25px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 162, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 162, 255, 0.2);
+  transition: all 0.4s ease;
+}
+
+/* 自定义搜索图标样式（保留） */
+.custom-search-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.search-bar-wrapper:hover .custom-search-icon {
+  opacity: 1;
+}
+
+.search-bar-wrapper:focus-within {
+  border-color: rgba(0, 162, 255, 0.8);
+  box-shadow: 0 0 25px rgba(0, 162, 255, 0.6), inset 0 0 10px rgba(0, 162, 255, 0.1);
+  transform: scale(1.01);
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.search-input::placeholder {
+  color: #ccc;
+}
+
+/* 标签按钮样式（保留原有交互） */
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tag-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  padding: 6px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.tag-btn.click-glow:hover {
+  background: rgba(0, 162, 255, 0.1);
+  border-color: rgba(0, 162, 255, 0.5);
+  color: white;
+  box-shadow: 0 0 12px rgba(0, 162, 255, 0.3);
+}
+
+.tag-btn.click-glow:active,
+.tag-btn.click-glow.active {
+  background: rgba(0, 162, 255, 0.15);
+  border-color: rgba(0, 162, 255, 0.7);
+  box-shadow: 0 0 18px rgba(0, 162, 255, 0.4), inset 0 0 6px rgba(0, 162, 255, 0.2);
+  color: #e0f7ff;
+}
+
+.filter-icon {
+  margin-right: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* 卡片网格（保留原有，调整margin-top避免遮挡） */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 30px;
+  margin-bottom: 80px;
+  /* 底部留白，防止紧贴边缘 */
+  z-index: 5;
+}
+
+.card {
+  background: rgba(17, 17, 17, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.tag-order {
+  background: rgba(255, 165, 0, 0.2);
+  color: orange;
+  border: 1px solid orange;
+}
+
+.tag-time {
+  background: rgba(0, 191, 255, 0.2);
+  color: deepskyblue;
+  border: 1px solid deepskyblue;
+}
+
+.card-content {
+  padding: 20px;
+  font-size: 13px;
+  color: #999;
+}
+
+.card-content .code-id {
+  color: #ccc;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.card-content .detail-item {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-content .date {
+  margin-top: 15px;
+  font-size: 11px;
+  color: #555;
+}
+
+.module-footer {
+  margin-top: -40px;
+  text-align: center;
+  margin-bottom: 50px;
+  z-index: 2;
+}
+
+.enter-btn {
+  text-decoration: none;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.arrow-down-img {
+  width: 20px;
+  /* 根据素材尺寸调整 */
+  height: 20px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.enter-btn:hover .arrow-down-img {
+  opacity: 1;
+  transform: translateY(3px);
+  /* 悬浮时轻微下移，增强交互 */
+  color: #ffffff;
+}
+
+/* 兼容移动端 */
+@media (max-width: 768px) {
+  .arrow-down-img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    justify-content: center;
+    margin-top: 15px;
+  }
+}
+
+/* --- 自定义搜索图标样式（保留）--- */
+.custom-search-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.search-bar-wrapper:hover .custom-search-icon {
+  opacity: 1;
+}
+
+/* --- 标签按钮 点击/悬浮 淡蓝光效 --- */
+/* 基础样式（保留原有，增强蓝光） */
+.tag-btn.click-glow {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  padding: 6px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* 悬浮效果：淡蓝光 */
+.tag-btn.click-glow:hover {
+  background: rgba(0, 162, 255, 0.1);
+  border-color: rgba(0, 162, 255, 0.5);
+  color: white;
+  box-shadow: 0 0 12px rgba(0, 162, 255, 0.3);
+  /* 淡蓝光晕 */
+}
+
+/* 点击激活效果：更明显的淡蓝光（点击后保持） */
+.tag-btn.click-glow:active,
+.tag-btn.click-glow.active {
+  background: rgba(0, 162, 255, 0.15);
+  border-color: rgba(0, 162, 255, 0.7);
+  box-shadow: 0 0 18px rgba(0, 162, 255, 0.4), inset 0 0 6px rgba(0, 162, 255, 0.2);
+  color: #e0f7ff;
+}
+
+.custom-songti {
+  font-family: "SimSun", "宋体", serif !important;
+  /* 可选：微调字号/字间距保持视觉协调 */
+  font-size: 2.5rem;
+  letter-spacing: 8px;
+}
+
+.beijing {
+  position: absolute;
+  /* 绝对定位 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  /* 让图片填满容器，不变形 */
+  z-index: 1;
+  margin-top: -350px;
+}
+
+/* --- 动画关键帧 --- */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes art-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes art-spin-reverse {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes art-breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+@keyframes art-fade {
+  0% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes art-float {
+
+  0%,
+  100% {
+    transform: rotate(45deg) translate(0, 0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: rotate(45deg) translate(-4px, -4px);
+    opacity: 1;
+  }
+}
+
+/* --- 移动端适配 --- */
+@media (max-width: 768px) {
+
+  /* 第一模块 */
+  .main-title {
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .top-nav {
+    top: 20px;
+    right: 20px;
+  }
+
+  .login-btn {
+    padding: 8px 20px;
+  }
+
+  /* 第二模块 */
+  .decoder-title {
+    font-size: 2rem;
+    letter-spacing: 8px;
+  }
+
+  .cards-wrapper {
+    gap: 50px;
+    transform: translateY(-30px);
+    width: 95%;
+  }
+
+  .decoder-card {
+    width: 180px;
+    height: 180px;
+    padding: 20px;
+  }
+
+  .card-icon img {
+    width: 50px;
+  }
+
+  .card-zh {
+    font-size: 1.2rem;
+  }
+
+  .nav-container {
+    width: 90%;
+    padding: 8px 15px;
+    height: 50px;
+  }
+
+  .nav-links a {
+    margin-left: 15px;
+    font-size: 0.8rem;
+  }
+
+  /* 第三模块 */
+  .philosophy-container {
+    flex-direction: column;
+    padding: 80px 30px;
+  }
+
+  .philosophy-left,
+  .philosophy-right {
+    flex: 0 0 100%;
+  }
+
+  .philosophy-right {
+    margin-top: 50px;
+  }
+
+  .philosophy-title {
+    font-size: 36px;
+  }
+
+  /* 第四模块 */
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    justify-content: center;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .philosophy-container {
+    flex-direction: column;
+    padding: 80px 30px;
+  }
+
+  .philosophy-left,
+  .philosophy-right {
+    flex: 0 0 100%;
+  }
+
+  .philosophy-right {
+    margin-top: 50px;
+  }
+}
+
+
+.footerr-module {
+  position: relative;
+  /* 关键：作为定位基准 */
+  width: 100%;
+  height: 290px;
+  /* 模块高度 */
+  overflow: hidden;
+  /* 防止图片溢出 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.flowerr {
+  position: absolute;
+  /* 绝对定位，脱离文档流 */
+  bottom: 0;
+  /* 固定在底部 */
+  left: 0;
+  width: 100%;
+  /* 宽度撑满 */
+  height: auto;
+  /* 高度自动，保持比例 */
+  z-index: 1;
+  /* 层级最低 */
+  opacity: 0.8;
+  /* 可选：调节透明度 */
+
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  /* 控制标题、导航、指纹之间的垂直间距 */
+  margin-top: -70px;
+  /* 如果花朵很高，可以用这个把文字往上顶一点 */
+}
+
+/* --- 标题部分 --- */
+.main-title {
+  /* 强制使用宋体 */
+  font-family: "SimSun", "Songti SC", "STSong", serif;
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: #d4c4a8;
+  /* 香槟金色 */
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(212, 196, 168, 0.3);
+}
+
+.sub-title {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  /* 暗灰色英文 */
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* --- 导航链接部分 --- */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  /* 链接之间的间距 */
+}
+
+.nav-links a {
+  font-family: "Microsoft YaHei", sans-serif;
+  font-size: 1rem;
+  color: #888;
+  /* 默认灰色 */
+  transition: all 0.3s ease;
+  letter-spacing: 2px;
+}
+
+.nav-links a:hover {
+  color: #d4c4a8;
+  /* 鼠标悬停变金色 */
+  text-shadow: 0 0 5px #d4c4a8;
+}
+
+/* --- 指纹图标部分 --- */
+.fingerprint-box img {
+  width: 50px;
+  /* 根据指纹图片大小调整 */
+  height: auto;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  /* margin-bottom: 30px; */
+}
+
+.fingerprint-box img:hover {
+  opacity: 1;
+  /* 鼠标悬停变亮 */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 实验室 */
+/* 模块主容器 */
+.sci-fi-module {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* 撑满屏幕高度，可按需修改 */
+  min-height: 800px;
+  overflow: hidden;
+  background-color: #02050b;
+  display: flex;
+  justify-content: center;
+}
+
+/* ==================== 图片占位与动画 ==================== */
+
+/* 左右两侧图片公共样式 */
+.side-img {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 80%;
+  /* 图片高度 */
+  width: 30%;
+  /* 图片宽度 */
+  z-index: 1;
+  /* 在中间面板下面 */
+  /* TODO: 替换为你真实的侧边图片 */
+
+  background-size: cover;
+  background-position: center;
+
+  /* 临时边框示意 */
+}
+
+/* 左侧图片 - 初始状态与动画 */
+.side-img.left {
+  left: 0;
+  transform: translate(-100%, -50%);
+  /* 初始在屏幕左侧外部 */
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* TODO: 替换真实左图 URL */
+/* .side-img.left { background-image: url('left-image.png'); } */
+
+/* 右侧图片 - 初始状态与动画 */
+.side-img.right {
+  right: 0;
+  transform: translate(100%, -50%);
+  /* 初始在屏幕右侧外部 */
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* TODO: 替换真实右图 URL */
+/* .side-img.right { background-image: url('right-image.png'); } */
+
+
+/* 中间背景图面板 */
+.center-bg {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  width: 470px;
+  height: 645px;
+  z-index: 2;
+  /* 覆盖在左右图片之上 */
+  /* TODO: 替换为你真实的中间带电路的背景图 */
+  /* background: linear-gradient(180deg, #020813 0%, #051024 100%); */
+  background-size: cover;
+  background-position: center;
+
+  /* 初始状态：在屏幕正上方外部 */
+  transform: translate(-50%, -100%);
+  transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1) 0.3s;
+  /* 延迟0.3秒滑下 */
+}
+
+/* TODO: 替换真实中间背景图 URL */
+/* .center-bg { background-image: url('center-bg.png'); } */
+
+
+/* ==================== 顶层内容区域 (文字 + 指纹) ==================== */
+.center-content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  height: 100%;
+  z-index: 3;
+  /* 最顶层 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* 初始状态：透明 */
+  opacity: 0;
+  transition: opacity 1s ease 1.2s;
+  /* 等背景滑下后再淡入 */
+}
+
+/* 顶部标题区 */
+.header-title {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #00f3ff;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+.arrows {
+  font-size: 20px;
+  letter-spacing: -2px;
+  color: #1b5b6f;
+  /* 暗青色箭头 */
+}
+
+.title-text {
+  text-align: center;
+}
+
+.title-text h1 {
+  font-size: 32px;
+  font-weight: normal;
+  letter-spacing: 5px;
+  color: #ffffff;
+}
+
+.title-text p {
+  font-size: 12px;
+  letter-spacing: 8px;
+  margin-top: 5px;
+  color: #55798a;
+}
+
+/* 垂直文字 "立即体验" */
+.vertical-text-box {
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical-text {
+  writing-mode: vertical-lr;
+  /* 垂直排版 */
+  letter-spacing: 15px;
+  font-size: 25px;
+  color: #00f3ff;
+  text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+  margin-left: -8px;
+}
+
+.down-arrows {
+  margin-top: 20px;
+  color: #1b5b6f;
+  writing-mode: vertical-lr;
+  letter-spacing: -2px;
+}
+
+/* 指纹区域 */
+.fingerprint-area {
+  margin-top: 20px;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 指纹外圈装饰 (CSS模拟，如果你有图可以直接用img标签替换) */
+.circle-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #00f3ff;
+  box-shadow: 0 0 15px #00f3ff inset, 0 0 15px #00f3ff;
+  animation: pulse 2s infinite alternate;
+}
+
+.circle-ring-inner {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 243, 255, 0.5);
+}
+
+/* 指纹图标素材 */
+.fingerprint-img {
+  width: 50%;
+  height: 50%;
+  z-index: 2;
+  /* TODO: 替换为你发光的指纹免抠图(PNG) */
+  /* background-image: url('fingerprint.png'); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 简单的呼吸灯动画 */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* ==================== 触发动画的 Active 状态 ==================== */
+
+.sci-fi-module.active .side-img.left {
+  transform: translate(0, -50%);
+  /* 滑入到原位 */
+}
+
+.sci-fi-module.active .side-img.right {
+  transform: translate(0, -50%);
+  /* 滑入到原位 */
+}
+
+.sci-fi-module.active .center-bg {
+  transform: translate(-50%, 0);
+  /* 滑下到原位 */
+}
+
+.sci-fi-module.active .center-content {
+  opacity: 1;
+  /* 淡入显示 */
+}
+
+.side-img img {
+  height: 110%;
+  width: 295%;
+  left: -120%;
+  position: absolute;
+}
+
+.center-bg img {
+  width: 230%;
+  height: 97%;
+  position: absolute;
+  left: -320px;
+  top: 150px;
+}
+
+.fingerprint-img img {
+  position: absolute;
+  top: 154px;
+  left: -19px;
+  width: 110%;
+  height: 107%;
+}
+
+
+
+
+
+
+.flowerr {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  opacity: 0.8;
+
+  /* 添加这一行：让鼠标点击穿透这张图片，不拦截点击事件 */
+  pointer-events: none;
+}
+
+.content-wrapper {
+  /* 增加下面两行：开启相对定位，并把层级提得很高，确保它在所有背景之上 */
+  position: relative;
+  z-index: 10;
+
+  /* 下面是你原本的代码，保持不变 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: -70px;
+}
+
+/* =========================================
+   用户信息与退出下拉菜单样式
+========================================= */
+/* 外层容器 */
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* 昵称显示框 (复用原本登录按钮的科技感) */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+.user-info:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.user-info .login-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* 下拉菜单基础状态（默认隐藏并向下偏移） */
+.logout-dropdown {
+  position: absolute;
+  top: 120%;
+  /* 位于昵称下方 */
+  right: 0;
+  background: rgba(10, 10, 15, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 100%;
+  backdrop-filter: blur(10px);
+
+  /* 动画隐藏状态 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* JS 赋予 .show 类名时的显示状态 */
+.logout-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 退出登录按钮样式 */
+#logout-btn {
+  width: 100%;
+  background: transparent;
+  color: #ff4d4f;
+  /* 红色警告色 */
+  border: none;
+  padding: 10px 15px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+#logout-btn:hover {
+  background: rgba(255, 77, 79, 0.15);
+  box-shadow: 0 0 8px rgba(255, 77, 79, 0.4);
+}

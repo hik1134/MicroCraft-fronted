@@ -1,0 +1,338 @@
+/* 全局重置与基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0e0e0e;
+  /* 极深的背景色 */
+  color: #ffffff;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  /* 默认等线/无衬线 */
+  line-height: 1.6;
+}
+
+/* 导航栏 (保持一致) */
+.navbar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: #0a0a0a;
+  position: relative;
+  border-bottom: 1px solid #1a1a1a;
+  z-index: 100;
+}
+
+.nav-left,
+.nav-right {
+  width: auto;
+}
+
+.back-btn {
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.back-arrow {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-family: "SimSun", serif;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  font-size: 12px;
+  color: #999;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #00b386;
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+
+/* 通用排版 */
+.main-title {
+  text-align: center;
+  font-family: "SimSun", "Songti SC", serif;
+  /* 宋体 */
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  letter-spacing: 2px;
+}
+
+/* 第一部分：五大名窑卡片 */
+.kiln-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 80px;
+  flex-wrap: wrap;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.kiln-card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 200px;
+  padding: 60px 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.kiln-card:hover {
+  transform: translateY(-5px);
+  background-color: #222;
+}
+
+.big-char {
+  /* font-family: "Kaiti", "STKaiti", "SimSun", serif; */
+  /* 书法体/楷体 */
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.kiln-name {
+  /* font-family: "SimSun", serif; */
+  font-size: 14px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #a5a5a5;
+}
+
+.kiln-desc {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 第二部分：信息对比 (Split Section) */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 80px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.info-card {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 40px;
+}
+
+.info-card h3 {
+  font-family: "SimSun", serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.intro-text {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+/* 表格样式 */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.compare-table th {
+  text-align: left;
+  color: #d4af37;
+  /* 金色表头 */
+  font-size: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #333;
+}
+
+.compare-table td {
+  padding: 15px 0;
+  border-bottom: 1px solid #333;
+  color: #ccc;
+}
+
+.compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 引用样式 */
+.quote-box {
+  border-left: 3px solid #d4af37;
+  /* 金色边框 */
+  padding-left: 20px;
+  margin-top: 40px;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.quote-source {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 第三部分：工艺流程 */
+.section-process {
+  margin-bottom: 80px;
+}
+
+.process-steps {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.step-item {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 30px 15px;
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #5f9ea0;
+  /* 青色背景 */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.step-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.step-desc {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 第四部分：哲学 */
+.section-philosophy {
+  padding-top: 40px;
+  border-top: 1px solid #222;
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-left: 30px;
+
+}
+
+.philo-text p {
+  font-size: 16px;
+  color: #ddd;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+/* 动画效果类 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+
+  .info-grid,
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kiln-grid {
+    flex-direction: column;
+  }
+}
+
+.fade-in.visible {
+  margin-top: 20px;
+}

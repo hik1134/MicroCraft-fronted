@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>青铜器锈蚀的化学原理</title>
+  <link rel="stylesheet" href="time-sci.css">
+</head>
+
+<body>
+
+  <!-- 顶部导航 (保持与上一页一致) -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+    <div class="logo-area">
+      <div class="logo-title">岁月·金石</div>
+      <div class="logo-sub">CROWN OF TIME</div>
+    </div>
+    <nav class="nav-menu">
+      <a href="time.html">
+        <div class="nav-item" data-tab="interactive">交互体验</div>
+        <a href="time-sci.html">
+          <div class="nav-item active" data-tab="science">科学原理</div>
+        </a>
+        <a href="time-his.html">
+          <div class="nav-item" data-tab="history">历史演变</div>
+        </a>
+        <a href="time-cul.html">
+          <div class="nav-item" data-tab="culture">文化内涵</div>
+        </a>
+    </nav>
+  </header>
+
+  <!-- 页面主体内容 -->
+  <div class="page-container">
+
+    <!-- 顶部标题区 -->
+    <div class="header-section">
+      <h1 class="page-title">青铜器锈蚀的化学原理</h1>
+      <p class="page-desc">从电化学腐蚀到矿物学特征，探索时间如何在青铜器上留下印记。</p>
+    </div>
+
+    <!-- 主要内容卡片 (深色背景区域) -->
+    <div class="content-card">
+      <h2 class="section-title">铜的氧化还原反应</h2>
+
+      <div class="split-layout">
+
+        <!-- 左侧：文字描述与方程式 -->
+        <div class="left-column">
+          <p class="text-body">
+            青铜器的主要成分是铜锡合金。在埋藏环境中，铜与土壤中的氧气、水分、二氧化碳、硫化物等发生复杂的氧化还原反应，形成各种铜的化合物。
+          </p>
+          <p class="text-body">
+            这些反应的速度和产物取决于环境的pH值、湿度、氧气浓度以及土壤中矿物质的种类和含量。
+          </p>
+
+          <!-- 化学反应卡片组 -->
+          <div class="reaction-group">
+            <!-- 反应 1 -->
+            <div class="reaction-box">
+              <span class="reaction-label">氧化反应</span>
+              <div class="equation">
+                2Cu + O<sub>2</sub> → 2CuO <span class="note">（黑色）</span>
+              </div>
+            </div>
+
+            <!-- 反应 2 -->
+            <div class="reaction-box">
+              <span class="reaction-label">碳酸化反应</span>
+              <div class="equation">
+                2Cu + H<sub>2</sub>O + CO<sub>2</sub> + O<sub>2</sub> → Cu<sub>2</sub>(OH)<sub>2</sub>CO<sub>3</sub>
+                <span class="note">（孔雀绿）</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧：数据表格 -->
+        <div class="right-column">
+          <h3 class="table-title">锈蚀类型与化学式</h3>
+
+          <div class="chemistry-table">
+            <!-- 表头 -->
+            <div class="table-row header">
+              <div class="col">锈色</div>
+              <div class="col">化学式</div>
+              <div class="col">形成条件</div>
+            </div>
+
+            <!-- 数据行 -->
+            <div class="table-row">
+              <div class="col">红褐色</div>
+              <div class="col mono">Fe<sub>2</sub>O<sub>3</sub></div>
+              <div class="col">富铁土壤</div>
+            </div>
+
+            <div class="table-row">
+              <div class="col">黑色</div>
+              <div class="col mono">CuO</div>
+              <div class="col">缺氧环境</div>
+            </div>
+
+            <div class="table-row">
+              <div class="col">孔雀绿</div>
+              <div class="col mono">Cu<sub>2</sub>(OH)<sub>2</sub>CO<sub>3</sub></div>
+              <div class="col">中性pH</div>
+            </div>
+
+            <div class="table-row">
+              <div class="col">石青蓝</div>
+              <div class="col mono">Cu<sub>3</sub>(CO<sub>3</sub>)<sub>2</sub>(OH)<sub>2</sub></div>
+              <div class="col">碱性环境</div>
+            </div>
+
+            <div class="table-row">
+              <div class="col">黑漆古</div>
+              <div class="col mono">Cu<sub>2</sub>S</div>
+              <div class="col">富硫环境</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="time-sci.js"></script>
+</body>
+
+</html>

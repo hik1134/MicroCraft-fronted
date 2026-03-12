@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>科学原理 - 岁月·金石</title>
+  <link rel="stylesheet" href="time-cul.css">
+</head>
+
+<body>
+  <!-- 顶部导航 (保持统一) -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+    <div class="logo-area">
+      <div class="logo-title">岁月·金石</div>
+      <div class="logo-sub">CROWN OF TIME</div>
+    </div>
+    <nav class="nav-menu">
+      <a href="time.html">
+        <div class="nav-item" data-tab="interactive">交互体验</div>
+      </a>
+      <a href="time-sci.html">
+        <div class="nav-item " data-tab="science">科学原理</div>
+      </a>
+      <a href="time-his.html">
+        <div class="nav-item" data-tab="history">历史演变</div>
+      </a>
+      <a href="time-cul.html">
+        <div class="nav-item active" data-tab="culture">文化内涵</div>
+      </a>
+    </nav>
+  </header>
+
+  <!-- 页面主体容器 (允许滚动) -->
+  <main class="scroll-container">
+
+    <!-- 第一部分：青铜器的主要类型 -->
+    <section class="section-types fade-in">
+      <h2 class="section-title">青铜器的主要类型</h2>
+      <div class="types-grid">
+        <!-- 卡片 1 -->
+        <div class="type-card">
+          <h3 class="type-name">礼器</h3>
+          <p class="type-desc">鼎、簋、爵、觚</p>
+        </div>
+        <!-- 卡片 2 -->
+        <div class="type-card">
+          <h3 class="type-name">乐器</h3>
+          <p class="type-desc">钟、铙、镈、鼓</p>
+        </div>
+        <!-- 卡片 3 -->
+        <div class="type-card">
+          <h3 class="type-name">兵器</h3>
+          <p class="type-desc">戈、矛、剑、戟</p>
+        </div>
+        <!-- 卡片 4 -->
+        <div class="type-card">
+          <h3 class="type-name">工具</h3>
+          <p class="type-desc">斧、锛、凿、刀</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第二部分：铸造工艺与合金配比 (左右分栏) -->
+    <section class="section-tech-alloy fade-in">
+
+      <!-- 左侧：铸造工艺介绍 -->
+      <div class="tech-box">
+        <h3 class="box-title">青铜器的铸造工艺</h3>
+        <p class="text-content">
+          中国古代青铜器采用陶范铸造法，这是世界上最早的精密铸造技术。整个过程包括制模、翻范、合范、浇铸等步骤。
+        </p>
+        <p class="text-content">
+          商周时期的青铜器，尤其是具有复杂纹饰的器物，展示了令人难以置信的工艺水平。有些器物的壁厚仅2-3毫米，纹饰精细到肉眼难以分辨。
+        </p>
+        <div class="quote-block">
+          <p class="quote-text">"铸鼎象物，百物而为之备。"</p>
+          <span class="quote-source">——《左传》</span>
+        </div>
+      </div>
+
+      <!-- 右侧：合金配比表格 -->
+      <div class="alloy-box">
+        <h3 class="box-title">青铜器的合金配比</h3>
+        <p class="text-content">
+          古代工匠已经掌握了不同用途青铜器的最佳合金配比。《考工记》中记载了"六齐"，即六种不同用途的铜锡配比。
+        </p>
+
+        <div class="alloy-table">
+          <div class="table-header">
+            <span>用途</span>
+            <span>铜:锡</span>
+            <span>现代用途</span>
+          </div>
+          <div class="table-row">
+            <span>钟鼎</span>
+            <span class="mono-font">6:1</span>
+            <span>乐器、礼器</span>
+          </div>
+          <div class="table-row">
+            <span>斧斤</span>
+            <span class="mono-font">4:1</span>
+            <span>工具</span>
+          </div>
+          <div class="table-row">
+            <span>戈戟</span>
+            <span class="mono-font">3:1</span>
+            <span>兵器</span>
+          </div>
+          <div class="table-row">
+            <span>大刀</span>
+            <span class="mono-font">2:1</span>
+            <span>刀具</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三部分：工艺流程 -->
+    <section class="section-process fade-in">
+      <h2 class="section-title">青铜器铸造工艺流程</h2>
+      <div class="process-steps">
+        <!-- 步骤 1 -->
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h4 class="step-title">制模</h4>
+          <p class="step-desc">用泥土制作器物的原型</p>
+        </div>
+        <!-- 步骤 2 -->
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h4 class="step-title">翻范</h4>
+          <p class="step-desc">用模子翻制外范和内范</p>
+        </div>
+        <!-- 步骤 3 -->
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h4 class="step-title">制芯</h4>
+          <p class="step-desc">制作形成器物内腔的泥芯</p>
+        </div>
+        <!-- 步骤 4 -->
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h4 class="step-title">合范</h4>
+          <p class="step-desc">将外范与内范组合固定</p>
+        </div>
+        <!-- 步骤 5 -->
+        <div class="step-card">
+          <div class="step-num">5</div>
+          <h4 class="step-title">浇铸</h4>
+          <p class="step-desc">将熔化的铜液注入范腔</p>
+        </div>
+        <!-- 步骤 6 -->
+        <div class="step-card">
+          <div class="step-num">6</div>
+          <h4 class="step-title">修整</h4>
+          <p class="step-desc">去除范料，打磨抛光</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第四部分：底部哲学引言 -->
+    <section class="section-philosophy fade-in">
+      <div class="philo-content">
+        <p class="text-content">
+          在中国古代，青铜器不仅是实用器具，更是礼乐制度的重要载体。"藏礼于器"，通过青铜器的种类、数量、纹饰，可以判断使用者的身份和地位。
+        </p>
+        <p class="text-content">
+          鼎是最重要的礼器，象征着国家和权力。"问鼎中原"的典故，就源于楚庄王向周王室询问鼎的大小轻重，暗示其觊觎天下的野心。
+        </p>
+      </div>
+      <div class="philo-quote">
+        <p class="big-quote">"天子九鼎，诸侯七，卿大夫五，元士三。"</p>
+        <span class="quote-source align-right">——《公羊传》</span>
+      </div>
+    </section>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <script src="time-cul.js"></script>
+</body>
+
+</html>

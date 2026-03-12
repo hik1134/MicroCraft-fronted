@@ -1,0 +1,515 @@
+/* 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 禁止页面滚动，强制全屏 */
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  height: 100vh;
+  /* 视口高度 */
+  overflow: hidden;
+  /* 隐藏滚动条 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 导航栏 - 固定高度 */
+.navbar {
+  flex: 0 0 60px;
+  /* 固定60px高 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: #0a0a0a;
+  position: relative;
+  border-bottom: 1px solid #1a1a1a;
+  z-index: 100;
+}
+
+.nav-left {
+  width: 120px;
+}
+
+.back-btn {
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.back-arrow {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-family: "SimSun", serif;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  font-size: 12px;
+  color: #999;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #00b386;
+  color: #fff;
+}
+
+/* 主容器 - 填满剩余高度 */
+.main-container {
+  flex: 1;
+  /* 占据导航栏之外的所有空间 */
+  padding: 20px 40px;
+  /* 调整内边距 */
+  max-width: 1400px;
+  /* 稍微放宽一点 */
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* 防止内部溢出 */
+}
+
+/* 页面标题 - 压缩高度以适应一屏 */
+.page-header {
+  text-align: center;
+  margin-bottom: 20px;
+  /* 减小间距 */
+  padding: 20px;
+  /* 减小内边距 */
+  /* 去掉纹理背景图，或者让它更淡一点，以免太抢眼，这里为了简洁先保留背景但缩小 */
+  background: url("./秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/标题栏纹理.png") no-repeat center center;
+  background-size: cover;
+  border-radius: 8px;
+  border-bottom: 1px solid #1a1a1a;
+  flex: 0 0 auto;
+  /* 不伸缩 */
+}
+
+
+.main-title {
+  font-family: "SimSun", "Songti SC", serif;
+  /* 宋体 */
+  font-size: 34px;
+  font-weight: bold;
+  /* 字重粗 */
+  /* 绿色到黄色渐变 */
+  background: linear-gradient(90deg, #00b386, #f9d500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.4;
+}
+
+/* 内容区 */
+.content-wrapper {
+  flex: 1;
+  /* 填满剩余高度 */
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+  /* 拉伸对齐 */
+  overflow: hidden;
+  /* 关键：防止出现滚动条 */
+  padding-bottom: 10px;
+}
+
+/* 左侧视觉区 */
+.visual-section {
+  flex: 0 0 65%;
+  border-radius: 8px;
+  position: relative;
+  /* 确保图片在容器内居中且不过大 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kiln-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* 这里的 margin 是为了微调视觉重心 */
+  margin-left: -5%;
+  margin-top: -5%;
+}
+
+.kiln-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  /* 或者 auto */
+  height: 100%;
+  /* 或者 auto */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* 关键：保证图片完整显示不裁剪 */
+}
+
+.porcelain {
+  position: absolute;
+  top: 50%;
+  /* 相对 kiln-bg 居中 */
+  left: 50%;
+  transform: translate(-50%, -40%);
+  /* 这里的 -40% 是为了让碗看起来在台面上 */
+  width: 45%;
+  /* 根据背景图比例调整 */
+  z-index: 5;
+}
+
+.bowl-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 50px;
+}
+
+.crack-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+/* 右侧控制面板 - Flex布局自动分配高度 */
+.control-section {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* 均匀分布卡片 */
+  gap: 16px;
+  height: 88%;
+  /* 填满高度 */
+}
+
+/* 通用卡片样式 */
+.slider-card,
+.monitor-card {
+  background-color: #141414;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider-card {
+  flex: 1;
+  /* 滑块卡片稍微高一点 */
+  min-height: 140px;
+}
+
+.monitor-card {
+  flex: 0 0 auto;
+  /* 监控卡片高度自适应 */
+  min-height: 100px;
+}
+
+/* 滑块头部 */
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slider-icon-img {
+  width: 20px;
+  height: 20px;
+}
+
+.slider-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.slider-tip {
+  font-size: 10px;
+  color: #666;
+}
+
+/* 滑块主体 */
+.slider-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 滑块轨道样式 */
+.slider {
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* 绿色滑块头 */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #00b386;
+  /* 默认绿色 */
+  border: 2px solid #141414;
+  box-shadow: 0 0 0 2px #333;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* 数值行布局 */
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+  position: relative;
+}
+
+/* 中间数值样式 */
+.current-value {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 颜色定义 */
+.text-fire {
+  color: #ff5533;
+}
+
+/* 烈火橙红 */
+.text-cool {
+  color: #509C90;
+}
+
+/* 冷却青色 */
+
+/* 针对烈火滑块改变thumb颜色（可选） */
+#temp-slider::-webkit-slider-thumb {
+  background: #ff5533;
+}
+
+#cool-slider::-webkit-slider-thumb {
+  background: #00b386;
+}
+
+/* 监控数据样式 */
+.monitor-title {
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.monitor-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.monitor-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.monitor-label {
+  font-size: 11px;
+  color: #888;
+}
+
+.monitor-value {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Menlo", monospace;
+}
+
+/* 按钮区域 */
+.action-buttons {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 12px;
+  background-color: transparent;
+  /* 去掉背景色，更贴合全屏 */
+  padding: 0;
+  border: none;
+}
+
+.btn {
+  border: none;
+  border-radius: 4px;
+  height: 44px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.generate-btn {
+  flex: 1;
+  background-color: #00b386;
+  /* 截图中的灰绿/青色 */
+  color: #fff;
+}
+
+.generate-btn:hover {
+  background-color: #00b386;
+}
+
+.download-btn {
+  width: 44px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.download-btn:hover {
+  background-color: #333;
+}
+
+/* 修改的部分 */
+/* 修改原有的 .porcelain 样式 */
+.porcelain {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 60%;
+  /* 稍微放大一点给3D模型留出空间 */
+  height: 60%;
+  /* 添加高度 */
+  z-index: 5;
+  /* 确保内部的 canvas 填满且不遮挡后方背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 为动态生成的 canvas 添加样式 */
+#canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  cursor: grab;
+  /* 提示用户可以拖拽旋转 */
+}
+
+#canvas-container canvas:active {
+  cursor: grabbing;
+}
+
+.current-value {
+  font-size: 11px;
+  font-weight: 400;
+}
+
+
+/* 下载按钮图标样式 */
+.download-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  /* 如果你的图标是黑色的，而按钮背景是黑色的，可以通过下面这行代码反转颜色变成白色 */
+  /* filter: invert(1); */
+}
+
+/* 稍微优化一下下载按钮本身的样式 */
+.download-btn {
+  width: 44px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+  /* 增加一点悬浮效果 */
+}

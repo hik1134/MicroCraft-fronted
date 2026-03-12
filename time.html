@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间模拟器 · 青铜器锈蚀</title>
+  <!-- 引入样式表 -->
+  <link rel="stylesheet" href="time.css">
+</head>
+
+<body>
+
+  <!-- 顶部导航 -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+    <div class="logo-area">
+      <div class="logo-title">岁月·金石</div>
+      <div class="logo-sub">CROWN OF TIME</div>
+    </div>
+    <nav class="nav-menu">
+      <a href="time.html">
+        <div class="nav-item active" data-tab="interactive">交互体验</div>
+        <a href="time-sci.html">
+          <div class="nav-item" data-tab="science">科学原理</div>
+        </a>
+        <a href="time-his.html">
+          <div class="nav-item" data-tab="history">历史演变</div>
+        </a>
+        <a href="time-cul.html">
+          <div class="nav-item" data-tab="culture">文化内涵</div>
+        </a>
+    </nav>
+  </header>
+
+  <!-- 标题区 -->
+  <div class="hero-text">
+    <h1 class="main-title">时间模拟器 · 青铜器锈蚀</h1>
+    <p class="sub-desc">选择历史时期，模拟青铜器在不同环境条件下的锈蚀过程。锈蚀不是损坏，是时间的"加冕"。</p>
+  </div>
+
+  <!-- 主内容区 -->
+  <div class="main-container">
+
+    <!-- 左侧：展示区 -->
+    <div class="artifact-display">
+      <div class="artifact-img-container">
+        <!-- 背景层 -->
+        <div class="artifact-bg"></div>
+        <!-- 青铜鼎图片 -->
+        <img src="./岁月金石界面素材/第一页/页面一鼎.png" alt="青铜鼎" class="bronze-img" id="bronzeImage">
+        <!-- 锈蚀遮罩层 -->
+        <div class="rust-overlay" id="rustOverlay"></div>
+        <!-- 酸雨遮罩层（新增，用于酸雨效果） -->
+        <div class="acid-overlay" id="acidOverlay"></div>
+        <!-- 纹理层 -->
+        <div class="texture-overlay"></div>
+      </div>
+    </div>
+
+    <!-- 右侧：控制面板 -->
+    <div class="control-panel">
+
+      <!-- 1. 时间轴 -->
+      <div class="card timeline-card">
+        <div class="card-header">
+          <span class="icon">⏱</span>
+          <span class="card-title">时间轴</span>
+          <span class="card-extra">选择历史时期</span>
+        </div>
+        <ul class="timeline-list">
+          <li class="timeline-item active" data-era="shang">
+            <div class="t-info">
+              <span class="dot">●</span>
+              <span class="t-name">商周</span>
+            </div>
+            <span class="t-date">BC 1600-256</span>
+          </li>
+          <li class="timeline-item" data-era="qin">
+            <div class="t-info">
+              <span class="dot">○</span>
+              <span class="t-name">秦汉</span>
+            </div>
+            <span class="t-date">BC 221-AD 220</span>
+          </li>
+          <li class="timeline-item" data-era="tang">
+            <div class="t-info">
+              <span class="dot">○</span>
+              <span class="t-name">唐宋</span>
+            </div>
+            <span class="t-date">AD 618-1279</span>
+          </li>
+          <li class="timeline-item" data-era="modern">
+            <div class="t-info">
+              <span class="dot">○</span>
+              <span class="t-name">现代</span>
+            </div>
+            <span class="t-date">AD 1900-至今</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 2. 环境模拟 -->
+      <div class="card env-card">
+        <div class="env-title">ENVIRONMENT SIMULATION</div>
+        <div class="env-row-main">
+          <div class="env-label-group">
+            <span class="plus">+</span>
+            <span>酸雨 (Acid Rain)</span>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="acidRainToggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="env-details">
+          <div class="env-detail-row">
+            <span>土壤酸碱度 (pH)</span>
+            <span class="mono-font" id="phValue">7.2</span>
+          </div>
+          <div class="env-detail-row">
+            <span>空气湿度 (Humidity)</span>
+            <span class="mono-font" id="humidityValue">45%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 时间流逝控制 -->
+      <div class="card control-card">
+        <div class="control-labels">
+          <span>时间流逝</span>
+          <span>锈蚀程度</span>
+        </div>
+        <div class="progress-display">
+          <span class="mono-font accent-text" id="rustPercent">0%</span>
+        </div>
+
+        <!-- 滑动条 -->
+        <div class="slider-container">
+          <input type="range" min="0" max="100" value="0" class="rust-slider" id="rustRange">
+          <div class="slider-track-fill" id="sliderFill"></div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-simulate" id="simulateBtn">模拟时间流逝</button>
+          <button class="btn-download" id="simulateBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 引入脚本 -->
+  <script src="time.js"></script>
+</body>
+
+</html>

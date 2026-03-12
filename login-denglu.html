@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>登录 - 欢迎回来</title>
+  <link rel="stylesheet" href="login-denglu.css">
+</head>
+
+<body>
+  <div class="login-container">
+    <!-- 左上角返回 -->
+    <div class="back-btn" onclick="goHome()">
+      <img src="./登录以及首页素材/登录以及首页素材/登录/箭头-左.png" class="back-icon"> <!-- 👈 替换你的返回箭头素材 -->
+      <span>返回</span>
+    </div>
+
+    <div class="login-card">
+      <!-- 顶部：指纹与欢迎 -->
+      <div class="header-section">
+        <!-- 替换你的指纹素材 -->
+        <img src="./登录以及首页素材/登录以及首页素材/登录/图标.png" class="finger-icon">
+        <h1 class="welcome-text">欢迎</h1>
+        <p class="subtitle">WELCOME</p>
+      </div>
+
+      <!-- 输入区域 -->
+      <div class="form-group">
+        <label>邮箱</label>
+        <div class="input-wrapper">
+          <img src="./登录以及首页素材/登录以及首页素材/登录/邮箱.png" class="field-icon"> <!-- 替换用户图标 -->
+          <input type="text" id="username" placeholder="请输入邮箱">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>密码 / Password</label>
+        <div class="input-wrapper">
+          <img src="./登录以及首页素材/登录以及首页素材/登录/密码.png" class="field-icon"> <!-- 替换锁图标 -->
+          <input type="password" id="password" placeholder="请输入密码">
+          <img src="./登录以及首页素材/登录以及首页素材/登录/眼睛_显示_o.png" class="eye-icon" id="togglePassword"> <!-- 替换眼睛图标 -->
+        </div>
+      </div>
+
+      <!-- 登录按钮 -->
+      <button class="btn-login" id="loginBtn">✨ 登录</button>
+
+      <!-- 游客按钮 -->
+      <button class="btn-guest" id="guestBtn">游客访问</button>
+
+      <!-- 底部链接：删除了忘记密码 -->
+      <div class="footer-links">
+        <a href="login.html">注册账号</a>
+      </div>
+    </div>
+  </div>
+  <script src="request.js"></script>
+  <script src="login-denglu.js"></script>
+
+</body>
+
+</html>

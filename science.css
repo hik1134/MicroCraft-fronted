@@ -1,0 +1,308 @@
+/* 全局重置 (保持一致) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+  /* 默认等线/无衬线 */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 导航栏样式 (完全复用) */
+.navbar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: #0a0a0a;
+  position: relative;
+  border-bottom: 1px solid #1a1a1a;
+  z-index: 10;
+}
+
+.nav-left,
+.nav-right {
+  width: auto;
+}
+
+.back-btn {
+  color: #999;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.back-arrow {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.brand-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-family: "SimSun", serif;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 16px;
+}
+
+.nav-link {
+  font-size: 12px;
+  color: #999;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #00b386;
+  color: #fff;
+}
+
+/* --- 科学原理页独有样式 --- */
+
+.main-container {
+  max-width: 1200px;
+  /* 控制整体宽度，使其聚焦 */
+  margin: 0 auto;
+  padding: 40px 24px;
+  width: 100%;
+}
+
+/* 头部 */
+.science-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-family: "SimSun", "Songti SC", serif;
+  /* 宋体 */
+  font-size: 34px;
+  font-weight: bold;
+  /* 字重粗 */
+  /* 绿色到黄色渐变 */
+  background: linear-gradient(90deg, #00b386, #f9d500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 12px;
+}
+
+.page-subtitle {
+  font-size: 16px;
+  color: #999;
+  /* 灰色 */
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+/* 分割线 */
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background-color: #333;
+  /* 灰色长线 */
+  margin-bottom: 40px;
+}
+
+/* 灰色圆角卡片模块 */
+.science-card {
+  background-color: #141414;
+  /* 深灰色背景 */
+  border-radius: 16px;
+  /* 四周圆弧 */
+  padding: 48px;
+  /* 可以选择加一点微弱的边框或阴影增加层次 */
+  border: 1px solid #222;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  /* 初始隐藏，用于JS动画 */
+  transform: translateY(20px);
+  margin-top: 50px;
+}
+
+.card-main-title {
+  text-align: center;
+  font-family: "SimSun", serif;
+  /* 宋体 */
+  font-size: 26px;
+  /* 标题稍大 */
+  font-weight: 900;
+  /* 字重中等 */
+  color: #fff;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+/* 左右两栏布局 */
+.card-content {
+  display: flex;
+  gap: 60px;
+  /* 左右间距 */
+  align-items: flex-start;
+}
+
+.left-column {
+  flex: 1.2;
+}
+
+.right-column {
+  flex: 1;
+}
+
+/* 左侧文字 */
+.text-block p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 20px;
+  text-align: justify;
+  /* 两端对齐 */
+}
+
+/* 公式模块 */
+.formula-box {
+  margin-top: 32px;
+  background-color: rgba(0, 179, 134, 0.05);
+  /* 绿色有点透明的背景 */
+  border: 1px solid #004d39;
+  /* 深绿色边框 */
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+
+.formula-label {
+  font-size: 14px;
+  color: #888;
+  /* 灰色 */
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.formula-main {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  /* 等宽/公式字体 */
+  font-size: 22px;
+  /* 稍微大一点更清晰，原需求14px可能偏小，可视情况调整 */
+  color: #00b386;
+  /* 绿色 */
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.formula-legend {
+  font-size: 13px;
+  color: #666;
+  /* 灰色 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.separator {
+  color: #333;
+}
+
+/* 右侧时间轴 */
+.timeline-header {
+  font-size: 16px;
+  color: #e3c478;
+  /* 青色/绿色 */
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 20px;
+  /* 为线条留出空间 */
+}
+
+.timeline-line-img {
+  position: absolute;
+  left: -67px;
+  top: -36px;
+  bottom: 0;
+  width: 130px;
+  height: 150%;
+  object-fit: fill;
+  z-index: 1;
+}
+
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  /* 增加一点间距 */
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+
+
+.stage-title {
+  font-size: 17px;
+  font-weight: 500;
+  /* 字重中等 */
+  color: #e3c478;
+  margin-bottom: 4px;
+  font-family: "SimSun", "宋体", serif;
+}
+
+.stage-desc {
+  font-size: 14px;
+  color: #888;
+  /* 灰色 */
+  line-height: 1.5;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .card-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .science-card {
+    padding: 24px;
+  }
+}

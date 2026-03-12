@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字织锦 - 历史演变</title>
+  <link rel="stylesheet" href="logic-his.css">
+</head>
+
+<body>
+
+  <!-- 顶部导航栏 -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"><button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="header-center">
+      <div class="logo-title">逻辑·织绣</div>
+      <div class="logo-subtitle">DIGITAL BROCADE</div>
+    </div>
+
+    <div class="header-right">
+      <nav>
+        <ul>
+          <li><a href="logic.html" class="nav-item">交互体验</a></li>
+          <li><a href="logic-sci.html" class="nav-item">科学原理</a></li>
+          <!-- 当前页面高亮 -->
+          <li><a href="logic-his.html" class="nav-item active">历史演变</a></li>
+          <li><a href="logic-cul.html" class="nav-item">文化内涵</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- === 新增：背景装饰层 === -->
+  <div class="bg-layer"></div>
+  <!-- 主内容区 -->
+  <main class="history-main">
+    <!-- 标题区域 -->
+    <section class="hero-section hero-history">
+      <h1 class="main-title">中国织绣发展简史</h1>
+      <p class="description">从原始编织到提花机，探索中国纺织技术的千年演变。</p>
+    </section>
+
+    <!-- 时间轴区域 -->
+    <div class="timeline-container">
+      <!-- 装饰性垂直线 -->
+      <div class="timeline-line"></div>
+
+      <!-- 时间节点 1 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">新石器时代 (约公元前5000年)</h3>
+          <p class="t-desc">中国最早的纺织品出现在仰韶文化时期。先民们使用简单的腰机，以手工方式编织麻布和葛布。</p>
+        </div>
+      </div>
+
+      <!-- 时间节点 2 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">商周时期 (公元前1600-256年)</h3>
+          <p class="t-desc">丝绸生产开始规模化，出现了原始的提花装置。甲骨文中的"丝"、"帛"等字，证明了丝绸在社会中的重要地位。</p>
+        </div>
+      </div>
+
+      <!-- 时间节点 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">战国时期 (公元前475-221年)</h3>
+          <p class="t-desc">提花机技术取得重大突破，出现了多综多蹑的复杂织机。湖南长沙马王堆汉墓出土的素纱襌衣，重量仅49克，展示了当时高超的织造技术。</p>
+        </div>
+      </div>
+
+      <!-- 时间节点 4 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">汉代 (公元前206-公元220年)</h3>
+          <p class="t-desc">丝绸之路开通，中国丝绸远销中亚和欧洲。提花机进一步完善，可以织出复杂的动物和几何图案。</p>
+        </div>
+      </div>
+
+      <!-- 时间节点 5 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">唐代 (公元618-907年)</h3>
+          <p class="t-desc">织锦艺术达到高峰，出现了著名的"唐锦"。纬线起花技术的发明，使图案更加丰富多彩。</p>
+        </div>
+      </div>
+
+      <!-- 时间节点 6 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">宋代 (公元960-1279年)</h3>
+          <p class="t-desc">提花机技术成熟，花本（穿孔卡片）系统完善。宋锦以其精美的图案和优雅的色彩闻名于世。</p>
+        </div>
+      </div>
+
+      <!-- 时间节点 7 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="t-title">明清时期 (公元1368-1912年)</h3>
+          <p class="t-desc">南京云锦、苏州宋锦、四川蜀锦、广西壮锦并称"中国四大名锦"。织绣工艺达到前所未有的高度。</p>
+        </div>
+      </div>
+
+      <!-- 底部留白，防止最后一个节点贴底 -->
+      <div style="height: 60px;"></div>
+    </div>
+  </main>
+
+  <script src="logic-his.js"></script>
+</body>
+
+</html>

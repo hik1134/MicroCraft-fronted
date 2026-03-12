@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逻辑·织锦 - 数字织锦生成器</title>
+  <link rel="stylesheet" href="logic.css">
+</head>
+
+<body>
+
+  <!-- 顶部导航栏 -->
+  <header>
+    <div class="header-left">
+      <!-- 返回按钮：点击跳转回首页 -->
+      <a href="index.html"><button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+
+    <div class="header-center">
+      <div class="logo-title">逻辑·织绣</div>
+      <div class="logo-subtitle">DIGITAL BROCADE</div>
+    </div>
+
+    <div class="header-right">
+      <nav>
+        <ul>
+          <li><a href="logic.html" class="nav-item active">交互体验</a></li>
+          <!-- 当前页面高亮 -->
+          <li><a href="logic-sci.html" class="nav-item ">科学原理</a></li>
+          <li><a href="logic-his.html" class="nav-item">历史演变</a></li>
+          <li><a href="logic-cul.html" class="nav-item">文化内涵</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. 标题文案区 -->
+  <!-- Hero 区域：带双重背景 -->
+  <section class="hero-section">
+    <h1 class="main-title">二进制编码的科学原理</h1>
+    <p class="description">从布尔代数到信息论，探索织锦图案背后的数学逻辑。</p>
+  </section>
+
+  <!-- 3. 主工作区 -->
+  <main class="workspace">
+
+    <!-- 左侧：画布展示 -->
+    <div class="preview-container">
+      <canvas id="weaveCanvas"></canvas>
+      <!-- 背景装饰纹理（仅作视觉效果） -->
+      <div class="grid-bg"></div>
+    </div>
+
+    <!-- 右侧控制面板 (完全重写以匹配截图) -->
+    <aside class="sidebar">
+
+      <!-- 模块1：输入文字 (卡片风格) -->
+      <div class="control-card">
+        <h3>输入文字</h3>
+        <p class="desc">输入一段话，编织你的数字织锦</p>
+        <div class="input-wrapper">
+          <input type="text" id="textInput" value="锦绣山河" placeholder="请输入...">
+        </div>
+      </div>
+
+      <!-- 模块2：二进制编码 (卡片风格) -->
+      <div class="control-card">
+        <h3>二进制编码</h3>
+        <div class="code-display" id="binaryOutput">
+          <!-- JS自动填充 -->
+        </div>
+      </div>
+
+      <!-- 模块3：纹样选择 (网格风格) -->
+      <div class="pattern-section">
+        <button class="pat-btn active" data-type="cloud">祥云纹样</button>
+        <button class="pat-btn" data-type="dragon">传统龙纹</button>
+        <button class="pat-btn" data-type="flower">花朵纹样</button>
+        <button class="pat-btn" data-type="landscape">山水纹样</button>
+      </div>
+
+      <!-- 模块4：颜色滑块 -->
+      <div class="color-section">
+        <h3>改变颜色</h3>
+        <div class="slider-wrapper">
+          <input type="range" id="hueSlider" min="0" max="360" value="45">
+        </div>
+      </div>
+
+      <!-- 底部按钮组 -->
+      <div class="action-group">
+        <button id="startBtn" class="btn-main">
+          <span class="icon">▷</span> 开始编织
+        </button>
+        <button id="downloadBtn" class="btn-icon">
+          <span class="icon">↓</span>
+        </button>
+      </div>
+
+    </aside>
+  </main>
+
+  <script src="logic.js"></script>
+</body>
+
+</html>

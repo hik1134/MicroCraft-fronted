@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中国青铜器发展简史</title>
+  <link rel="stylesheet" href="time-his.css">
+</head>
+
+<body>
+  <!-- 顶部导航 -->
+  <header>
+    <div class="header-left">
+      <a href="index.html"> <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>返回</span>
+        </button></a>
+    </div>
+    <div class="logo-area">
+      <div class="logo-title">岁月·金石</div>
+      <div class="logo-sub">CROWN OF TIME</div>
+    </div>
+    <nav class="nav-menu">
+      <a href="time.html">
+        <div class="nav-item" data-tab="interactive">交互体验</div>
+      </a>
+      <a href="time-sci.html">
+        <div class="nav-item" data-tab="science">科学原理</div>
+      </a>
+      <a href="time-his.html">
+        <div class="nav-item active" data-tab="history">历史演变</div>
+      </a>
+      <a href="time-cul.html">
+        <div class="nav-item" data-tab="culture">文化内涵</div>
+      </a>
+    </nav>
+  </header>
+  <!-- === 新增：统一的背景装饰层 === -->
+  <div class="bg-layer"></div>
+  <!-- 页面主体布局 -->
+  <div class="page-container">
+
+    <!-- 1. 顶部标题区 (居中显示) -->
+    <div class="header-section">
+      <h1 class="page-title">中国青铜器发展简史</h1>
+      <p class="page-desc">从礼器到兵器，探索青铜文明在中国历史中的重要地位。</p>
+    </div>
+
+    <!-- 2. 主体内容区 (左右分栏核心容器) -->
+    <div class="content-body">
+
+      <!-- 左侧：滚动时间轴区域 -->
+      <div class="content-side">
+        <div class="timeline-container">
+          <div class="timeline-line"></div> <!-- 垂直贯穿线 -->
+
+          <!-- 时间轴列表项 -->
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-content">
+              <h3 class="t-title">夏代 (约公元前2070-1600年)</h3>
+              <p class="t-desc">中国青铜时代的开端。出现了简单的青铜工具和武器，但数量稀少，技术尚不成熟。</p>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-content">
+              <h3 class="t-title">商代早期 (公元前1600-1300年)</h3>
+              <p class="t-desc">青铜铸造技术迅速发展。郑州商城出土的青铜器显示了高超的铸造水平，爵、觚等酒器开始流行。</p>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-content">
+              <h3 class="t-title">商代晚期 (公元前1300-1046年)</h3>
+              <p class="t-desc">青铜文明的鼎盛时期。安阳殷墟出土的司母戊鼎重达832.84公斤，是世界最大的古代青铜器。</p>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-content">
+              <h3 class="t-title">西周 (公元前1046-771年)</h3>
+              <p class="t-desc">青铜器从酒器转向食器，鼎、簋等礼器成为等级制度的象征。铭文大量出现，记录了重要的历史事件。</p>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-content">
+              <h3 class="t-title">春秋战国 (公元前770-221年)</h3>
+              <p class="t-desc">青铜器风格从庄重转向精巧。错金银、镶嵌、鎏金等装饰工艺达到巅峰，兵器制造技术突飞猛进。</p>
+            </div>
+          </div>
+
+          <div class="t-item">
+            <div class="t-dot"></div>
+            <div class="t-content">
+              <h3 class="t-title">秦汉以后 (公元前221年以后)</h3>
+              <p class="t-desc">铁器逐渐取代青铜器的实用功能，青铜器转向祭祀和装饰用途。铜镜成为主要的青铜制品。</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 右侧：背景图展示区 -->
+      <div class="visual-side">
+        <img src="./素材补充/未标题-2.png" alt="青铜纹饰背景" class="bg-graphic">
+      </div>
+
+    </div> <!-- 结束 content-body -->
+
+  </div>
+
+  <script src="time-his.js"></script>
+</body>
+
+</html>
