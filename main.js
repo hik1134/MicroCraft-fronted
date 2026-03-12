@@ -193,30 +193,30 @@ document.addEventListener('DOMContentLoaded', function () {
 // ];
 
 // 渲染函数
-function renderCards(data) {
-  const container = document.getElementById('cardContainer');
+//function renderCards(data) {
+//  const container = document.getElementById('cardContainer');
 
-  container.innerHTML = data.map(item => `
-        <div class="card">
-            <div class="card-image-wrapper">
-                <span class="tag tag-${item.tagType}">${item.tag}</span>
-                <img src="${item.imageUrl}" alt="artifact">
-            </div>
-            <div class="card-content">
-                <span class="code-id"># ${item.id}</span>
-                <div class="detail-item">
-                    <span>⛓</span> ${item.details}
-                </div>
-                <div class="date">${item.date}</div>
-            </div>
-        </div>
-    `).join('');
-}
+ // container.innerHTML = data.map(item => `
+ //       <div class="card">
+//           <div class="card-image-wrapper">
+ //               <span class="tag tag-${item.tagType}">${item.tag}</span>
+//              <img src="${item.imageUrl}" alt="artifact">
+//            </div>
+//            <div class="card-content">
+//                <span class="code-id"># ${item.id}</span>
+//                <div class="detail-item">
+//                   <span>⛓</span> ${item.details}
+//                </div>
+//                <div class="date">${item.date}</div>
+//            </div>
+//        </div>
+//    `).join('');
+//}
 
 // 初始化调用
-document.addEventListener('DOMContentLoaded', () => {
-  renderCards(backendData);
-});
+//document.addEventListener('DOMContentLoaded', () => {
+//  renderCards(backendData);
+//});
 
 // ==========================================
 // 文明代码库 - 接口联调与交互逻辑
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 1. 接口配置与核心状态
 const API_CONFIG = {
-  baseUrl: "118.89.82.148:8080",
+  baseUrl: "http://118.89.82.148:8080",
   listEndpoint: "/posts/life-texture"
 };
 
