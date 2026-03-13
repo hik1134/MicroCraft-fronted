@@ -1,5 +1,5 @@
 /* ================== 1. 全局配置与状态 ================== */
-const API_BASE_URL = '118.89.82.148:8080';
+const API_BASE_URL = 'http://118.89.82.148:8080';
 
 // 获取 Token 和 当前用户名
 function getToken() { return localStorage.getItem('userToken') || ''; }
