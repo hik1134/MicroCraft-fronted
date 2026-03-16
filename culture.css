@@ -32,23 +32,20 @@ body {
   width: auto;
 }
 
-.back-btn {
-  color: #999;
-  text-decoration: none;
+.nav-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
   font-size: 14px;
+  font-family: "Microsoft YaHei", sans-serif;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+  cursor: pointer;
 }
 
-.back-btn:hover {
+.nav-left .back-btn:hover {
   color: #fff;
-}
-
-.back-arrow {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
 }
 
 .nav-center {
@@ -68,7 +65,7 @@ body {
 
 .brand-subtitle {
   font-size: 10px;
-  color: #666;
+  color: #fff;
   letter-spacing: 2px;
   margin-top: 2px;
 }
@@ -106,10 +103,20 @@ body {
   text-align: center;
   font-family: "SimSun", "Songti SC", serif;
   /* 宋体 */
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   margin-bottom: 50px;
   letter-spacing: 2px;
+
+
+  font-family: "SimSun", "Songti SC", serif;
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #6ab9a5 30%, #f9d500 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-top: 52px;
 }
 
 /* 第一部分：五大名窑卡片 */
@@ -147,15 +154,15 @@ body {
 
 .kiln-name {
   /* font-family: "SimSun", serif; */
-  font-size: 14px;
+  font-size: 20px;
   margin-bottom: 10px;
   font-weight: bold;
-  color: #a5a5a5;
+  color: #d7d7d7;
 }
 
 .kiln-desc {
-  font-size: 12px;
-  color: #888;
+  font-size: 16px;
+  color: #bfbfbf;
 }
 
 /* 第二部分：信息对比 (Split Section) */
@@ -176,13 +183,13 @@ body {
 
 .info-card h3 {
   font-family: "SimSun", serif;
-  font-size: 20px;
+  font-size: 30px;
   margin-bottom: 20px;
   color: #fff;
 }
 
 .intro-text {
-  font-size: 14px;
+  font-size: 17px;
   color: #ccc;
   margin-bottom: 30px;
   text-align: justify;
@@ -199,7 +206,7 @@ body {
   text-align: left;
   color: #d4af37;
   /* 金色表头 */
-  font-size: 12px;
+  font-size: 16px;
   padding: 15px 0;
   border-bottom: 1px solid #333;
 }
@@ -208,6 +215,7 @@ body {
   padding: 15px 0;
   border-bottom: 1px solid #333;
   color: #ccc;
+  font-size: 16px;
 }
 
 .compare-table tr:last-child td {
@@ -224,14 +232,14 @@ body {
 
 .quote-text {
   font-style: italic;
-  font-size: 16px;
+  font-size: 18px;
   color: #fff;
   margin-bottom: 10px;
 }
 
 .quote-source {
-  font-size: 12px;
-  color: #666;
+  font-size: 17px;
+  color: #b5b4b4;
 }
 
 /* 第三部分：工艺流程 */
@@ -275,14 +283,14 @@ body {
 }
 
 .step-name {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .step-desc {
-  font-size: 12px;
-  color: #888;
+  font-size: 17px;
+  color: #b2b0b0;
 }
 
 /* 第四部分：哲学 */
@@ -302,7 +310,7 @@ body {
 }
 
 .philo-text p {
-  font-size: 16px;
+  font-size: 17px;
   color: #ddd;
   margin-bottom: 20px;
   line-height: 1.8;
@@ -321,6 +329,7 @@ body {
 }
 
 /* 响应式调整 */
+/* 响应式调整 */
 @media (max-width: 768px) {
 
   .info-grid,
@@ -328,11 +337,116 @@ body {
     grid-template-columns: 1fr;
   }
 
+  /* --- 修改五大名窑排版 --- */
   .kiln-grid {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* 强制一行显示两列 */
+    gap: 12px;
+  }
+
+  .kiln-card {
+    min-width: 0;
+    /* 解除原本 200px 的最小宽度限制 */
+    padding: 30px 10px;
+    /* 减小内边距，让卡片变小 */
+  }
+
+  .big-char {
+    font-size: 32px;
+    /* 缩小大字 (原为48px) */
+    margin-bottom: 12px;
+  }
+
+  .kiln-name {
+    font-size: 13px;
+    /* 适当缩小标题 */
+  }
+
+  .kiln-desc {
+    font-size: 11px;
+    /* 适当缩小描述文本，防止换行过多 */
+  }
+
+  /* 可选项：因为有5个名窑，让最后单独剩下一个的卡片在底部居中 */
+  .kiln-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    width: 60%;
+    margin: 0 auto;
   }
 }
 
-.fade-in.visible {
-  margin-top: 20px;
+/* =========================================
+   移动端与平板响应式设计 (完美流式布局)
+========================================= */
+@media screen and (max-width: 1024px) {
+
+  /* 1. 解除页面高度锁定，允许上下滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    min-height: 100vh;
+  }
+
+  /* 2. 导航栏重排：不拥挤的两行布局 */
+  .navbar {
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    /* 允许换行 */
+  }
+
+  .nav-left {
+    flex: 1;
+    /* 返回按钮靠左 */
+  }
+
+  .nav-center {
+    position: static;
+    transform: none;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行，并允许横向滑动 */
+  .nav-right {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    /* 超出屏幕可横向滑动 */
+    padding-bottom: 8px;
+    /* 给滑动条留一点空间 */
+    -webkit-overflow-scrolling: touch;
+    /* 丝滑滚动 */
+  }
+
+  /* 隐藏横向滚动条保持美观 */
+  .nav-right::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    /* 文字不换行 */
+  }
+
+  /* 3. 页面主容器 */
+  .main-container {
+    padding: 16px;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* 4. 核心内容排版：严格按照 上->下 顺序 */
+  .content-wrapper {
+    flex-direction: column;
+    /* 变为上下结构 */
+    height: auto;
+    overflow: visible;
+    gap: 24px;
+  }
+
 }

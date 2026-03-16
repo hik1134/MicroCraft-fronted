@@ -50,8 +50,10 @@ html {
 }
 
 /* 登录卡片 */
+
 .login-card {
   width: 400px;
+  /* 👈 问题出在这里，它把宽度定死了 */
   background: rgba(26, 26, 26, 0.9);
   padding: 40px;
   border-radius: 12px;
@@ -169,4 +171,143 @@ input {
 .footer-links a:hover {
   color: #61c3a5;
   /* 悬浮时变为图片中的那种绿色 */
+}
+
+/* =========================================
+   👇 新增：移动端响应式适配
+========================================= */
+
+/* 1. 适配屏幕宽度较小的设备（手机） */
+@media screen and (max-width: 500px) {
+
+  /* 让登录卡片宽度自适应，两边留出空隙，不再死死固定400px */
+  .login-card {
+    width: 90%;
+    padding: 30px 20px;
+    /* 稍微缩小内边距，给输入框留出更多空间 */
+    margin-top: 65px;
+  }
+
+  /* 手机上返回按钮稍微往边缘靠一点，省空间 */
+  .back-btn {
+    top: 20px;
+    left: 20px;
+  }
+
+  /* 标题稍微缩小一点，防止挤占太多高度 */
+  .welcome-text {
+    font-size: 28px;
+    letter-spacing: 4px;
+  }
+
+  /* （针对注册页）稍微缩小获取验证码按钮的边距，防止把输入框挤得太窄 */
+  .btn-send-code {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+
+/* 2. 适配屏幕高度过小的状态（如：手机横屏，或手机弹起软键盘打字时） */
+@media screen and (max-height: 600px) {
+  .login-container {
+    align-items: flex-start;
+    /* 放弃居中，改为靠上对齐 */
+    overflow-y: auto;
+    /* 内容太长时允许上下滑动 */
+    padding: 70px 0 30px 0;
+    /* 顶部留白，防止挡住返回按钮 */
+  }
+
+  .back-btn {
+    top: 15px;
+    /* 键盘弹起时，返回按钮靠上贴一点 */
+  }
+}
+
+/* =========================================
+   👇 login.css 底部追加：完美复刻饱满比例与移动端响应式 👇
+========================================= */
+
+/* 1. 让卡片更饱满，占据手机大部分宽度 */
+.login-card {
+  width: 88%;
+  /* 占据屏幕88%宽度，两边留白 */
+  max-width: 420px;
+  /* 电脑端也会稍微变宽一点点，更协调 */
+  padding: 50px 30px;
+  /* 上下边距加大，显得更大气 */
+  border-radius: 16px;
+  /* 圆角变大一点，更柔和 */
+}
+
+/* 2. 让输入框变得厚实 */
+.input-wrapper {
+  padding: 16px 15px;
+  /* 加大内边距，把输入框撑高 */
+  border-radius: 10px;
+  /* 输入框圆角加大 */
+}
+
+.form-group label {
+  font-size: 14px;
+  /* 标签字体稍微调大 */
+  margin-bottom: 10px;
+}
+
+.field-icon,
+.eye-icon {
+  width: 20px;
+  /* 图标稍微放大 */
+}
+
+input {
+  font-size: 15px;
+  /* 输入框内文字调大 */
+}
+
+/* 3. 针对注册页“获取验证码”按钮的专项适配（让它跟厚输入框更搭） */
+.btn-send-code {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* 4. 底部按钮变大、变厚 */
+.btn-login,
+.btn-guest {
+  padding: 16px;
+  /* 加高按钮 */
+  font-size: 16px;
+  border-radius: 10px;
+  /* 按钮圆角加大，和输入框统一 */
+  margin-top: 15px;
+}
+
+/* 5. 标题和副标题的间距拉开 */
+.welcome-text {
+  font-size: 36px;
+  margin-top: 15px;
+}
+
+.subtitle {
+  margin-bottom: 40px;
+  /* 标题和输入框的距离拉大一点 */
+}
+
+/* 6. 针对手机屏幕特殊优化（防键盘遮挡 & 返回按钮位置） */
+@media screen and (max-width: 600px) {
+  .back-btn {
+    top: 25px;
+    left: 20px;
+    font-size: 15px;
+  }
+
+  /* 手机横屏或弹出软键盘时，允许页面上下滑动，防止按钮被键盘挡住点不到 */
+  .login-container {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    align-items: flex-start;
+    /* 放弃绝对居中，往上靠 */
+    overflow-y: auto;
+  }
 }

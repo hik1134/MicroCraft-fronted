@@ -76,7 +76,7 @@ header {
 .logo-subtitle {
   font-family: var(--font-sans);
   font-size: 10px;
-  color: var(--text-gray);
+  color: #fff;
   letter-spacing: 1px;
   margin-top: 2px;
   margin-left: 160px;
@@ -126,8 +126,8 @@ header {
 
 .main-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   margin-bottom: 16px;
   color: var(--accent-gold);
   /* 这里的标题是金色的 */
@@ -136,8 +136,8 @@ header {
 
 .description {
   font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-gray);
+  font-size: 16px;
+  color: #fff;
   letter-spacing: 0.5px;
 }
 
@@ -159,7 +159,7 @@ main {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 26px;
   color: #fff;
   text-align: center;
   margin-bottom: 40px;
@@ -180,7 +180,7 @@ main {
 }
 
 .text-content p {
-  font-size: 14px;
+  font-size: 18px;
   color: #eee;
   line-height: 1.8;
   margin-bottom: 24px;
@@ -196,7 +196,7 @@ main {
 
 .logic-table th {
   text-align: left;
-  font-size: 12px;
+  font-size: 20px;
   color: var(--accent-gold);
   padding: 10px 0;
   border-bottom: 1px solid #333;
@@ -205,7 +205,7 @@ main {
 
 .logic-table td {
   padding: 18px 0;
-  font-size: 13px;
+  font-size: 19px;
   color: #ccc;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -222,7 +222,7 @@ main {
 }
 
 .panel-header {
-  font-size: 14px;
+  font-size: 20px;
   color: var(--accent-gold);
   margin-bottom: 15px;
   font-weight: normal;
@@ -239,7 +239,7 @@ main {
 
 .grid-header {
   text-align: center;
-  font-size: 12px;
+  font-size: 19px;
   color: var(--accent-gold);
   padding-bottom: 5px;
   font-family: var(--font-sans);
@@ -261,6 +261,7 @@ main {
 .bg-gold {
   background-color: var(--accent-gold);
   color: #1a1a1a;
+  font-size: 20px;
 }
 
 /* 深色背景块 (模拟图中的结果为0的块) */
@@ -269,6 +270,7 @@ main {
   /* 深灰背景 */
   color: #888;
   /* 灰色文字 */
+  font-size: 20px;
 }
 
 /* 响应式适配 */
@@ -282,5 +284,77 @@ main {
     width: 100%;
     max-width: 400px;
     /* 手机上不让表格太宽 */
+  }
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 上下两行之间的间距 */
+    position: relative;
+  }
+
+  /* 将返回按钮绝对定位在左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    /* 垂直对齐第一行的Logo */
+  }
+
+  .header-center {
+    margin: 0;
+  }
+
+  /* 重点：清除之前写死的160px间距，让标题在手机上真正居中 */
+  .logo-title,
+  .logo-subtitle {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行并居中，超出可滑动 */
+  .header-right {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .header-right nav ul {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证导航文字不换行 */
+  }
+
+  /* 3. Hero 标题区缩小间距 */
+  .hero-section {
+    padding: 30px 15px 20px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
   }
 }

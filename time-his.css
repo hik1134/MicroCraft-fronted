@@ -74,7 +74,7 @@ header {
 
 .logo-sub {
   font-size: 10px;
-  color: var(--text-grey);
+  color: #fff;
   letter-spacing: 3px;
   margin-left: 320px;
 }
@@ -156,15 +156,15 @@ header {
 
 .page-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   color: var(--accent-orange);
   margin-bottom: 10px;
 }
 
 .page-desc {
   font-size: 14px;
-  color: var(--text-grey);
+  color: #fff;
 }
 
 /* --- 时间轴样式 --- */
@@ -413,5 +413,128 @@ header {
   .content-side {
     max-width: 100%;
     margin-left: 20px;
+  }
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    position: relative;
+  }
+
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  .logo-title,
+  .logo-sub {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  /* 3. 解除主容器的高度限制，取消内部滚动，跟随网页整体滚动 */
+  .page-container {
+    height: auto;
+    overflow: visible;
+    padding: 15px;
+    /* 缩小全局边距 */
+  }
+
+  /* 4. 标题区缩小字体和边距 */
+  .header-section {
+    margin-top: 10px;
+    margin-bottom: 25px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .page-desc {
+    font-size: 13px;
+  }
+
+  /* 5. 核心：修复时间轴在手机端的排版挤压问题 */
+  .content-side {
+    max-width: 100%;
+    margin-left: 0;
+    padding: 0 10px 20px 10px;
+    /* 清除原本巨大的左右内边距 */
+    overflow-y: visible;
+    /* 取消内部滚动条 */
+  }
+
+  /* 微调时间轴的线条和圆点位置 */
+  .timeline-container {
+    padding-left: 5px;
+  }
+
+  .timeline-line {
+    left: -4px;
+    /* 调整线条靠近左侧 */
+    width: 2px;
+  }
+
+  .t-item {
+    padding-left: 20px;
+    /* 减小文字距离线条的空隙 */
+    margin-bottom: 35px;
+  }
+
+  .t-dot {
+    left: -15px;
+    /* 重新对齐圆点中心到线条 */
+    width: 14px;
+    height: 14px;
+    top: 2px;
+    border-width: 2px;
+  }
+
+  /* 调整时间轴文字 */
+  .t-title {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .t-desc {
+    font-size: 13px;
+  }
+
+  /* 隐藏 HTML 中多余的图片占位容器（因为已经用了 bg-layer） */
+  .visual-side {
+    display: none;
   }
 }

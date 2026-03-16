@@ -76,7 +76,7 @@ header {
 .logo-subtitle {
   font-family: var(--font-sans);
   font-size: 10px;
-  color: var(--text-gray);
+  color: #fff;
   letter-spacing: 1px;
   margin-top: 2px;
   margin-left: 160px;
@@ -156,8 +156,8 @@ header {
 
 .main-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   margin-bottom: 16px;
   color: var(--accent-gold);
   /* 这里的标题是金色的 */
@@ -167,7 +167,7 @@ header {
 .description {
   font-family: var(--font-sans);
   font-size: 14px;
-  color: var(--text-gray);
+  color: #fff;
   letter-spacing: 0.5px;
 }
 
@@ -198,11 +198,12 @@ header {
 
 .sub-title {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   color: #fff;
   margin-bottom: 20px;
 }
+
 
 /* === 第一部分：四大名锦卡片 === */
 .brocade-cards {
@@ -236,14 +237,14 @@ header {
 
 .b-name {
   font-family: var(--font-serif);
-  font-size: 14px;
+  font-size: 19px;
   font-weight: bold;
   color: #fff;
   margin-bottom: 8px;
 }
 
 .b-desc {
-  font-size: 12px;
+  font-size: 18px;
   color: var(--text-gray);
 }
 
@@ -270,14 +271,14 @@ header {
 
 .symbol-table th {
   text-align: left;
-  font-size: 12px;
+  font-size: 18px;
   color: var(--accent-gold);
   padding-bottom: 10px;
   border-bottom: 1px solid #333;
 }
 
 .symbol-table td {
-  font-size: 13px;
+  font-size: 18px;
   color: #ccc;
   padding: 12px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -327,14 +328,14 @@ header {
 }
 
 .step-name {
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
 .step-desc {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--text-gray);
   line-height: 1.4;
 }
@@ -353,7 +354,7 @@ header {
 }
 
 .quote-text-col p {
-  font-size: 14px;
+  font-size: 17px;
   color: #ccc;
   line-height: 1.8;
   margin-bottom: 15px;
@@ -378,14 +379,14 @@ header {
 
 .q-content {
   font-family: "KaiTi", "STKaiti", serif;
-  font-size: 18px;
+  font-size: 20px;
   /* 稍微大一点以示区别 */
   color: #fff;
   font-style: italic;
 }
 
 .q-source {
-  font-size: 12px;
+  font-size: 17px;
   color: var(--text-gray);
   margin-top: 5px;
 }
@@ -419,5 +420,83 @@ header {
     border-top: 2px solid var(--accent-gold);
     padding-left: 0;
     padding-top: 20px;
+  }
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 上下两行之间的间距 */
+    position: relative;
+  }
+
+  /* 将返回按钮绝对定位在左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    /* 垂直对齐第一行的Logo */
+  }
+
+  .header-center {
+    margin: 0;
+  }
+
+  /* 重点：清除之前写死的160px间距，让标题在手机上真正居中 */
+  .logo-title,
+  .logo-subtitle {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行并居中，超出可滑动 */
+  .header-right {
+    width: 100%;
+    overflow-x: auto;
+
+  }
+
+  .header-right nav ul {
+    justify-content: center;
+    gap: 8px;
+
+  }
+
+  .header-right nav ul li {
+    border-radius: 8px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证导航文字不换行 */
+  }
+
+  /* 3. Hero 标题区缩小间距 */
+  .hero-section {
+    padding: 30px 15px 20px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
   }
 }

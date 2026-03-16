@@ -1,156 +1,273 @@
-// 1. 返回首页功能
-function goHome() {
-  window.location.href = "index.html"; // 或者你的主页URL
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+document.addEventListener('DOMContentLoaded', init3D);
+
+function init3D() {
+  // 1. 获取 DOM 元素 (UI 控制)
+  const tempSlider = document.getElementById('temp-slider');
+  const coolSlider = document.getElementById('cool-slider');
+  const tempDisplayMiddle = document.getElementById('temp-display-middle');
+  const coolDisplayMiddle = document.getElementById('cool-display-middle');
+  const tempDisplayMonitor = document.getElementById('kiln-temp');
+  const coolDisplayMonitor = document.getElementById('cool-rate');
+  const generateBtn = document.getElementById('generate-btn');
+  const container = document.getElementById('canvas-container');
+
+  // 2. 初始化 Three.js 基础场景
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight || 1, 0.1, 100);
+  camera.position.set(0, 2, 5);
+
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    preserveDrawingBuffer: true
+  });
+  // 初始设置大小，后面交给 ResizeObserver 管理
+  renderer.setSize(container.clientWidth || 300, container.clientHeight || 300);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // 限制最高像素比优化性能
+  container.appendChild(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.enablePan = false;
+  controls.minDistance = 2;
+  controls.maxDistance = 8;
+
+  // 3. 设置光照
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+  const directionalLight = new THREE.DirectionalLight(0xfff0dd, 1);
+  directionalLight.position.set(5, 5, 2);
+  scene.add(directionalLight);
+  const backLight = new THREE.DirectionalLight(0xaabbff, 0.8);
+  backLight.position.set(-5, 3, -5);
+  scene.add(backLight);
+
+  // 4. 生成冰裂纹贴图
+  function createProceduralCrack(density) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, 512, 512);
+
+    const segments = density === 'sparse' ? 5 : (density === 'medium' ? 10 : 20);
+    const step = 512 / segments;
+    const points = [];
+
+    for (let y = 0; y <= segments; y++) {
+      const row = [];
+      for (let x = 0; x <= segments; x++) {
+        let jx = (x === 0 || x === segments) ? 0 : (Math.random() - 0.5) * step * 0.9;
+        let jy = (y === 0 || y === segments) ? 0 : (Math.random() - 0.5) * step * 0.9;
+        row.push({ x: x * step + jx, y: y * step + jy });
+      }
+      points.push(row);
+    }
+
+    ctx.strokeStyle = '#3a3a3a';
+    ctx.lineWidth = density === 'sparse' ? 2 : (density === 'medium' ? 1.5 : 0.8);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.shadowColor = '#000000';
+    ctx.shadowBlur = 1;
+
+    ctx.beginPath();
+    for (let y = 0; y < segments; y++) {
+      for (let x = 0; x < segments; x++) {
+        const p1 = points[y][x];
+        const p2 = points[y][x + 1];
+        const p3 = points[y + 1][x];
+
+        if (Math.random() > 0.1) { ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); }
+        if (Math.random() > 0.1) { ctx.moveTo(p1.x, p1.y); ctx.lineTo(p3.x, p3.y); }
+        if (Math.random() > 0.6) {
+          const p4 = points[y + 1][x + 1];
+          ctx.moveTo(p1.x, p1.y); ctx.lineTo(p4.x, p4.y);
+        }
+      }
+    }
+
+    for (let i = 0; i < segments; i++) {
+      ctx.moveTo(points[i][segments].x, points[i][segments].y);
+      ctx.lineTo(points[i + 1][segments].x, points[i + 1][segments].y);
+      ctx.moveTo(points[segments][i].x, points[segments][i].y);
+      ctx.lineTo(points[segments][i + 1].x, points[segments][i + 1].y);
+    }
+    ctx.stroke();
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(3, 3);
+    return texture;
+  }
+
+  const crackTextures = {
+    sparse: createProceduralCrack('sparse'),
+    medium: createProceduralCrack('medium'),
+    dense: createProceduralCrack('dense')
+  };
+
+  // 5. 创建陶瓷材质
+  const ceramicMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x98b8b8,
+    metalness: 0.1,
+    roughness: 0.2,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.1,
+    map: crackTextures.medium,
+    side: THREE.DoubleSide
+  });
+
+  let activeMesh; // 记录当前展示的模型
+
+  // 默认创建一个替代用的半球体(碗)
+  const fallbackGeometry = new THREE.SphereGeometry(1.5, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2);
+  const fallbackMesh = new THREE.Mesh(fallbackGeometry, ceramicMaterial);
+  fallbackMesh.rotation.x = Math.PI;
+  fallbackMesh.position.y = 0.5;
+  scene.add(fallbackMesh);
+  activeMesh = fallbackMesh;
+
+  // 尝试加载真实模型
+  const gltfLoader = new GLTFLoader();
+  gltfLoader.load('./models/ceramic.glb', (gltf) => {
+    scene.remove(fallbackMesh); // 移除替代圆球
+    const ceramicMesh = gltf.scene;
+    ceramicMesh.traverse((child) => {
+      if (child.isMesh) child.material = ceramicMaterial;
+    });
+    ceramicMesh.scale.set(1, 1, 1);
+    ceramicMesh.position.set(0, -1, 0);
+    scene.add(ceramicMesh);
+    activeMesh = ceramicMesh; // 更新当前激活的模型
+  }, undefined, (error) => {
+    console.log("未找到真实的GLB模型，继续使用备用半球体。");
+  });
+
+  // 7. 更新UI和材质
+  function updateCeramicEffect() {
+    const temp = parseInt(tempSlider.value);
+    const cool = parseInt(coolSlider.value);
+
+    tempDisplayMiddle.textContent = temp + '° C';
+    coolDisplayMiddle.textContent = cool + '° C/h';
+    tempDisplayMonitor.textContent = temp + '° C';
+    coolDisplayMonitor.textContent = cool + '° C/h';
+
+    if (cool < 100) ceramicMaterial.map = crackTextures.sparse;
+    else if (cool >= 100 && cool < 160) ceramicMaterial.map = crackTextures.medium;
+    else ceramicMaterial.map = crackTextures.dense;
+
+    const colorLow = new THREE.Color(0x6b8e8e);
+    const colorHigh = new THREE.Color(0xcce6e6);
+    const tempRatio = (temp - 900) / 400;
+    ceramicMaterial.color.lerpColors(colorLow, colorHigh, tempRatio);
+    ceramicMaterial.clearcoatRoughness = 0.3 - (tempRatio * 0.25);
+    ceramicMaterial.needsUpdate = true;
+  }
+
+  tempSlider.addEventListener('input', updateCeramicEffect);
+  coolSlider.addEventListener('input', updateCeramicEffect);
+
+  generateBtn.addEventListener('click', () => {
+    const targetScale = 0.1;
+    // 缩放动画
+    activeMesh.scale.set(targetScale, targetScale, targetScale);
+
+    setTimeout(() => {
+      tempSlider.value = Math.floor(Math.random() * (1300 - 900) + 900);
+      coolSlider.value = Math.floor(Math.random() * (200 - 50) + 50);
+      updateCeramicEffect();
+      // 恢复大小
+      activeMesh.scale.set(1, 1, 1);
+    }, 300);
+  });
+
+  // 【核心修复】使用 ResizeObserver 完美解决 Flexbox 导致 Canvas 初始大小为 0 的问题
+  const resizeObserver = new ResizeObserver(entries => {
+    for (let entry of entries) {
+      const { width, height } = entry.contentRect;
+      if (width > 0 && height > 0) {
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+    }
+  });
+  resizeObserver.observe(container);
+
+  // 下载图片逻辑
+  const downloadBtn = document.getElementById('download-btn');
+  downloadBtn.addEventListener('click', () => {
+    const kilnContainer = document.querySelector('.kiln-container');
+    const bgImg = document.querySelector('.kiln-bg');
+    const webglCanvas = document.querySelector('#canvas-container canvas');
+
+    if (!bgImg.complete) {
+      alert("背景图片还在加载中，请稍后再试！");
+      return;
+    }
+
+    const compCanvas = document.createElement('canvas');
+    const width = kilnContainer.clientWidth;
+    const height = kilnContainer.clientHeight;
+    const dpr = window.devicePixelRatio || 1;
+    compCanvas.width = width * dpr;
+    compCanvas.height = height * dpr;
+
+    const ctx = compCanvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, width, height);
+
+    const imgW = bgImg.naturalWidth;
+    const imgH = bgImg.naturalHeight;
+    const scale = Math.min(width / imgW, height / imgH);
+    const drawW = imgW * scale;
+    const drawH = imgH * scale;
+    const drawX = (width - drawW) / 2;
+    const drawY = (height - drawH) / 2;
+
+    ctx.drawImage(bgImg, drawX, drawY, drawW, drawH);
+
+    const canvasW = width * 0.6;
+    const canvasH = height * 0.6;
+    const canvasX = (width / 2) - (canvasW * 0.5);
+    const canvasY = (height / 2) - (canvasH * 0.4);
+
+    renderer.render(scene, camera);
+    ctx.drawImage(webglCanvas, canvasX, canvasY, canvasW, canvasH);
+
+    try {
+      const dataURL = compCanvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      const tempVal = tempSlider.value;
+      link.download = `秩序陶瓷-冰裂纹-${tempVal}度.png`;
+      link.href = dataURL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (e) {
+      console.error("导出图片失败:", e);
+      alert("导出失败，可能是因为跨域问题。请在本地服务器环境（如 Live Server）下运行。");
+    }
+  });
+
+  // 渲染循环
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  // 立即初始化
+  updateCeramicEffect();
+  animate();
 }
-
-// 2. 密码显示/隐藏切换
-const togglePassword = document.querySelector('#togglePassword');
-const passwordInput = document.querySelector('#password');
-
-togglePassword.addEventListener('click', function () {
-  const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-  passwordInput.setAttribute('type', type);
-  // 这里根据状态切换眼睛图标的 src 路径
-  this.src = type === 'text'
-    ? './登录以及首页素材/登录以及首页素材/登录/眼睛_显示_o.png'
-    : './登录以及首页素材/登录以及首页素材/登录/眼睛_隐藏_o.png'; // 👈 请确保有这张闭眼的图
-});
-
-// 获取输入框元素
-const emailInput = document.querySelector('#username'); // HTML里邮箱的id叫username
-const verifyCodeInput = document.querySelector('#verifyCode'); // 验证码输入框
-const sendCodeBtn = document.querySelector('#sendCodeBtn'); // 获取验证码按钮
-
-// 3. 发送验证码逻辑 (对接你的 Apifox 接口)
-sendCodeBtn.addEventListener('click', async () => {
-  const email = emailInput.value.trim();
-
-  // 简单的邮箱格式验证
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email) {
-    alert("请先输入邮箱地址");
-    return;
-  }
-  if (!emailRegex.test(email)) {
-    alert("请输入有效的邮箱地址");
-    return;
-  }
-
-  // 开始 60 秒倒计时
-  let countdown = 60;
-  sendCodeBtn.disabled = true;
-  sendCodeBtn.textContent = `${countdown}s 后重发`;
-
-  const timer = setInterval(() => {
-    countdown--;
-    if (countdown > 0) {
-      sendCodeBtn.textContent = `${countdown}s 后重发`;
-    } else {
-      clearInterval(timer);
-      sendCodeBtn.disabled = false;
-      sendCodeBtn.textContent = "获取验证码";
-    }
-  }, 1000);
-
-  // 与后端通讯 - 请求发送验证码
-  try {
-    // ⚠️ 【重要修改】：请把 127.0.0.1:8080 换成你们后端真实的 IP 和端口
-    const apiUrl = 'http://118.89.82.148:8080/auth/email/code';
-
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email // 对应你 Apifox 里的 "email": "test@qq.com"
-      })
-    });
-
-    const result = await response.json();
-
-    // 判断成功条件（这里假设后端成功返回 code: 200，具体看你们的接口文档）
-    if (response.ok && result.code === "OK") {
-      alert("验证码已发送，请注意查收邮件！");
-    } else {
-      alert("发送失败: " + (result.msg || result.message || "未知错误"));
-      // 失败则恢复按钮
-      clearInterval(timer);
-      sendCodeBtn.disabled = false;
-      sendCodeBtn.textContent = "获取验证码";
-    }
-  } catch (error) {
-    console.error("验证码请求失败:", error);
-    alert("网络请求失败，请检查后端是否开启或跨域配置！");
-    clearInterval(timer);
-    sendCodeBtn.disabled = false;
-    sendCodeBtn.textContent = "获取验证码";
-  }
-});
-
-// 4. 注册接口对接逻辑
-
-const registerBtn = document.querySelector('#loginBtn'); // 假设你HTML里按钮的id还是loginBtn
-
-registerBtn.addEventListener('click', async () => {
-  const email = emailInput.value.trim();
-  const code = verifyCodeInput.value.trim();
-  const password = passwordInput.value;
-
-  // 表单验证：确保三项都填了
-  if (!email || !code || !password) {
-    alert("请完整填写邮箱、验证码和密码！");
-    return;
-  }
-
-  registerBtn.textContent = "注册中...";
-  registerBtn.disabled = true;
-
-  try {
-    // ⚠️ 【重要修改 1】：请去 Apifox 点开左侧的“POST 用户注册”
-    // 看看它的接口路径是什么？如果是 /auth/register，就改成下面的样子
-    const registerApiUrl = 'http://118.89.82.148:8080/auth/register'; // 👈 替换为真实的注册接口路径
-
-    const response = await fetch(registerApiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      // ⚠️ 【重要修改 2】：去 Apifox 看看注册接口的 Body 需要传什么参数名？
-      // 下面是常见的参数名，如果你们后端的命名不一样（比如密码叫 pwd），请修改左边的名字
-      body: JSON.stringify({
-        email: email,      // 邮箱
-        code: code,        // 验证码
-        password: password // 密码
-      })
-    });
-
-    const result = await response.json();
-
-    // 判断注册是否成功 (假设后端成功返回 code: 200)
-    if (response.ok && result.code === "OK") {
-      alert("✨ 注册成功！请前往登录~");
-
-      // 注册成功后，自动跳转回登录页
-      window.location.href = "login.html"; // 👈 替换成你真实的登录页面HTML名字
-    } else {
-      // 注册失败（比如验证码错误、邮箱已被注册过等）
-      alert("注册失败: " + (result.msg || result.message || "未知错误"));
-    }
-  } catch (error) {
-    console.error("注册请求失败:", error);
-    alert("网络请求失败，请检查后端是否开启！");
-  } finally {
-    // 恢复按钮状态
-    registerBtn.textContent = "✨ 注册"; // 按钮文字可以改成注册
-    registerBtn.disabled = false;
-  }
-});
-// 5. 游客访问逻辑
-document.querySelector('#guestBtn').addEventListener('click', () => {
-  const confirmGuest = confirm("游客身份可能无法保存游戏数据，确定要进入吗？");
-  if (confirmGuest) {
-    console.log("正在以游客身份进入...");
-    window.location.href = "index.html"; // 👈 替换成你们真实的主页html名字
-  }
-});

@@ -15,9 +15,10 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // 限制像素比，提升性能
 document.getElementById('canvas-container').appendChild(renderer.domElement);
-
 // 2. 创建粒子系统
-const particleCount = 15000;
+const isMobile = window.innerWidth < 768;
+const particleCount = isMobile ? 4000 : 10000;
+
 const geometry = new THREE.BufferGeometry();
 const positions = new Float32Array(particleCount * 3);
 const colors = new Float32Array(particleCount * 3);
@@ -127,7 +128,8 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 });
 
 // 7. 平滑滚动到第二模块
@@ -196,10 +198,10 @@ document.addEventListener('DOMContentLoaded', function () {
 //function renderCards(data) {
 //  const container = document.getElementById('cardContainer');
 
- // container.innerHTML = data.map(item => `
- //       <div class="card">
+// container.innerHTML = data.map(item => `
+//       <div class="card">
 //           <div class="card-image-wrapper">
- //               <span class="tag tag-${item.tagType}">${item.tag}</span>
+//               <span class="tag tag-${item.tagType}">${item.tag}</span>
 //              <img src="${item.imageUrl}" alt="artifact">
 //            </div>
 //            <div class="card-content">

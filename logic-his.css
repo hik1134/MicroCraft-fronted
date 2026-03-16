@@ -78,7 +78,7 @@ header {
 .logo-subtitle {
   font-family: var(--font-sans);
   font-size: 10px;
-  color: var(--text-gray);
+  color: #fff;
   letter-spacing: 1px;
   margin-top: 2px;
   margin-left: 160px;
@@ -123,8 +123,8 @@ header {
 
 .main-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   margin-bottom: 16px;
   color: var(--accent-gold);
   /* 这里的标题是金色的 */
@@ -133,8 +133,8 @@ header {
 
 .description {
   font-family: var(--font-sans);
-  font-size: 14px;
-  color: var(--text-gray);
+  font-size: 20px;
+  color: #fff;
   letter-spacing: 0.5px;
 }
 
@@ -247,11 +247,11 @@ header {
 /* 时间轴圆点 */
 .timeline-dot {
   position: absolute;
-  left: -29px;
+  left: -32px;
   /* 相对于 content 调整位置，使其正好压在线上 */
   top: 6px;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   background-color: var(--accent-gold);
   border-radius: 50%;
   z-index: 2;
@@ -259,15 +259,11 @@ header {
   /* 发光效果 */
 }
 
-/* 节点内容 */
-.timeline-content {
-  /* 左侧已由 container 的 padding 撑开 */
-}
 
 /* 年代标题 */
 .t-title {
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: 23px;
   font-weight: bold;
   color: var(--accent-gold);
   margin-bottom: 8px;
@@ -277,8 +273,8 @@ header {
 /* 描述文字 */
 .t-desc {
   font-family: var(--font-sans);
-  font-size: 13px;
-  color: #999;
+  font-size: 20px;
+  color: #b2b1b1;
   line-height: 1.6;
   max-width: 500px;
   /* 限制文字宽度，防止碰到右侧背景图 */
@@ -295,5 +291,77 @@ header {
   .timeline-container {
     margin: 0 auto;
     padding-left: 30px;
+  }
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 上下两行之间的间距 */
+    position: relative;
+  }
+
+  /* 将返回按钮绝对定位在左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    /* 垂直对齐第一行的Logo */
+  }
+
+  .header-center {
+    margin: 0;
+  }
+
+  /* 重点：清除之前写死的160px间距，让标题在手机上真正居中 */
+  .logo-title,
+  .logo-subtitle {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行并居中，超出可滑动 */
+  .header-right {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .header-right nav ul {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证导航文字不换行 */
+  }
+
+  /* 3. Hero 标题区缩小间距 */
+  .hero-section {
+    padding: 30px 15px 20px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
   }
 }

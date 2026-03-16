@@ -83,7 +83,7 @@ header {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 4px;
-  color: var(--text-gray);
+  color: #fff;
   margin-top: 2px;
   margin-left: 230px;
 }
@@ -130,8 +130,8 @@ main {
 
 .main-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   margin-bottom: 10px;
   /* 珊瑚色渐变文字效果 */
   background: linear-gradient(to right, #E37B58, #F5A985);
@@ -142,7 +142,7 @@ main {
 
 .sub-title {
   font-size: 14px;
-  color: var(--text-gray);
+  color: #fff;
 }
 
 /* --- 工作区布局 --- */
@@ -233,7 +233,7 @@ canvas {
 
 input[type=range] {
   width: 100%;
-  -webkit-appearance: none;
+  appearance: none;
   background: transparent;
 }
 
@@ -382,4 +382,123 @@ button:hover {
   color: transparent;
   /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
   /* 增加一点阴影 */
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 上下两行之间的间距 */
+    position: relative;
+  }
+
+  /* 将返回按钮绝对定位在左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  /* 重点：清除之前 PC 端写死的 230px 左边距，让 Logo 真正在手机上居中 */
+  .logo-text,
+  .logo-en {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行并居中，超出可滑动 */
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证导航文字不换行 */
+  }
+
+  /* 3. 主体内容间距缩小 */
+  main {
+    padding: 0 15px 30px 15px;
+  }
+
+  /* 4. 标题背景区缩小边距和字体 */
+  .hero-text {
+    margin: 15px 0 20px 0;
+    padding: 25px 15px;
+    /* 缩小背景图的内边距 */
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .sub-title {
+    font-size: 13px;
+  }
+
+  /* 5. 核心修改：工作区左右排版变为上下排版 */
+  .workspace {
+    flex-direction: column;
+    /* 左右变上下 */
+    height: auto;
+    /* 解除原本 height: 0 的限制，允许内容向下延伸 */
+    gap: 20px;
+  }
+
+  /* 上半部分：画板 */
+  .canvas-container {
+    width: 100%;
+    height: 400px;
+    /* 关键：给手机端的画板固定一个合适的高度，防止被压扁 */
+    flex: none;
+    /* 解除 flex: 1 的自适应 */
+  }
+
+  /* 画板上的提示文字稍微缩小一点 */
+  .canvas-footer-text {
+    font-size: 11px;
+    padding: 8px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  /* 下半部分：控制面板 */
+  .control-panel {
+    width: 100%;
+    /* 取消原本写死的 320px 宽度，占满手机屏幕 */
+    flex: none;
+    padding: 20px 15px;
+  }
+
+  /* 略微紧凑控制面板内部的间距 */
+  .control-group {
+    margin-bottom: 25px;
+  }
+
+  .button-group {
+    margin-bottom: 25px;
+  }
 }

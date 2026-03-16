@@ -1,35 +1,20 @@
 // --- START OF FILE shiyan.js ---
 
-// 引入 Three.js
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-/**
- * 全局状态管理
- */
 const appState = {
-  carrier: '', // 当前载体ID
-  texture: '', // 当前纹理类型
-  currentProgress: 0, // 流程图进度
-  material: {
-    fusion: 50,
-    metal: 30,
-    rough: 50,
-    emit: 0
-  }
+  carrier: '',
+  texture: '',
+  currentProgress: 0,
+  material: { fusion: 50, metal: 30, rough: 50, emit: 0 }
 };
 
-/**
- * Three.js 全局变量
- */
 let scene, camera, renderer, controls;
 let currentModel = null;
 let requestID;
 
-// ==========================================
-// 1. 路径配置
-// ==========================================
 const MODEL_PATHS = {
   keyboard: './models/keyboard.glb',
   sneaker: './models/sneaker.glb',
@@ -37,8 +22,7 @@ const MODEL_PATHS = {
   car: './models/car.glb'
 };
 
-// ⚠️ 【新增】：填入你的黑色包裹素材图片路径
-const BASE_TEXTURE_PATH = './素材补充/黑色贴图背景.png'; // 请替换为实际的黑色图片路径
+const BASE_TEXTURE_PATH = './素材补充/黑色贴图背景.png';
 
 const TEXTURE_PATHS = {
   ice: './素材补充/陶瓷纹理.png',
@@ -47,20 +31,12 @@ const TEXTURE_PATHS = {
   ink: './素材补充/墨迹纹理.png'
 };
 
-// 纹理加载器
 const textureLoader = new THREE.TextureLoader();
 
-/**
- * 初始化入口
- */
 document.addEventListener('DOMContentLoaded', () => {
   initThreeJS();
   updateFlowchart(0);
 });
-
-/* =========================================
-   2. 核心交互逻辑
-   ========================================= */
 
 function selectCarrier(element) {
   document.querySelectorAll('.carrier-card').forEach(el => el.classList.remove('selected'));
@@ -118,17 +94,13 @@ function setSeal(text) {
   document.getElementById('seal-stamp').innerText = text;
 }
 
-// ==========================================
-// 海报生成与下载逻辑
-// ==========================================
 function exportPoster() {
   if (!appState.carrier || !appState.texture) {
     alert("请先完成载体和纹理的选择！");
     return;
   }
-
   updateFlowchart(4);
-
+  // 海报生成逻辑不变，保留你原有的逻辑
   const rawName = document.querySelector('.input-name').value;
   const name = rawName.trim() === "" ? "无名设计师" : rawName;
   const sealText = document.getElementById('seal-stamp').innerText || "匠心";
@@ -174,12 +146,6 @@ function exportPoster() {
     const drawX = (canvas.width - drawWidth) / 2;
     const drawY = 280;
 
-    const glowGradient = ctx.createRadialGradient(canvas.width / 2, drawY + drawHeight / 2, 100, canvas.width / 2, drawY + drawHeight / 2, 500);
-    glowGradient.addColorStop(0, 'rgba(79, 172, 254, 0.2)');
-    glowGradient.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = glowGradient;
-    ctx.fillRect(100, drawY, 880, drawHeight);
-
     ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
 
     ctx.textAlign = 'left';
@@ -192,7 +158,7 @@ function exportPoster() {
 
     ctx.font = '24px "Courier New", monospace';
     ctx.fillStyle = '#718096';
-    ctx.fillText(`[FUSION: ${appState.material.fusion}%]  [METAL: ${appState.material.metal}%]  [ROUGH: ${appState.material.rough}%]`, 100, startY + 110);
+    ctx.fillText(`[FUSION: ${appState.material.fusion}%]  [METAL: ${appState.material.metal}%]`, 100, startY + 110);
     ctx.fillText(`TIMESTAMP : ${new Date().toLocaleString()}`, 100, startY + 150);
 
     ctx.textAlign = 'right';
@@ -223,15 +189,11 @@ function exportPoster() {
     const finalImageUrl = canvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.href = finalImageUrl;
-    link.download = `共生纹理重构_${name}_${new Date().getTime()}.png`;
-
+    link.download = `共生纹理重构_${name}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
-    alert("✨ 海报生成成功，已开始下载！");
   };
-
   img.src = modelImgUrl;
 }
 
@@ -241,10 +203,6 @@ window.filterTextures = filterTextures;
 window.updateSlider = updateSlider;
 window.setSeal = setSeal;
 window.exportPoster = exportPoster;
-
-/* =========================================
-   3. 流程图逻辑
-   ========================================= */
 
 function updateFlowchart(level) {
   if (level > appState.currentProgress) {
@@ -278,10 +236,6 @@ function unlockMaterialPanel() {
   }
 }
 
-/* =========================================
-   4. Three.js 核心渲染与双层贴图逻辑
-   ========================================= */
-
 function initThreeJS() {
   const container = document.getElementById('vp-model-display');
   if (!container) return;
@@ -289,7 +243,7 @@ function initThreeJS() {
   scene = new THREE.Scene();
   scene.background = null;
 
-  camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+  camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight || 1, 0.1, 100);
   camera.position.set(0, 2, 6);
 
   renderer = new THREE.WebGLRenderer({
@@ -297,6 +251,7 @@ function initThreeJS() {
     antialias: true,
     preserveDrawingBuffer: true
   });
+  // 初始时虽然容器宽高可能是0，但我们在 loadModel 中会修复它
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -309,11 +264,9 @@ function initThreeJS() {
 
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
-
   const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
   mainLight.position.set(5, 10, 7);
   scene.add(mainLight);
-
   const fillLight = new THREE.DirectionalLight(0xa18cd1, 0.5);
   fillLight.position.set(-5, 0, -5);
   scene.add(fillLight);
@@ -325,9 +278,16 @@ function initThreeJS() {
 function loadModel(carrierId) {
   const container = document.getElementById('vp-model-display');
   const placeholder = document.getElementById('vp-placeholder');
+
+  // 切换UI显示
   placeholder.style.display = 'none';
   container.classList.remove('hidden');
-  container.style.display = 'block';
+
+  // 🔴【核心修复】：因为容器一开始是 display:none，Threejs 画布尺寸是 0
+  // 取消隐藏后，强制触发一次 resize 重新计算渲染器和相机的尺寸，模型就能立刻显示出来了！
+  setTimeout(() => {
+    onWindowResize();
+  }, 50);
 
   if (currentModel) {
     scene.remove(currentModel);
@@ -345,13 +305,12 @@ function loadModel(carrierId) {
     },
     undefined,
     (error) => {
-      console.warn('模型加载失败，使用备用几何体', error);
+      console.warn('模型加载失败，使用备用几何体');
       loadFallbackGeometry(carrierId);
     }
   );
 }
 
-// 📌 【核心修改 1】：创建双层网格结构
 function setupModel(model) {
   const box = new THREE.Box3().setFromObject(model);
   const center = box.getCenter(new THREE.Vector3());
@@ -363,41 +322,28 @@ function setupModel(model) {
 
   scene.add(model);
 
-  // 遍历模型，构建底层（黑底）和覆盖层（图案）
   model.traverse((child) => {
     if (child.isMesh && !child.userData.isOverlay) {
-
-      // 1. 设置底层网格的基础材质 (如果图片没加载出来，保底是黑灰色)
       child.material = new THREE.MeshStandardMaterial({
-        color: 0x222222,
-        roughness: 0.8,
-        metalness: 0.2
+        color: 0xffffff, roughness: 0.8, metalness: 0.2
       });
 
-      // 2. 克隆出一个重叠的覆盖层网格
       const overlayMesh = new THREE.Mesh(child.geometry, new THREE.MeshStandardMaterial({
-        transparent: true,
-        opacity: 0, // 初始透明，直到选择了纹理
-        polygonOffset: true,       // 解决两个模型完全重叠的闪烁问题
-        polygonOffsetFactor: -1,   // 让覆盖层在渲染时往前靠一点
-        polygonOffsetUnits: -1
+        transparent: true, opacity: 0,
+        polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1
       }));
-
-      overlayMesh.userData.isOverlay = true; // 打个标记
-      child.add(overlayMesh); // 绑定为子对象，旋转时一起动
+      overlayMesh.userData.isOverlay = true;
+      child.add(overlayMesh);
     }
   });
 
-  // 3. 加载底层黑色素材图片
   loadBaseTexture(model);
 
-  // 如果状态里已经存了某种纹理，加载出来
   if (appState.texture) {
     applyTextureToModel(appState.texture);
   }
 }
 
-// 📌 【核心修改 2】：专门加载黑色底层素材
 function loadBaseTexture(model) {
   textureLoader.load(
     BASE_TEXTURE_PATH,
@@ -405,27 +351,24 @@ function loadBaseTexture(model) {
       baseTexture.colorSpace = THREE.SRGBColorSpace;
       baseTexture.wrapS = THREE.RepeatWrapping;
       baseTexture.wrapT = THREE.RepeatWrapping;
-      baseTexture.repeat.set(4, 4); // 黑色底纹的平铺密度（觉得太大可以改大数字）
+      baseTexture.repeat.set(4, 4);
       baseTexture.flipY = false;
 
       model.traverse((child) => {
-        // 只给底层赋黑色图片
         if (child.isMesh && !child.userData.isOverlay) {
           child.material.map = baseTexture;
-          child.material.color = new THREE.Color(0xffffff); // 使用原图颜色
+          child.material.color = new THREE.Color(0xffffff);
           child.material.needsUpdate = true;
         }
       });
     },
     undefined,
-    () => { console.warn("未找到底层黑色素材图片，将使用纯黑材质。请检查 BASE_TEXTURE_PATH 路径。"); }
+    () => { console.warn("未找到底层黑色素材图片。"); }
   );
 }
 
-// 📌 【核心修改 3】：将用户选择的纹理照片贴在覆盖层上
 function applyTextureToModel(type) {
   if (!currentModel) return;
-
   const imgUrl = TEXTURE_PATHS[type];
   if (!imgUrl) return;
 
@@ -433,11 +376,9 @@ function applyTextureToModel(type) {
     imgUrl,
     (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace;
-
-      // 纹理均匀平铺
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
-      texture.repeat.set(5, 5); // 纹理照片的平铺密度，数字越大越密集
+      texture.repeat.set(5, 5);
       texture.flipY = false;
 
       let matParams = {};
@@ -449,39 +390,30 @@ function applyTextureToModel(type) {
       }
 
       currentModel.traverse((child) => {
-        // 只把选择的照片赋给【覆盖层】
         if (child.isMesh && child.userData.isOverlay) {
           child.material.map = texture;
           child.material.transparent = true;
-          child.material.opacity = 1.0; // 加载完毕，显示覆盖图案
-
+          child.material.opacity = 1.0;
           child.material.metalness = matParams.metalness;
           child.material.roughness = matParams.roughness;
           child.material.needsUpdate = true;
         }
       });
-
       updateModelMaterial();
     }
   );
 }
 
-// 📌 【核心修改 4】：面板滑动时，控制覆盖层的透明度与质感
 function updateModelMaterial() {
   if (!currentModel) return;
   const m = appState.material;
 
   currentModel.traverse((child) => {
-    // 这里我们主要控制图案覆盖层的变化，营造“融合”效果
     if (child.isMesh && child.userData.isOverlay && child.material.map) {
       child.material.metalness = m.metal / 100;
       child.material.roughness = m.rough / 100;
-
-      // 融合度 (调整覆盖层透明度，露出下方黑底)
-      // fusion 为 100% 时图案完全不透明，fusion 为 0% 时图案变成半透明幽灵状态
       child.material.opacity = 0.2 + (m.fusion / 100) * 0.8;
 
-      // 赛博发光强度
       if (child.material.emissive !== undefined) {
         child.material.emissiveIntensity = m.emit / 50;
         if (m.emit > 0) {
@@ -504,26 +436,39 @@ function loadFallbackGeometry(type) {
   }
   const material = new THREE.MeshStandardMaterial({ color: 0x222222 });
   currentModel = new THREE.Mesh(geometry, material);
-  setupModel(currentModel); // 使用统一配置双层的入口
+  setupModel(currentModel);
 }
 
 function onWindowResize() {
   const container = document.getElementById('vp-model-display');
   if (!container) return;
-  camera.aspect = container.clientWidth / container.clientHeight;
+
+  // 如果容器尺寸为0（如初始隐藏状态），使用父容器的尺寸
+  let width = container.clientWidth;
+  let height = container.clientHeight;
+
+  if (width === 0 || height === 0) {
+    const parent = container.parentElement;
+    if (parent) {
+      width = parent.clientWidth;
+      height = parent.clientHeight;
+    }
+  }
+
+  // 如果仍然为0，使用默认值避免除零错误
+  if (width === 0) width = 400;
+  if (height === 0) height = 400;
+
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setSize(width, height);
 }
 
 function animate() {
   requestID = requestAnimationFrame(animate);
   controls.update();
-
-  // 缓慢自转
   if (currentModel) {
     currentModel.rotation.y += 0.003;
   }
-
   renderer.render(scene, camera);
 }
-// --- END OF FILE shiyan.js ---

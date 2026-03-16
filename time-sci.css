@@ -74,7 +74,7 @@ header {
 
 .logo-sub {
   font-size: 10px;
-  color: var(--text-grey);
+  color: #fff;
   letter-spacing: 3px;
   margin-left: 320px;
 }
@@ -119,15 +119,15 @@ header {
 
 .page-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   color: var(--accent-orange);
   margin-bottom: 10px;
 }
 
 .page-desc {
-  font-size: 14px;
-  color: var(--text-grey);
+  font-size: 16px;
+  color: #fff;
 }
 
 /* --- 主要内容大卡片 --- */
@@ -148,7 +148,7 @@ header {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 24px;
+  font-size: 30px;
   text-align: center;
   margin-bottom: 40px;
   color: var(--text-main);
@@ -173,7 +173,7 @@ header {
 
 /* 文字段落 */
 .text-body {
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.8;
   color: #ffffff;
   margin-bottom: 20px;
@@ -200,14 +200,14 @@ header {
 
 .reaction-label {
   display: block;
-  font-size: 15px;
-  color: #27211b;
+  font-size: 18px;
+  color: #ffffff;
   margin-bottom: 8px;
 }
 
 .equation {
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 20px;
   color: var(--accent-orange);
   letter-spacing: 0.5px;
 }
@@ -215,7 +215,7 @@ header {
 .note {
   font-family: var(--font-sans);
   color: var(--text-grey);
-  font-size: 14px;
+  font-size: 18px;
 }
 
 /* 下标微调 */
@@ -225,7 +225,7 @@ sub {
 
 /* --- 右侧表格 --- */
 .table-title {
-  font-size: 14px;
+  font-size: 20px;
   color: var(--accent-orange);
   margin-bottom: 20px;
   font-weight: normal;
@@ -271,4 +271,211 @@ sub {
 /* 最后一项去边框 */
 .table-row:last-child {
   border-bottom: none;
+}
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 两行间距 */
+    position: relative;
+  }
+
+  /* 返回按钮绝对定位到左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  /* 重点：清除PC端写死的 margin-left，让Logo真正在手机端居中 */
+  .logo-title,
+  .logo-sub {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航菜单在第二行居中铺开，超出可滑动 */
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    /* 给滑动条留一点空间 */
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证文字不换行 */
+  }
+
+  /* 3. 标题区缩小字体和边距 */
+  .hero-text {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    position: relative;
+  }
+
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  .logo-title,
+  .logo-sub {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  /* 3. 页面大框架间距调整 */
+  .page-container {
+    padding: 15px 15px 40px 15px;
+    /* 减小左右留白 */
+  }
+
+  /* 4. 标题区适配 */
+  .header-section {
+    margin-bottom: 20px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .page-desc {
+    font-size: 13px;
+  }
+
+  /* 5. 核心内容区适配：左右排版改为上下排版 */
+  .content-card {
+    padding: 20px;
+    /* 缩小卡片内边距 */
+    margin-top: 15px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+
+  .split-layout {
+    flex-direction: column;
+    /* 核心：左右分栏变成上下分栏 */
+    gap: 30px;
+    /* 上下两部分的间距 */
+  }
+
+  .text-body {
+    font-size: 14px;
+    /* 稍微缩小正文字体 */
+    line-height: 1.6;
+  }
+
+  /* 6. 化学方程式盒子调整 */
+  .reaction-group {
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .reaction-box {
+    height: auto;
+    /* 取消原先写死的 90px 高度，让其自适应 */
+    padding: 12px 15px;
+  }
+
+  .reaction-label {
+    font-size: 14px;
+  }
+
+  .equation {
+    font-size: 12px;
+    /* 缩小方程式字体，防止在手机屏幕上被截断 */
+    word-break: break-all;
+    /* 允许在极窄屏幕下换行 */
+  }
+
+  .note {
+    font-size: 12px;
+  }
+
+  /* 7. 右侧表格调整 */
+  .right-column {
+    margin-top: 10px;
+  }
+
+  .chemistry-table {
+    width: 100%;
+    /* 取消原先的 110% 宽度，防止横向出现滚动条 */
+  }
+
+  .table-row {
+    grid-template-columns: 1.2fr 1.5fr 1fr;
+    /* 微调列比例，给化学式留多点空间 */
+    gap: 5px;
+  }
+
+  .table-row.header .col,
+  .col {
+    font-size: 12px;
+    /* 缩小表格字体 */
+  }
 }

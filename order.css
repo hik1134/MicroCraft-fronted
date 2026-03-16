@@ -36,23 +36,20 @@ body {
   width: 120px;
 }
 
-.back-btn {
-  color: #999;
-  text-decoration: none;
+.nav-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
   font-size: 14px;
+  font-family: "Microsoft YaHei", sans-serif;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+  cursor: pointer;
 }
 
-.back-btn:hover {
+.nav-left .back-btn:hover {
   color: #fff;
-}
-
-.back-arrow {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
 }
 
 .nav-center {
@@ -72,7 +69,7 @@ body {
 
 .brand-subtitle {
   font-size: 10px;
-  color: #666;
+  color: #fff;
   letter-spacing: 2px;
   margin-top: 2px;
 }
@@ -133,9 +130,9 @@ body {
 .main-title {
   font-family: "SimSun", "Songti SC", serif;
   /* 宋体 */
-  font-size: 34px;
-  font-weight: bold;
-  /* 字重粗 */
+  font-size: 42px;
+  font-weight: 800;
+  /* 字重加粗 */
   /* 绿色到黄色渐变 */
   background: linear-gradient(90deg, #00b386, #f9d500);
   -webkit-background-clip: text;
@@ -146,7 +143,7 @@ body {
 
 .subtitle {
   font-size: 14px;
-  color: #999;
+  color: #fff;
   line-height: 1.4;
 }
 
@@ -296,7 +293,7 @@ body {
 
 .slider-tip {
   font-size: 10px;
-  color: #666;
+  color: #fff;
 }
 
 /* 滑块主体 */
@@ -341,7 +338,7 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  color: #666;
+  color: #fff;
   position: relative;
 }
 
@@ -375,7 +372,7 @@ body {
 /* 监控数据样式 */
 .monitor-title {
   font-size: 10px;
-  color: #666;
+  color: #fff;
   margin-bottom: 16px;
   letter-spacing: 1px;
 }
@@ -393,7 +390,7 @@ body {
 
 .monitor-label {
   font-size: 11px;
-  color: #888;
+  color: #fff;
 }
 
 .monitor-value {
@@ -512,4 +509,184 @@ body {
   background-color: #333;
   transform: translateY(-2px);
   /* 增加一点悬浮效果 */
+}
+
+/* =========================================
+   新增：3D 模型加载动画样式
+========================================= */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(10, 10, 10, 0.6);
+  z-index: 20;
+  border-radius: 50%;
+  /* 让背景近似贴合碗的区域 */
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #333;
+  border-top-color: #00b386;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-text {
+  font-size: 12px;
+  color: #00b386;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   移动端与平板响应式设计 (完美流式布局)
+========================================= */
+@media screen and (max-width: 1024px) {
+
+  /* 1. 解除页面高度锁定，允许上下滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    min-height: 100vh;
+  }
+
+  /* 2. 导航栏重排：不拥挤的两行布局 */
+  .navbar {
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    /* 允许换行 */
+  }
+
+  .nav-left {
+    flex: 1;
+    /* 返回按钮靠左 */
+  }
+
+  .nav-center {
+    position: static;
+    transform: none;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行，并允许横向滑动 */
+  .nav-right {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    /* 超出屏幕可横向滑动 */
+    padding-bottom: 8px;
+    /* 给滑动条留一点空间 */
+    -webkit-overflow-scrolling: touch;
+    /* 丝滑滚动 */
+  }
+
+  /* 隐藏横向滚动条保持美观 */
+  .nav-right::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    /* 文字不换行 */
+  }
+
+  /* 3. 页面主容器 */
+  .main-container {
+    padding: 16px;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* 4. 核心内容排版：严格按照 上->下 顺序 */
+  .content-wrapper {
+    flex-direction: column;
+    /* 变为上下结构 */
+    height: auto;
+    overflow: visible;
+    gap: 24px;
+  }
+
+  /* 第一部分：顶部的陶瓷和窑炉 */
+  .visual-section {
+    flex: none;
+    width: 100%;
+    height: 50vh;
+    /* 屏幕一半的高度 */
+    min-height: 350px;
+  }
+
+  .kiln-container {
+    margin: 0;
+    /* 居中对齐 */
+  }
+
+  .porcelain {
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -45%);
+  }
+
+  /* 第二部分：下面的控制台 */
+  .control-section {
+    flex: none;
+    width: 100%;
+    height: auto;
+    gap: 16px;
+  }
+
+  .slider-card,
+  .monitor-card {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  /* 第三部分：最底部的按钮 */
+  .action-buttons {
+    padding-bottom: 40px;
+    /* 底部留白，防止被手机底部黑条挡住 */
+  }
+
+  .btn {
+    height: 50px;
+    /* 移动端按钮稍微加大，方便手指点击 */
+  }
+}
+
+/* 适配超小屏幕手机 (iPhone SE等) */
+@media screen and (max-width: 480px) {
+  .visual-section {
+    height: 40vh;
+    min-height: 300px;
+  }
+
+  .page-header {
+    padding: 12px;
+  }
+
+  .main-title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
 }

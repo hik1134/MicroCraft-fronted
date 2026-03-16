@@ -85,97 +85,108 @@
 
   <!-- 3. 我的纹理作品 -->
   <section id="my-works-section" class="section-block">
-    <div class="section-header">
-      <h2 class="text-18 font-serif">我的纹理作品</h2>
+    <div class="container">
+      <div class="section-header">
+        <h2 class="text-18 font-serif">我的纹理作品</h2>
+      </div>
+      <div class="works-grid" id="myWorksGrid"></div>
     </div>
-    <div class="works-grid" id="myWorksGrid"></div>
   </section>
 
   <!-- 4. 纹理展览 -->
   <section id="exhibition" class="section-block">
-    <div class="section-header">
-      <h2 class="text-18 font-serif">纹理展览</h2>
-    </div>
-
-    <!-- 筛选栏 -->
-    <div class="filter-bar">
-      <div class="search-box">
-        <img src="./社区板及素材块/搜索.png" alt="搜索" class="search-icon-img">
-        <!-- 增加 id="exhibitionSearch" -->
-        <input type="text" id="exhibitionSearch" placeholder="搜索作品或创作者..." class="text-14">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="text-18 font-serif">纹理展览</h2>
       </div>
-      <div class="filter-tags text-12" id="exhibitionFilters">
-        <span class="filter-tag active" data-type="all">全部</span>
-        <span class="filter-tag" data-type="texture">肌理</span>
-        <span class="filter-tag" data-type="logic">逻辑</span>
-        <span class="filter-tag" data-type="time">岁月</span>
-        <span class="filter-tag" data-type="charm">气韵</span>
-      </div>
-    </div>
 
-    <div class="works-grid" id="exhibitionGrid"></div>
-    <div class="pagination" id="exhibitionPagination"></div>
+      <!-- 筛选栏 -->
+      <div class="filter-bar">
+        <div class="search-box">
+          <img src="./社区板及素材块/搜索.png" alt="搜索" class="search-icon-img">
+          <!-- 增加 id="exhibitionSearch" -->
+          <input type="text" id="exhibitionSearch" placeholder="搜索作品或创作者..." class="text-14">
+        </div>
+        <div class="filter-tags text-12" id="exhibitionFilters">
+          <span class="filter-tag active" data-type="all">全部</span>
+          <span class="filter-tag" data-type="texture">肌理</span>
+          <span class="filter-tag" data-type="logic">逻辑</span>
+          <span class="filter-tag" data-type="time">岁月</span>
+          <span class="filter-tag" data-type="charm">气韵</span>
+        </div>
+      </div>
+
+      <div class="works-grid" id="exhibitionGrid"></div>
+      <div class="pagination" id="exhibitionPagination"></div>
+    </div>
   </section>
 
   <!-- 5. 拍照上传大模块 -->
-  <section class="upload-section-bg">
-    <div class="upload-content">
-      <div class="camera-deco">
-        <img src="./社区板及素材块/第四部分/拍照图标内容.png" alt="Cam" class="camera-icon-lg">
+  <div class="container">
+    <section class="upload-section-bg">
+      <div class="upload-content">
+        <div class="camera-deco">
+          <img src="./社区板及素材块/第四部分/拍照图标内容.png" alt="Cam" class="camera-icon-lg">
+        </div>
+        <h2 class="text-18 font-serif" style="margin-bottom:10px;margin-left: -5px;">拍照上传</h2>
+        <p class="text-14 text-gray-light">使用手机或电脑摄像头捕捉生活中的纹理瞬间，上传到社区与大家分享</p>
+        <div class="upload-btns">
+          <button class="btn-custom btn-upload-lg" onclick="handleUploadClick('photoUploadModal')">
+            <img src="./社区板及素材块/第四部分/相机.png" class="icon-xs"> 拍照上传
+          </button>
+          <button class="btn-custom btn-upload-lg btn-upload-outline" onclick="handleUploadClick('photoAlbumModal')">
+            <img src="./社区板及素材块/第一部分/第一个的上传.png" class="icon-xs"> 从相册选择
+          </button>
+        </div>
       </div>
-      <h2 class="text-18 font-serif" style="margin-bottom:10px;margin-left: -5px;">拍照上传</h2>
-      <p class="text-14 text-gray-light">使用手机或电脑摄像头捕捉生活中的纹理瞬间，上传到社区与大家分享</p>
-      <div class="upload-btns">
-        <button class="btn-custom btn-upload-lg" onclick="handleUploadClick('photoUploadModal')">
-          <img src="./社区板及素材块/第四部分/相机.png" class="icon-xs"> 拍照上传
-        </button>
-        <button class="btn-custom btn-upload-lg btn-upload-outline" onclick="handleUploadClick('photoAlbumModal')">
-          <img src="./社区板及素材块/第一部分/第一个的上传.png" class="icon-xs"> 从相册选择
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- 6. 代码库 (暂时复用作品接口展示前3个) -->
   <section id="code-library" class="section-block">
-    <div class="section-header">
-      <h2 class="text-18 font-serif">代码库</h2>
+    <div class="container">
+      <div class="section-header">
+        <h2 class="text-18 font-serif">代码库</h2>
+      </div>
+      <div class="works-grid" id="libraryGrid"></div>
     </div>
-    <div class="works-grid" id="libraryGrid"></div>
   </section>
 
 
   <!-- 7. Footer -->
   <footer class="footer-section">
-    <div class="text-12 footer-sub">PHILOSOPHY</div>
-    <h2 class="footer-slogan text-28 font-serif">鼓励线下观察，线上分享，形成情感共鸣的社区氛围</h2>
-    <div class="footer-stats">
-      <div class="f-stat-item">
-        <!-- 加上了 id="stat-works" -->
-        <div class="f-num font-serif" id="stat-works">0</div>
-        <div class="f-label">分享作品</div>
-      </div>
-      <div class="f-stat-item">
-        <!-- 加上了 id="stat-likes" -->
-        <div class="f-num font-serif" id="stat-likes">0</div>
-        <div class="f-label">获赞总数</div>
-      </div>
-      <div class="f-stat-item">
-        <!-- 加上了 id="stat-users" -->
-        <div class="f-num font-serif" id="stat-users">0</div>
-        <div class="f-label">活跃用户</div>
-      </div>
-      <div class="f-stat-item">
-        <!-- 加上了 id="stat-tags" -->
-        <div class="f-num font-serif" id="stat-tags">4</div>
-        <div class="f-label">温度标签</div>
+    <div class="container">
+      <div class="text-12 footer-sub">PHILOSOPHY</div>
+      <h2 class="footer-slogan text-28 font-serif">鼓励线下观察，线上分享，形成情感共鸣的社区氛围</h2>
+      <div class="footer-stats">
+        <div class="f-stat-item">
+          <!-- 加上了 id="stat-works" -->
+          <div class="f-num font-serif" id="stat-works">0</div>
+          <div class="f-label">分享作品</div>
+        </div>
+        <div class="f-stat-item">
+          <!-- 加上了 id="stat-likes" -->
+          <div class="f-num font-serif" id="stat-likes">0</div>
+          <div class="f-label">获赞总数</div>
+        </div>
+        <div class="f-stat-item">
+          <!-- 加上了 id="stat-users" -->
+          <div class="f-num font-serif" id="stat-users">0</div>
+          <div class="f-label">活跃用户</div>
+        </div>
+        <div class="f-stat-item">
+          <!-- 加上了 id="stat-tags" -->
+          <div class="f-num font-serif" id="stat-tags">4</div>
+          <div class="f-label">温度标签</div>
+        </div>
       </div>
     </div>
   </footer>
   <!-- ================= 隐藏输入框与弹窗区 ================= -->
   <!-- 本地文件上传隐藏输入框 -->
   <input type="file" id="localUploadInput" accept="image/*" style="display: none;" onchange="handleLocalUpload(this)">
-  <input type="file" id="photoAlbumInput" accept="image/*" style="display: none;" onchange="handlePhotoAlbumUpload(this)">
+  <input type="file" id="photoAlbumInput" accept="image/*" style="display: none;"
+    onchange="handlePhotoAlbumUpload(this)">
 
   <!-- 弹窗1：上传纹理 (本地) -->
   <div id="uploadTextureModal" class="custom-modal-overlay" style="display: none;">

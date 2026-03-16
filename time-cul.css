@@ -80,12 +80,13 @@ header {
   font-family: var(--font-serif);
   font-size: 18px;
   letter-spacing: 2px;
+  color: #fff;
   margin-left: 320px;
 }
 
 .logo-sub {
   font-size: 10px;
-  color: var(--text-grey);
+  color: #fff;
   letter-spacing: 3px;
   margin-left: 320px;
 }
@@ -147,11 +148,11 @@ section {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 40px;
-  color: var(--text-main);
+  color: #d99c68;
 }
 
 .text-content {
@@ -401,5 +402,69 @@ section {
 
   .align-right {
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 两行间距 */
+    position: relative;
+  }
+
+  /* 返回按钮绝对定位到左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  /* 重点：清除PC端写死的 margin-left，让Logo真正在手机端居中 */
+  .logo-title,
+  .logo-sub {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航菜单在第二行居中铺开，超出可滑动 */
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    /* 给滑动条留一点空间 */
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证文字不换行 */
+  }
+
+  /* 3. 标题区缩小字体和边距 */
+  .hero-text {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
   }
 }

@@ -33,23 +33,20 @@ body {
   width: auto;
 }
 
-.back-btn {
-  color: #999;
-  text-decoration: none;
+.nav-left .back-btn {
+  background: none;
+  border: none;
+  color: #ccc;
   font-size: 14px;
+  font-family: "Microsoft YaHei", sans-serif;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+  cursor: pointer;
 }
 
-.back-btn:hover {
+.nav-left .back-btn:hover {
   color: #fff;
-}
-
-.back-arrow {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
 }
 
 .nav-center {
@@ -69,7 +66,7 @@ body {
 
 .brand-subtitle {
   font-size: 10px;
-  color: #666;
+  color: #fff;
   letter-spacing: 2px;
   margin-top: 2px;
 }
@@ -113,9 +110,9 @@ body {
 .page-title {
   font-family: "SimSun", "Songti SC", serif;
   /* 宋体 */
-  font-size: 34px;
-  font-weight: bold;
-  /* 字重粗 */
+  font-size: 42px;
+  font-weight: 800;
+  /* 字重加粗 */
   /* 绿色到黄色渐变 */
   background: linear-gradient(90deg, #00b386, #f9d500);
   -webkit-background-clip: text;
@@ -126,8 +123,8 @@ body {
 
 .page-subtitle {
   font-size: 16px;
-  color: #999;
-  /* 灰色 */
+  color: #fff;
+  /* 白色 */
   font-weight: normal;
   letter-spacing: 1px;
 }
@@ -188,7 +185,7 @@ body {
 
 /* 左侧文字 */
 .text-block p {
-  font-size: 16px;
+  font-size: 19px;
   line-height: 1.8;
   color: #ccc;
   margin-bottom: 20px;
@@ -208,8 +205,8 @@ body {
 }
 
 .formula-label {
-  font-size: 14px;
-  color: #888;
+  font-size: 19px;
+  color: #a2a2a2;
   /* 灰色 */
   margin-bottom: 8px;
   font-weight: 500;
@@ -218,7 +215,7 @@ body {
 .formula-main {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
   /* 等宽/公式字体 */
-  font-size: 22px;
+  font-size: 28px;
   /* 稍微大一点更清晰，原需求14px可能偏小，可视情况调整 */
   color: #00b386;
   /* 绿色 */
@@ -227,8 +224,8 @@ body {
 }
 
 .formula-legend {
-  font-size: 13px;
-  color: #666;
+  font-size: 18px;
+  color: #c6c5c5;
   /* 灰色 */
   display: flex;
   flex-wrap: wrap;
@@ -242,7 +239,7 @@ body {
 
 /* 右侧时间轴 */
 .timeline-header {
-  font-size: 16px;
+  font-size: 22px;
   color: #e3c478;
   /* 青色/绿色 */
   font-weight: 500;
@@ -280,7 +277,7 @@ body {
 
 
 .stage-title {
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 500;
   /* 字重中等 */
   color: #e3c478;
@@ -289,7 +286,7 @@ body {
 }
 
 .stage-desc {
-  font-size: 14px;
+  font-size: 19px;
   color: #888;
   /* 灰色 */
   line-height: 1.5;
@@ -305,4 +302,82 @@ body {
   .science-card {
     padding: 24px;
   }
+}
+
+
+
+
+/* =========================================
+   移动端与平板响应式设计
+========================================= */
+@media screen and (max-width: 1024px) {
+
+  /* 1. 解除页面高度锁定，允许上下滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    min-height: 100vh;
+  }
+
+  /* 2. 导航栏重排：不拥挤的两行布局 */
+  .navbar {
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    /* 允许换行 */
+  }
+
+  .nav-left {
+    flex: 1;
+    /* 返回按钮靠左 */
+  }
+
+  .nav-center {
+    position: static;
+    transform: none;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行，并允许横向滑动 */
+  .nav-right {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    /* 超出屏幕可横向滑动 */
+    padding-bottom: 8px;
+    /* 给滑动条留一点空间 */
+    -webkit-overflow-scrolling: touch;
+    /* 丝滑滚动 */
+  }
+
+  /* 隐藏横向滚动条保持美观 */
+  .nav-right::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    /* 文字不换行 */
+  }
+
+  /* 3. 页面主容器 */
+  .main-container {
+    padding: 16px;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* 4. 核心内容排版：严格按照 上->下 顺序 */
+  .content-wrapper {
+    flex-direction: column;
+    /* 变为上下结构 */
+    height: auto;
+    overflow: visible;
+    gap: 24px;
+  }
+
 }

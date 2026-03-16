@@ -77,6 +77,7 @@ header {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 2px;
+  color: #fff;
   margin-left: 240px;
 }
 
@@ -84,7 +85,7 @@ header {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 4px;
-  color: var(--text-gray);
+  color: #fff;
   margin-top: 2px;
   margin-left: 240px;
 }
@@ -144,11 +145,16 @@ section {
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 40px;
-  color: var(--text-main);
+  color: #e9825f;
+
+
+
+
+
 }
 
 .text-content {
@@ -398,5 +404,59 @@ section {
 
   .align-right {
     text-align: center;
+  }
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 上下两行之间的间距 */
+    position: relative;
+  }
+
+  /* 将返回按钮绝对定位在左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  /* 重点：清除之前 PC 端写死的 230px 左边距，让 Logo 真正在手机上居中 */
+  .logo-text,
+  .logo-en {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航链接放到第二行并居中，超出可滑动 */
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证导航文字不换行 */
   }
 }

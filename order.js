@@ -14,14 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const crackPattern = document.getElementById('crack-pattern');
   const generateBtn = document.getElementById('generate-btn');
 
-  // 2. 定义素材路径 
-  // 请确保这里使用透明背景的裂纹PNG图，否则会重影
-  // const crackAssets = {
-  //   // 假设你有不同的裂纹图，如果没有，暂时用同一个测试，但必须是透明底
-  //   sparse: './秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/裂纹1.png',
-  //   medium: './秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/裂纹2.png',
-  //   dense: './秩序陶瓷页面素材/秩序陶瓷页面素材/陶瓷素材/裂纹3.png'
-  // };
+
 
   // 3. 核心逻辑：更新裂纹状态及数值显示
   function updateCracks() {
@@ -262,6 +255,42 @@ function init3D() {
    */
 
   const gltfLoader = new GLTFLoader();
+  const loadingOverlay = document.getElementById('loading-overlay');
+  const loadingText = document.getElementById('loading-text');
+
+  // 加载真实模型并显示进度
+  gltfLoader.load(
+    './models/ceramic.glb',
+    // 1. 加载成功回调
+    (gltf) => {
+      // 隐藏加载动画
+      if (loadingOverlay) loadingOverlay.style.display = 'none';
+
+      scene.remove(fallbackMesh); // 移除替代圆球
+      const ceramicMesh = gltf.scene;
+      ceramicMesh.traverse((child) => {
+        if (child.isMesh) child.material = ceramicMaterial;
+      });
+      ceramicMesh.scale.set(1, 1, 1);
+      ceramicMesh.position.set(0, -1, 0);
+      scene.add(ceramicMesh);
+      activeMesh = ceramicMesh; // 更新当前激活的模型
+    },
+    // 2. 加载进度回调
+    (xhr) => {
+      if (xhr.lengthComputable) {
+        const percentComplete = Math.round((xhr.loaded / xhr.total) * 100);
+        loadingText.textContent = `模型烧制中 ${percentComplete}%`;
+      } else {
+        loadingText.textContent = `模型烧制中...`;
+      }
+    },
+    // 3. 加载失败回调
+    (error) => {
+      if (loadingOverlay) loadingOverlay.style.display = 'none';
+      console.log("未找到真实的GLB模型，继续使用备用半球体。");
+    }
+  );
   gltfLoader.load('./models/taoci.glb', (gltf) => {
     ceramicMesh = gltf.scene;
 
@@ -278,7 +307,6 @@ function init3D() {
     ceramicMesh.position.set(-1, -1, 0);
     scene.add(ceramicMesh);
   });
-
 
 
 
@@ -439,5 +467,5 @@ function init3D() {
 }
 
 
-init3D
+const gltfLoader = new GLTFLoader();
 

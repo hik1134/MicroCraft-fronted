@@ -76,7 +76,7 @@ header {
 
 .logo-sub {
   font-size: 10px;
-  color: var(--text-grey);
+  color: #fff;
   letter-spacing: 3px;
   margin-top: 2px;
 }
@@ -131,8 +131,8 @@ header {
 
 .main-title {
   font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 40px;
+  font-weight: 800;
   background: linear-gradient(to right, #d99c68, #ffbd85);
   background-clip: text;
   color: transparent;
@@ -140,8 +140,8 @@ header {
 }
 
 .sub-desc {
-  font-size: 14px;
-  color: var(--text-grey);
+  font-size: 17px;
+  color: #fff;
 }
 
 /* --- 主容器 --- */
@@ -244,13 +244,13 @@ header {
 }
 
 .card-title {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   flex: 1;
 }
 
 .card-extra {
-  font-size: 11px;
+  font-size: 15px;
   color: var(--text-grey);
 }
 
@@ -289,7 +289,7 @@ header {
 }
 
 .dot {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-grey);
 }
 
@@ -298,7 +298,7 @@ header {
 }
 
 .t-name {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text-grey);
 }
 
@@ -309,13 +309,13 @@ header {
 
 .t-date {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-grey);
 }
 
 /* 卡片 2: 环境 */
 .env-title {
-  font-size: 10px;
+  font-size: 14px;
   color: var(--text-grey);
   letter-spacing: 1px;
   margin-bottom: 15px;
@@ -337,7 +337,7 @@ header {
 
 .plus {
   color: var(--accent-orange);
-  font-size: 16px;
+  font-size: 33px;
 }
 
 /* 开关样式 */
@@ -507,4 +507,103 @@ input:checked+.slider:before {
 .btn-download:hover {
   border-color: var(--text-main);
   color: var(--text-main);
+}
+
+/* ========================================= */
+/* --- 响应式适配 (移动端: 屏幕宽度小于768px) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. 取消全屏锁定，允许页面垂直滚动 */
+  body {
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* 2. 导航栏改造：分两行显示 */
+  header {
+    height: auto;
+    flex-direction: column;
+    /* 改为垂直排列 */
+    padding: 15px 15px 10px 15px;
+    gap: 15px;
+    /* 两行间距 */
+    position: relative;
+  }
+
+  /* 返回按钮绝对定位到左上角 */
+  .header-left {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+  }
+
+  /* 重点：清除PC端写死的 margin-left，让Logo真正在手机端居中 */
+  .logo-title,
+  .logo-sub {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  /* 导航菜单在第二行居中铺开，超出可滑动 */
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    /* 给滑动条留一点空间 */
+  }
+
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    white-space: nowrap;
+    /* 保证文字不换行 */
+  }
+
+  /* 3. 标题区缩小字体和边距 */
+  .hero-text {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  /* 4. 主容器：核心修改，左右排版变成上下排版 */
+  .main-container {
+    flex-direction: column;
+    padding: 0 15px 40px 15px;
+    /* 减小左右边距 */
+    gap: 20px;
+  }
+
+  /* 上半部分：青铜器展示区 */
+  .artifact-display {
+    width: 100%;
+    height: 350px;
+    /* 手机端固定一个高度，防止图片过大或消失 */
+    flex: none;
+    border-radius: 16px;
+  }
+
+  .artifact-img-container {
+    width: 90%;
+    height: 90%;
+  }
+
+  /* 下半部分：控制面板依次排开 */
+  .control-panel {
+    width: 100%;
+    min-width: 100%;
+    flex: none;
+    overflow-y: visible;
+    /* 取消内部滚动，跟随整个页面滚动 */
+  }
 }
